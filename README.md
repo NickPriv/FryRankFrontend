@@ -1,6 +1,4 @@
-### Docker Instructions
-
-1. Build the image via IntelliJ (run the Dockerfile)
-2. Start the container via IntelliJ (run the compose file)
-3. Run `docker run --publish 8080:8080 fryrank-fryrank-service`
-4. Go to http://localhost:8080/welcome
+### Rapid testing intructions
+1. Build the image via IntelliJ (run the Dockerfile) -- do this once
+2. Start the container via IntelliJ (run the compose file) -- do this once
+3. Every time after making a change, run 'FryRankApplication' via the main class to run your changes on port 8080
