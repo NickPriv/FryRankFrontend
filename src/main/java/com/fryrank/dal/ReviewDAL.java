@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReviewDAL {
 
-    List<Review> getAllReviewsByRestaurantId(String restaurantId);
+    List<Review> getAllReviewsByRestaurantId(final String restaurantId);
 
-    Review addNewReview(Review review);
+    Review addNewReview(final Review review);
 }

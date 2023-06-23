@@ -12,21 +12,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Review {
 
     @Id @Getter
-    private String reviewId;
+    private final String reviewId;
 
     @NonNull @Getter
-    private String restaurantId;
+    private final String restaurantId;
 
     @NonNull @Getter
-    private String authorId;
+    private final String authorId;
 
     @NonNull @Getter
-    private Double score;
+    private final Double score;
 
     @NonNull @Getter
-    private String title;
+    private final String title;
 
     @NonNull @Getter
-    private String body;
+    private final String body;
 
 }
