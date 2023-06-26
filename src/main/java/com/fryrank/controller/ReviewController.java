@@ -14,12 +14,12 @@ public class ReviewController {
     @Autowired
     private ReviewDAL reviewDAL;
 
-    @GetMapping(value = "/reviews/")
+    @GetMapping(value = "/reviews")
     public List<Review> getAllReviewsForRestaurant(@RequestParam("restaurantId") @NonNull final String restaurantId) {
         return reviewDAL.getAllReviewsByRestaurantId(restaurantId);
     }
 
-    @PostMapping(value = "/reviews/")
+    @PostMapping(value = "/reviews")
     public Review addNewReviewForRestaurant(@RequestBody @NonNull final Review review) {
         return reviewDAL.addNewReview(review);
     }
