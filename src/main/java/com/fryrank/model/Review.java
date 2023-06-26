@@ -1,32 +1,32 @@
 package com.fryrank.model;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("review")
 @RequiredArgsConstructor
+@Data
 public class Review {
 
-    @Id @Getter
+    @Id
     private final String reviewId;
 
-    @NonNull @Getter
+    @NonNull
     private final String restaurantId;
 
-    @NonNull @Getter
+    @NonNull
     private final String authorId;
 
-    @NonNull @Getter
+    @NonNull
     private final Double score;
 
-    @NonNull @Getter
+    @NonNull
     private final String title;
 
-    @NonNull @Getter
+    @NonNull
     private final String body;
 
 }
