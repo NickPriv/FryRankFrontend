@@ -1,9 +1,6 @@
 import { Component } from 'react';
 import logo from '../../FrenchFryFoodCritic.png';
 import '../../App.css';
-import RestaurantReviews from '../RestaurantReviews';
-
-
 
 class Homepage extends Component {
 

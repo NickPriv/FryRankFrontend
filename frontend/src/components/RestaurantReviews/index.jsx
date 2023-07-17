@@ -1,24 +1,31 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { getAllReviewsForRestaurant } from '../../redux/actions/restaurantReviewActions';
 
-class RestaurantReviews extends React.Component {
-  state = {
-    reviews: []
-  };
+const RestaurantReviews = () => {
+  const { restaurantId } = useParams();
+  const reviews = useSelector((state) => state.reviews)
 
-  async componentDidMount() {
-    const response = await fetch(`/reviews?restaurantId=${this.props.match.params.id}`);
-    const body = await response.json();
-    this.setState({reviews: body});
-  }
+  useEffect((restaurantId) => {
+    getAllReviewsForRestaurant(restaurantId)
+  },[])
 
-  render() {
-    const {reviews} = this.state;
-    return (
-      <div>
-        <h1>{this.props.match.params.id}</h1>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>{restaurantId}</h1>
+    </div>
+  );
 }
 
-export default RestaurantReviews;
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators(
+   {
+    getAllReviewsForRestaurant
+   },
+  dispatch
+  );
+ };
+
+ export default connect(null, mapDispatchToProps)(RestaurantReviews);
