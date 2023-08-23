@@ -1,15 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from "redux-saga"
 
-import restaurantReviewReducer from "./reducers/restaurantReviewReducer";
-import getAllReviewsForRestaurantSaga from "./sagas/restaurantReviewSagas";
+import rootReducer from "./reducers";
+import rootSaga from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware()
 const store = configureStore({
-  reducer: restaurantReviewReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 })
 
-sagaMiddleware.run(getAllReviewsForRestaurantSaga)
+console.log("Printing store")
+console.log(store.getState())
+
+sagaMiddleware.run(rootSaga)
 
 export default store;

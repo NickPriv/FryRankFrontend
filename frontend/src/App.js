@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Homepage from './components/Homepage';
-import RestaurantReviews from './components/RestaurantReviews';
+import Reviews from './containers/Reviews';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Homepage} />
-            <Route path="/reviews/:restaurantId" component={RestaurantReviews} />
+            <Route path="/reviews/:restaurantId" component={Reviews} />
           </Switch>
         </Router>
       </Provider>
