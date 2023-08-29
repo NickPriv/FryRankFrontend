@@ -9,7 +9,7 @@ const propTypes = {
 const Reviews = ({ reviews, error }) => {
 
     const reviewsDisplay = (reviews) => {
-        const reviewsView = reviews.map(review => (
+        return reviews.map(review => (
             <Fragment>
                 <h2>{review.title}</h2>
                 <p>Author: {review.authorId}</p>
@@ -17,17 +17,15 @@ const Reviews = ({ reviews, error }) => {
                 <p>{review.body}</p>
             </Fragment>
         ));
-
-        return reviewsView;
     }
 
-    if(!reviews || reviews.length == 0) {
+    if(!reviews) {
         return <p>{error}</p>;
+    } else if (reviews.length == 0) {
+        return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
     } else {
         return (
-            <div>
-                {reviewsDisplay(reviews)}
-            </div>
+            <div>{reviewsDisplay(reviews)}</div>
         );
     }
 }
