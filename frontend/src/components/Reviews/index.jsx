@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
-import { Fragment } from 'react';
+
+import ReviewCard from './ReviewCard';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -10,12 +11,7 @@ const Reviews = ({ reviews, error }) => {
 
     const reviewsDisplay = (reviews) => {
         return reviews.map(review => (
-            <Fragment>
-                <h2>{review.title}</h2>
-                <p>Author: {review.authorId}</p>
-                <p>Score: {review.score}</p>
-                <p>{review.body}</p>
-            </Fragment>
+            <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
         ));
     }
 
