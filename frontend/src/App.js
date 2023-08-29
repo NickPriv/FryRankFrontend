@@ -1,36 +1,22 @@
-import { Component } from 'react';
-import logo from './FrenchFryFoodCritic.png';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import Homepage from './components/Homepage';
+import Reviews from './containers/Reviews';
 
-
-
-class App extends Component {
-
-  state = {
-    message: ""
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/welcome');
-    const body = await response.text();
-    this.setState({message: body});
-  }
-
-  render() {
-    const {message} = this.state;
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="Food-critic" alt="logo" />
-            <div className="App-intro">
-              <h2>Welcome</h2>
-              <p>{message}</p>
-            </div>
-        </header>
-      </div>
-    );
-
-  }
+function App() {
+  return (
+    <div>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Homepage} />
+            <Route path="/reviews/:restaurantId" component={Reviews} />
+          </Switch>
+        </Router>
+      </Provider>
+    </div>
+  );
 }
 
 export default App;
