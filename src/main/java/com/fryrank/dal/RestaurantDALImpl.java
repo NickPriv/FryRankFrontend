@@ -19,6 +19,11 @@ public class RestaurantDALImpl implements RestaurantDAL {
     }
 
     @Override
+    public Restaurant getRestaurantById(@NonNull final String restaurantId) {
+        return mongoTemplate.findById(restaurantId, Restaurant.class);
+    }
+
+    @Override
     public Restaurant addNewRestaurant(@NonNull final Restaurant restaurant) {
         mongoTemplate.save(restaurant);
         return restaurant;

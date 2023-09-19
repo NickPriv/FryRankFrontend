@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import FrySpinner from "../Common/FrySpinner"
+import FrySpinner from '../Common/FrySpinner'
+import AddressDisplay from '../Common/AddressDisplay'
 
 const propTypes = {
     restaurants: PropTypes.array.isRequired,
@@ -9,19 +10,11 @@ const propTypes = {
 
 const Restaurants = ({ restaurants, error }) => {
 
-    const addressDisplay = (address) => {
-        return (
-            <Fragment>
-                <p>Street Address: {address.streetNumberAndName}, City: {address.city}, State: {address.stateAbbr}, Zip: {address.zipCode}</p>
-            </Fragment>
-        );
-    }
-
     const restaurantsDisplay = (restaurants) => {
         return restaurants.map((restaurant, i) => (
             <Fragment key = {i}>
                 <p><b>{restaurant.name}</b> </p>
-                <p>{addressDisplay(restaurant.address)}</p>
+                <AddressDisplay address={restaurant.address} />
             </Fragment>
         ));
     }

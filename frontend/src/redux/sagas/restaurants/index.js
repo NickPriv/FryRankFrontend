@@ -3,9 +3,10 @@ import axios from 'axios';
 
 import { types, restaurantsActions } from '../../reducers/restaurants';
 
+const API_PATH = 'http://localhost:3000/restaurants';
+
 export function* callGetRestaurants() {
     try {
-        const API_PATH = 'http://localhost:3000/restaurants';
         const { data } = yield axios.get(API_PATH);
         yield put(restaurantsActions.successfulGetRestaurantsRequest(data));
     } catch (err) {
@@ -13,6 +14,16 @@ export function* callGetRestaurants() {
     }
 }
 
+export function* callGetRestaurantById({ restaurantId }) {
+    try {
+        const { data } = yield axios.get(API_PATH, { params: { restaurantId } });
+        yield put(restaurantsActions.successfulGetRestaurantByIdRequest(data));
+    } catch (err) {
+        yield put(restaurantsActions.failedGetRestaurantByIdRequest('Failed getting a restaurant for the requested ID'));
+    }
+}
+
 export default function* watchRestaurantsRequest() {
     yield takeEvery(types.GET_RESTAURANTS_REQUEST, callGetRestaurants);
+    yield takeEvery(types.GET_RESTAURANT_BY_ID_REQUEST, callGetRestaurantById);
 }
