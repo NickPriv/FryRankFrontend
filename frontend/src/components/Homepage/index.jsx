@@ -2,7 +2,7 @@ import { Component } from 'react';
 import logo from '../../FrenchFryFoodCritic.png';
 import '../../App.css';
 
-class Homepage extends Component {
+export class Homepage extends Component {
 
   state = {
     message: ""
