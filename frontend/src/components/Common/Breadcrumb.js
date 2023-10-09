@@ -1,16 +1,39 @@
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { React } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Breadcrumb as ReactstrapBreadcrumb, BreadcrumbItem as ReactstrapBreadcrumbItem } from 'reactstrap'
+import { pathToPageName } from '../../routes'
 
-import "./Breadcrumb.css"
+const Breadcrumb = () => {
+    const location = useLocation()
 
-export default function Breadcrumb() {
-    const location = useLocation();
+    let currentLink = ''
+
+    const crumbs = location.pathname.split('/')
+        .filter(crumb => crumb !== '')
+        .map((crumb, i, arr) => {
+            currentLink += `/${crumb}`
+
+            if(arr.length - 1 === i) {
+                return (
+                    <ReactstrapBreadcrumbItem active>
+                        {pathToPageName[currentLink] ? pathToPageName[currentLink] : crumb}
+                    </ReactstrapBreadcrumbItem>
+                )
+            }
+            else {
+                return (
+                    <ReactstrapBreadcrumbItem>
+                        <a href={currentLink}>{pathToPageName[currentLink] ? pathToPageName[currentLink] : crumb}</a>
+                    </ReactstrapBreadcrumbItem>
+                )
+            }
+        })
 
     return (
-        <nav className="Breadcrumb">
-            <Link to="/RestaurantsPage" className={location.pathname === "/RestaurantsPage" ? "breadcrumb-active" : "breadcrumb-not-active"}>
-                Restaurants
-            </Link>
-        </nav>
+        <ReactstrapBreadcrumb>
+            {crumbs}
+        </ReactstrapBreadcrumb>
     )
 }
+
+export default Breadcrumb;

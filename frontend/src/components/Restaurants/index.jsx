@@ -4,6 +4,9 @@ import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from "../../const
 import FrySpinner from '../Common/FrySpinner'
 import AddressDisplay from '../Common/AddressDisplay'
 
+import Header from "../Common/Header"
+import Breadcrumb from "../Common/Breadcrumb"
+
 const propTypes = {
     restaurants: PropTypes.array.isRequired,
     error: PropTypes.string.isRequired
@@ -36,6 +39,8 @@ const Restaurants = ({ restaurants, error }) => {
     else {
         return (
             <div>
+                <Header />
+                <Breadcrumb />
                 {restaurantsDisplay(restaurants)}
             </div>
         );
