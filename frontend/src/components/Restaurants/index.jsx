@@ -1,7 +1,11 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
+import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from "../../constants.js"
 import FrySpinner from '../Common/FrySpinner'
 import AddressDisplay from '../Common/AddressDisplay'
+
+import Header from "../Common/Header"
+import Breadcrumb from "../Common/Breadcrumb"
 
 const propTypes = {
     restaurants: PropTypes.array.isRequired,
@@ -11,12 +15,15 @@ const propTypes = {
 const Restaurants = ({ restaurants, error }) => {
 
     const restaurantsDisplay = (restaurants) => {
-        return restaurants.map((restaurant, i) => (
-            <Fragment key = {i}>
-                <p><b>{restaurant.name}</b> </p>
-                <AddressDisplay address={restaurant.address} />
-            </Fragment>
-        ));
+        return restaurants.map((restaurant, i) => {
+            let restaurantLink = `${BASE_URL}${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
+            return (
+                <Fragment key = {i}>
+                    <p><b><a href={restaurantLink} >{restaurant.name}</a></b> </p>
+                    <AddressDisplay address={restaurant.address} />
+                </Fragment>
+            )
+        });
     }
 
     if(!restaurants) {
@@ -32,6 +39,8 @@ const Restaurants = ({ restaurants, error }) => {
     else {
         return (
             <div>
+                <Header />
+                <Breadcrumb />
                 {restaurantsDisplay(restaurants)}
             </div>
         );
