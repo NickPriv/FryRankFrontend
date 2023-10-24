@@ -1,7 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import FrySpinner from '../Common/FrySpinner'
-import AddressDisplay from '../Common/AddressDisplay'
+import { AddressDisplay, FrySpinner } from '../Common';
 
 const propTypes = {
     restaurants: PropTypes.array.isRequired,

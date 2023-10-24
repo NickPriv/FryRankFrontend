@@ -1,8 +1,9 @@
 import { PropTypes } from 'prop-types';
+import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import ReviewCard from './ReviewCard';
-import AddressDisplay from '../Common/AddressDisplay';
-import FrySpinner from '../Common/FrySpinner';
+import { ErrorBanner, RestaurantHeader } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -12,41 +13,26 @@ const propTypes = {
 
 const Reviews = ({ reviews, error, currentRestaurant }) => {
 
-    const reviewsDisplay = (reviews) => {
-        return reviews.map(review => (
-            <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
-        ));
-    }
-
     const reviewsBody = () => {
-        if(!reviews) {
-            return <p>{error}</p>;
-        } else if (reviews.length == 0) {
+        if (reviews.length == 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
-            return (
-                <div>{reviewsDisplay(reviews)}</div>
-            );
-        }
-    }
-
-    const restaurantHeader = () => {
-        if(!currentRestaurant) {
-            return <FrySpinner />
-        } else {
-            return (
-                <div>
-                    <h1>{currentRestaurant.name}</h1>
-                    <AddressDisplay address = {currentRestaurant.address} />
-                </div>
-            )
+            return reviews.map(review => (
+                <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
+            ));
         }
     }
 
     return (
         <div>
-            {restaurantHeader()}
-            {reviewsBody()}
+            <ErrorBanner error = {error} />
+            <RestaurantHeader currentRestaurant = {currentRestaurant} />
+            {reviews && reviewsBody()}
+            {currentRestaurant && <Link to={'/reviews/' + currentRestaurant.id + '/create'}>
+                <Button>
+                    Click me to go to the create page
+                </Button>
+            </Link>}
         </div>
     )
 }

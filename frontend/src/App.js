@@ -4,6 +4,7 @@ import store from "./redux/store";
 import Homepage from './components/Homepage';
 import Restaurants from './containers/Restaurants';
 import Reviews from './containers/Reviews';
+import CreateReview from './containers/CreateReview';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/" component={Homepage} />
+            <Route path="/reviews/:restaurantId/create" component={CreateReview} />
             <Route path="/reviews/:restaurantId" component={Reviews} />
             // TODO: The path for this endpoint should just be /restaurants, but since we share ports with the
             // backend service which also has the endpoint /restaurants, we need to come up with a different name for
