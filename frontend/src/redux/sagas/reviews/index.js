@@ -2,9 +2,9 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, reviewsActions } from '../../reducers/reviews';
-import { ERROR_MESSAGE } from '../../constants';
+import { BACKEND_SERVICE_PATH, ERROR_MESSAGE } from '../../constants';
 
-const API_PATH = 'http://localhost:3000/reviews';
+const API_PATH = `${BACKEND_SERVICE_PATH}/reviews`;
 
 export function* callGetAllReviewsForRestaurant({ restaurantId }) {
     try {

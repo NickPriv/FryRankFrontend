@@ -2,14 +2,14 @@ import { Component } from 'react';
 import logo from '../../FrenchFryFoodCritic.png';
 import '../../App.css';
 
-class Homepage extends Component {
+export class Homepage extends Component {
 
   state = {
     message: ""
   };
 
   async componentDidMount() {
-    const response = await fetch('/welcome');
+    const response = await fetch('http://localhost:8080/welcome');
     const body = await response.text();
     this.setState({message: body});
   }

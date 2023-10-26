@@ -2,8 +2,9 @@ import { call, delay, put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, restaurantsActions } from '../../reducers/restaurants';
+import { BACKEND_SERVICE_PATH } from '../../constants';
 
-const API_PATH = 'http://localhost:3000/restaurants';
+const API_PATH = `${BACKEND_SERVICE_PATH}/restaurants`;
 
 export function* callGetRestaurants() {
     try {

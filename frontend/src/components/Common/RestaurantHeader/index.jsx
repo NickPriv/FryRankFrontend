@@ -7,16 +7,12 @@ const propTypes = {
 };
 
 const RestaurantHeader = ({ currentRestaurant }) => {
-    if(!currentRestaurant) {
-        return <FrySpinner />
-    } else {
-        return (
-            <div>
-                <h1>{currentRestaurant.name}</h1>
-                <AddressDisplay address = {currentRestaurant.address} />
-            </div>
-        )
-    }
+    return (
+        <div>
+            <h1>{currentRestaurant.name}</h1>
+            <AddressDisplay address = {currentRestaurant.address} />
+        </div>
+    )
 }
 
 RestaurantHeader.propTypes = propTypes;

@@ -3,7 +3,7 @@ import { Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import ReviewCard from './ReviewCard';
-import { ErrorBanner, RestaurantHeader } from '../Common';
+import { Breadcrumb, ErrorBanner, FrySpinner, Header, RestaurantHeader } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -23,16 +23,27 @@ const Reviews = ({ reviews, error, currentRestaurant }) => {
         }
     }
 
+    if (!currentRestaurant) {
+        return <FrySpinner />;
+    }
+
     return (
         <div>
+            <Header />
             <ErrorBanner error = {error} />
+            <Breadcrumb />
             <RestaurantHeader currentRestaurant = {currentRestaurant} />
             {reviews && reviewsBody()}
-            {currentRestaurant && <Link to={'/reviews/' + currentRestaurant.id + '/create'}>
-                <Button>
-                    Click me to go to the create page
+            <Link to={'/restaurants/' + currentRestaurant.id + '/create'}>
+                <Button color="danger">
+                    Write a review
                 </Button>
-            </Link>}
+            </Link>
+            <Link to={'/restaurants/'}>
+                <Button color="secondary">
+                    Back to all restaurants
+                </Button>
+            </Link>
         </div>
     )
 }

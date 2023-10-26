@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import { ErrorBanner, RestaurantHeader } from '../Common/';
+import { Breadcrumb, ErrorBanner, FrySpinner, Header, RestaurantHeader } from '../Common/';
 import ReviewForm from './ReviewForm';
 
 const propTypes = {
@@ -12,9 +12,15 @@ const propTypes = {
 };
 
 const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentReview, createReview }) => {
+    if (!currentRestaurant) {
+        return <FrySpinner />;
+    }
+
     return (
         <div>
+            <Header />
             <ErrorBanner error = {error} />
+            <Breadcrumb />
             <RestaurantHeader currentRestaurant = {currentRestaurant} />
             <ReviewForm
                 createReview = {createReview}

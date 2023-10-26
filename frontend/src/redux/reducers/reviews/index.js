@@ -5,7 +5,8 @@ export const types = {
     CREATE_REVIEW_FOR_RESTAURANT_REQUEST: "CREATE_REVIEW_FOR_RESTAURANT_REQUEST",
     CREATE_REVIEW_FOR_RESTAURANT_SUCCESS: "CREATE_REVIEW_FOR_RESTAURANT_SUCCESS",
     CREATE_REVIEW_FOR_RESTAURANT_FAILURE: "CREATE_REVIEW_FOR_RESTAURANT_FAILURE",
-    UPDATE_CURRENT_REVIEW: "UPDATE_CURRENT_REVIEW"
+    UPDATE_CURRENT_REVIEW: "UPDATE_CURRENT_REVIEW",
+    RESET_CREATE_REQUEST: "RESET_CREATE_REQUEST"
 }
 
 export const initialState = {
@@ -17,7 +18,8 @@ export const initialState = {
     "title": null,
     "body": null
   },
-  error: ''
+  error: '',
+  successfulCreate: null
 };
 
 export default (state = initialState, action) => {
@@ -52,6 +54,7 @@ export default (state = initialState, action) => {
         case types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS: {
             return {
                 ...state,
+                successfulCreate: true,
                 error: ''
             };
         }
@@ -59,6 +62,7 @@ export default (state = initialState, action) => {
         case types.CREATE_REVIEW_FOR_RESTAURANT_FAILURE: {
             return {
                 ...state,
+                successfulCreate: false,
                 error: action.error,
             }
         }
@@ -70,6 +74,13 @@ export default (state = initialState, action) => {
                     ...state.currentReview,
                     [action.name]: action.value
                 }
+            }
+        }
+
+        case types.RESET_CREATE_REQUEST: {
+            return {
+                ...state,
+                successfulCreate: null
             }
         }
 
@@ -85,5 +96,6 @@ export const reviewsActions = {
     startCreateReviewForRestaurantRequest: review => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST, review }),
     successfulCreateReviewForRestaurantRequest: () => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS }),
     failedCreateReviewForRestaurantRequest: error => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_FAILURE, error }),
-    updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value })
+    updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value }),
+    resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST })
 }
