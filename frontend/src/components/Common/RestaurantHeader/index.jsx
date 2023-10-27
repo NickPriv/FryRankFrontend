@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import { AddressDisplay, FrySpinner } from '../';
+import { AddressDisplay } from '../';
 
 const propTypes = {
     currentRestaurant: PropTypes.object.isRequired

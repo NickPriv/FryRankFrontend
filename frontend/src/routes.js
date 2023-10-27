@@ -2,7 +2,7 @@ import { Homepage } from './components/Homepage';
 import Restaurants from './containers/Restaurants';
 import Reviews from './containers/Reviews';
 import CreateReview from './containers/CreateReview';
-import { PATH_HOME, PATH_RESTAURANTS, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID, PATH_CREATE_REVIEW } from "./constants.js"
+import { PATH_HOME, PATH_RESTAURANTS, PATH_REVIEWS, PATH_CREATE_REVIEW } from "./constants.js"
 
 const routes = [
     { path: PATH_HOME, component: Homepage },

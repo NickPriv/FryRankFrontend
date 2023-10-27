@@ -1,9 +1,7 @@
 import { PropTypes } from 'prop-types';
-import { Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 import ReviewCard from './ReviewCard';
-import { Breadcrumb, ErrorBanner, FrySpinner, Header, RestaurantHeader } from '../Common';
+import { Breadcrumb, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -29,21 +27,20 @@ const Reviews = ({ reviews, error, currentRestaurant }) => {
 
     return (
         <div>
-            <Header />
             <ErrorBanner error = {error} />
             <Breadcrumb />
             <RestaurantHeader currentRestaurant = {currentRestaurant} />
             {reviews && reviewsBody()}
-            <Link to={'/restaurants/' + currentRestaurant.id + '/create'}>
-                <Button color="danger">
-                    Write a review
-                </Button>
-            </Link>
-            <Link to={'/restaurants/'}>
-                <Button color="secondary">
-                    Back to all restaurants
-                </Button>
-            </Link>
+            <LinkButton
+                link={'/restaurants/' + currentRestaurant.id + '/create'}
+                children='Write a review'
+                color='danger'
+            />
+            <LinkButton
+                link='/restaurants/'
+                children='Back to all restaurants'
+                color='secondary'
+            />
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import { AddressDisplay, Breadcrumb, FrySpinner, Header } from '../Common';
+import { AddressDisplay, Breadcrumb, FrySpinner } from '../Common';
 import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
 const propTypes = {
@@ -35,7 +35,6 @@ const Restaurants = ({ restaurants, error }) => {
     else {
         return (
             <div>
-                <Header />
                 <Breadcrumb />
                 {restaurantsDisplay(restaurants)}
             </div>

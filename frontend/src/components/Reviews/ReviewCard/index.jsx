@@ -12,7 +12,7 @@ const ReviewCard = ({ title, authorId, score, body }) => {
     return (
         <Card
             color="warning"
-            className="mt-4 ms-4"
+            className="mb-2"
             style={{
                 width: '36rem'
             }}

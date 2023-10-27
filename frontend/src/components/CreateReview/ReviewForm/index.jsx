@@ -1,6 +1,7 @@
 import { PropTypes } from 'prop-types';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Form, FormGroup, Input, Label } from 'reactstrap';
+
+import { Button, LinkButton } from '../../Common';
 
 const propTypes = {
     currentRestaurant: PropTypes.object.isRequired,
@@ -61,16 +62,16 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                     type="textarea"
                 />
             </FormGroup>
-            <Button color="danger" onClick={(event) => {
-                createReview(currentReview);
-            }}>
-                Submit
-            </Button>
-            <Link to={'/restaurants/' + currentRestaurant.id}>
-                <Button color="secondary">
-                    Back to all reviews
-                </Button>
-            </Link>
+            <Button
+                children='Submit'
+                color='danger'
+                onClick={(event) => {createReview(currentReview)}}
+            />
+            <LinkButton
+                link={'/restaurants/' + currentRestaurant.id}
+                children='Back to all reviews'
+                color='secondary'
+            />
         </Form>
     )
 }

@@ -24,7 +24,7 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantById, createReview, updateCurrentReview, resetCreateRequest } = this.props;
+            const { match: { params: { restaurantId } }, getRestaurantById, updateCurrentReview, resetCreateRequest } = this.props;
             resetCreateRequest();
             getRestaurantById(restaurantId);
             updateCurrentReview("restaurantId", restaurantId);
