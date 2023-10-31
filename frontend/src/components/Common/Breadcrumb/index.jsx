@@ -1,7 +1,7 @@
 import { React } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Breadcrumb as ReactstrapBreadcrumb, BreadcrumbItem as ReactstrapBreadcrumbItem } from 'reactstrap'
-import { pathToPageName } from '../../routes'
+import { pathToPageName } from '../../../routes'
 
 const Breadcrumb = () => {
     const location = useLocation()

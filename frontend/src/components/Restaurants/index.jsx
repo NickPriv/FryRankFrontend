@@ -1,11 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from "../../constants.js"
-import FrySpinner from '../Common/FrySpinner'
-import AddressDisplay from '../Common/AddressDisplay'
-
-import Header from "../Common/Header"
-import Breadcrumb from "../Common/Breadcrumb"
+import { AddressDisplay, Breadcrumb, FrySpinner } from '../Common';
+import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
 const propTypes = {
     restaurants: PropTypes.array.isRequired,
@@ -39,7 +35,6 @@ const Restaurants = ({ restaurants, error }) => {
     else {
         return (
             <div>
-                <Header />
                 <Breadcrumb />
                 {restaurantsDisplay(restaurants)}
             </div>

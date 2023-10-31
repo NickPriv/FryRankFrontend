@@ -1,8 +1,7 @@
 import { PropTypes } from 'prop-types';
 
 import ReviewCard from './ReviewCard';
-import AddressDisplay from '../Common/AddressDisplay';
-import FrySpinner from '../Common/FrySpinner';
+import { Breadcrumb, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -12,41 +11,36 @@ const propTypes = {
 
 const Reviews = ({ reviews, error, currentRestaurant }) => {
 
-    const reviewsDisplay = (reviews) => {
-        return reviews.map(review => (
-            <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
-        ));
-    }
-
     const reviewsBody = () => {
-        if(!reviews) {
-            return <p>{error}</p>;
-        } else if (reviews.length == 0) {
+        if (reviews.length == 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
-            return (
-                <div>{reviewsDisplay(reviews)}</div>
-            );
+            return reviews.map(review => (
+                <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
+            ));
         }
     }
 
-    const restaurantHeader = () => {
-        if(!currentRestaurant) {
-            return <FrySpinner />
-        } else {
-            return (
-                <div>
-                    <h1>{currentRestaurant.name}</h1>
-                    <AddressDisplay address = {currentRestaurant.address} />
-                </div>
-            )
-        }
+    if (!currentRestaurant) {
+        return <FrySpinner />;
     }
 
     return (
         <div>
-            {restaurantHeader()}
-            {reviewsBody()}
+            <ErrorBanner error = {error} />
+            <Breadcrumb />
+            <RestaurantHeader currentRestaurant = {currentRestaurant} />
+            {reviews && reviewsBody()}
+            <LinkButton
+                link={'/restaurants/' + currentRestaurant.id + '/create'}
+                children='Write a review'
+                color='danger'
+            />
+            <LinkButton
+                link='/restaurants/'
+                children='Back to all restaurants'
+                color='secondary'
+            />
         </div>
     )
 }

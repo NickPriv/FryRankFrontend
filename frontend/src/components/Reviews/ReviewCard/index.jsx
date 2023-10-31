@@ -11,6 +11,8 @@ const propTypes = {
 const ReviewCard = ({ title, authorId, score, body }) => {
     return (
         <Card
+            color="warning"
+            className="mb-2"
             style={{
                 width: '36rem'
             }}
@@ -26,7 +28,7 @@ const ReviewCard = ({ title, authorId, score, body }) => {
                     Author: {authorId}
                 </CardSubtitle>
                 <CardSubtitle
-                    className="mb-2 text-primary"
+                    className="mb-2 text-danger"
                     tag="h5"
                 >
                     Score: {score}
