@@ -32,10 +32,7 @@ export default compose(
         componentDidUpdate() {
             const { match: { params: { restaurantId } }, successfulCreate, history } = this.props;
             if (successfulCreate) {
-                setTimeout(
-                    () => history.push(`/restaurants/${restaurantId}`),
-                    5000, // Wait for 5s
-                );
+                history.push(`/restaurants/${restaurantId}`);
             }
         },
     }),

@@ -10,7 +10,8 @@ export const types = {
 export const initialState = {
   restaurants: [],
   currentRestaurant: null,
-  error: ''
+  error: '',
+  requestingRestaurantDetails: false,
 };
 
 export default (state = initialState, action) => {
@@ -38,7 +39,8 @@ export default (state = initialState, action) => {
 
         case types.GET_RESTAURANT_BY_ID_REQUEST: {
             return {
-                ...state
+                ...state,
+                requestingRestaurantDetails: true,
             };
         }
 
@@ -46,7 +48,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                currentRestaurant: action.data,
-               error: ''
+               error: '',
+               requestingRestaurantDetails: false,
             }
         }
 
@@ -54,6 +57,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 error: action.error,
+                requestingRestaurantDetails: false,
             }
         }
 
