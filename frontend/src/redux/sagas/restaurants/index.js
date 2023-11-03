@@ -20,7 +20,7 @@ export function* callGetRestaurantById({ restaurantId }) {
         const { data } = yield axios.get(API_PATH, { params: { restaurantId } });
         yield put(restaurantsActions.successfulGetRestaurantByIdRequest(data));
     } catch (err) {
-        yield put(restaurantsActions.failedGetRestaurantByIdRequest('Failed getting a restaurant for the requested ID'));
+        yield put(restaurantsActions.failedGetRestaurantByIdRequest(err.response.data.message));
     }
 }
 

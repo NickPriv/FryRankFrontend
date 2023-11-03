@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RestaurantDALImpl implements RestaurantDAL {
@@ -20,7 +21,8 @@ public class RestaurantDALImpl implements RestaurantDAL {
 
     @Override
     public Restaurant getRestaurantById(@NonNull final String restaurantId) {
-        return mongoTemplate.findById(restaurantId, Restaurant.class);
+        final Optional<Restaurant> restaurant = Optional.ofNullable(mongoTemplate.findById(restaurantId, Restaurant.class));
+        return restaurant.orElseThrow(() -> new NullPointerException(String.format("A restaurant does not exist for the requested ID %s.", restaurantId)));
     }
 
     @Override

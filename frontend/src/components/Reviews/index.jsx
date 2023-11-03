@@ -5,11 +5,13 @@ import { Breadcrumb, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader } fro
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
-    error: PropTypes.string.isRequired,
-    currentRestaurant: PropTypes.string.isRequired
+    reviewsError: PropTypes.string.isRequired,
+    restaurantsError: PropTypes.string.isRequired,
+    currentRestaurant: PropTypes.string.isRequired,
+    requestingRestaurantDetails: PropTypes.bool.isRequired
 };
 
-const Reviews = ({ reviews, error, currentRestaurant }) => {
+const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails }) => {
 
     const reviewsBody = () => {
         if (reviews.length == 0) {
@@ -21,26 +23,27 @@ const Reviews = ({ reviews, error, currentRestaurant }) => {
         }
     }
 
-    if (!currentRestaurant) {
-        return <FrySpinner />;
-    }
-
     return (
         <div>
-            <ErrorBanner error = {error} />
+            <ErrorBanner error = {reviewsError} />
+            <ErrorBanner error = {restaurantsError} />
             <Breadcrumb />
-            <RestaurantHeader currentRestaurant = {currentRestaurant} />
-            {reviews && reviewsBody()}
-            <LinkButton
-                link={'/restaurants/' + currentRestaurant.id + '/create'}
-                children='Write a review'
-                color='danger'
-            />
-            <LinkButton
-                link='/restaurants/'
-                children='Back to all restaurants'
-                color='secondary'
-            />
+            { requestingRestaurantDetails && <FrySpinner /> }
+            { currentRestaurant &&
+                <div>
+                   <RestaurantHeader currentRestaurant = {currentRestaurant} />
+                   {reviews && reviewsBody()}
+                   <LinkButton
+                       link={'/restaurants/' + currentRestaurant.id + '/create'}
+                       children='Write a review'
+                       color='danger'
+                   />
+                   <LinkButton
+                       link='/restaurants/'
+                       children='Back to all restaurants'
+                       color='secondary'
+                   />
+                </div> }
         </div>
     )
 }
