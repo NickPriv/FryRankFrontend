@@ -10,7 +10,7 @@ Become the world's most-esteemed French Fry food critic! This web application en
 
 ### Current Status ###
 
-The app is fully-functional, allowing users to view reviews and create new ones for a pre-set list of restaurants.
+The app is functional, allowing users to view reviews and create new ones for a pre-set list of restaurants.
 
 In progress:
 - Hosting the website on a server so it is available to the public internet
