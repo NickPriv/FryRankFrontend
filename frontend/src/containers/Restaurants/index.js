@@ -6,12 +6,14 @@ import { restaurantsActions } from '../../redux/reducers/restaurants'
 const mapStateToProps = (state) => {
     return {
         restaurants: state.restaurantsReducer.restaurants,
-        error: state.restaurantsReducer.error
+        error: state.restaurantsReducer.error,
+        currentSearchQuery: state.restaurantsReducer.searchQuery
     }
 }
 
 const mapDispatchToProps = {
-    getRestaurants: restaurantsActions.startGetRestaurantsRequest
+    getRestaurants: restaurantsActions.startGetRestaurantsRequest,
+    updateSearchQuery: restaurantsActions.updateSearchQuery
 };
 
 export default compose(
@@ -19,7 +21,7 @@ export default compose(
     lifecycle({
         componentDidMount() {
             const { getRestaurants } = this.props;
-            getRestaurants();
+            getRestaurants("french fries");
         },
     }),
 )(Restaurants);

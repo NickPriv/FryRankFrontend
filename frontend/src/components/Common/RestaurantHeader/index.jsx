@@ -1,7 +1,5 @@
 import { PropTypes } from 'prop-types';
 
-import { AddressDisplay } from '../';
-
 const propTypes = {
     currentRestaurant: PropTypes.object.isRequired
 };
@@ -9,8 +7,8 @@ const propTypes = {
 const RestaurantHeader = ({ currentRestaurant }) => {
     return (
         <div>
-            <h1>{currentRestaurant.name}</h1>
-            <AddressDisplay address = {currentRestaurant.address} />
+            <h1>{currentRestaurant.displayName.text}</h1>
+            <p>{currentRestaurant.formattedAddress}</p>
         </div>
     )
 }
