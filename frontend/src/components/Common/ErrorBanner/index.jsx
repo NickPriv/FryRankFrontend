@@ -7,7 +7,7 @@ const propTypes = {
 
 const ErrorBanner = ({ error }) => {
     return error
-        ? <Alert color="danger">{error}</Alert>
+        ? <Alert color="danger">Error: {error}</Alert>
         : null;
 }
 

@@ -21,7 +21,7 @@ export function* callGetRestaurants({ textQuery }) {
         );
         yield put(restaurantsActions.successfulGetRestaurantsRequest(data));
     } catch (err) {
-        yield put(restaurantsActions.failedGetRestaurantsRequest('Failed getting restaurants from Google'));
+        yield put(restaurantsActions.failedGetRestaurantsRequest(err.response.data.error.message));
     }
 }
 
@@ -36,7 +36,7 @@ export function* callGetRestaurantById({ restaurantId }) {
         );
         yield put(restaurantsActions.successfulGetRestaurantByIdRequest(data));
     } catch (err) {
-        yield put(restaurantsActions.failedGetRestaurantByIdRequest('Failed getting restaurant details from Google'));
+        yield put(restaurantsActions.failedGetRestaurantByIdRequest(err.response.data.error.message));
     }
 
 }
