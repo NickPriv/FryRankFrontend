@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import { AddressDisplay, Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
+import { Breadcrumb, ErrorBanner } from '../Common';
 import SearchInput from './SearchInput';
 import { BASE_URL, PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
