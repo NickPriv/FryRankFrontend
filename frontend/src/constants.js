@@ -1,5 +1,3 @@
-export const BASE_URL = "http://localhost:3000"
-
 export const PATH_VARIABLE_RESTAURANT_ID = ":restaurantId"
 
 export const PATH_HOME = "/"
