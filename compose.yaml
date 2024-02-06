@@ -1,8 +1,0 @@
-version: '1.0'
-
-services:
-  fryrank-service:
-    build: .
-    container_name: fryrank-service
-    ports:
-      - "8000:8000"
