@@ -2,7 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, reviewsActions } from '../../reducers/reviews';
-import { BACKEND_SERVICE_PATH, ERROR_MESSAGE } from '../../constants';
+import { BACKEND_SERVICE_PATH } from '../../constants';
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/reviews`;
 
@@ -11,7 +11,7 @@ export function* callGetAllReviewsForRestaurant({ restaurantId }) {
         const { data } = yield axios.get(API_PATH, { params: { restaurantId } });
         yield put(reviewsActions.successfulGetAllReviewsForRestaurantRequest(data));
     } catch (err) {
-        yield put(reviewsActions.failedGetAllReviewsForRestaurantRequest(ERROR_MESSAGE));
+        yield put(reviewsActions.failedGetAllReviewsForRestaurantRequest(err.response.data.message));
     }
 }
 
@@ -20,7 +20,7 @@ export function* callCreateReviewForRestaurant({ review }) {
         yield axios.post(API_PATH, review);
         yield put(reviewsActions.successfulCreateReviewForRestaurantRequest());
     } catch (err) {
-        yield put(reviewsActions.failedCreateReviewForRestaurantRequest(err.message));
+        yield put(reviewsActions.failedCreateReviewForRestaurantRequest(err.response.data.message));
     }
 }
 
