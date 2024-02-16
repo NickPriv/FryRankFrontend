@@ -14,7 +14,7 @@ export const initialState = {
   currentReview: {
     "restaurantId": null,
     "authorId": null,
-    "score": "10", // Initialize score to 10 because select input defaults value to 10
+    "score": null,
     "title": null,
     "body": null
   },

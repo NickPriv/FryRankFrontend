@@ -32,6 +32,7 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                     Score
                 </Label>
                 <Input type="select" name="score" id="scoreInput" className="form-select">
+                    <option></option>
                     <option>10</option>
                     <option>9</option>
                     <option>8</option>
