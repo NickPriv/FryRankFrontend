@@ -48,6 +48,11 @@ export default (state = initialState, action) => {
         case types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST: {
             return {
                 ...state,
+                currentReview: {
+                    // Reset the current review, except for the restaurantId, which gets set on page load
+                    ...initialState.currentReview,
+                    restaurantId: state.currentReview.restaurantId
+                }
             };
         }
 
@@ -72,7 +77,7 @@ export default (state = initialState, action) => {
                 ...state,
                 currentReview: {
                     ...state.currentReview,
-                    [action.name]: action.value
+                    [action.name]: action.value != "" ? action.value : null
                 }
             }
         }

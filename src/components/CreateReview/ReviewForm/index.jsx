@@ -31,14 +31,19 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                 <Label for="scoreInput">
                     Score
                 </Label>
-                <Input
-                    id="scoreInput"
-                    name="score"
-                    placeholder="Any number from 0 to 10"
-                    type="number"
-                    min="0"
-                    max="10"
-                />
+                <Input type="select" name="score" id="scoreInput" className="form-select">
+                    <option></option>
+                    <option>10</option>
+                    <option>9</option>
+                    <option>8</option>
+                    <option>7</option>
+                    <option>6</option>
+                    <option>5</option>
+                    <option>4</option>
+                    <option>3</option>
+                    <option>2</option>
+                    <option>1</option>
+                </Input>
             </FormGroup>
             <FormGroup>
                 <Label for="titleInput">
