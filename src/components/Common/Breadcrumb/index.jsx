@@ -2,8 +2,13 @@ import { React } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Breadcrumb as ReactstrapBreadcrumb, BreadcrumbItem as ReactstrapBreadcrumbItem } from 'reactstrap'
 import { pathToPageName } from '../../../routes'
+import { PropTypes } from 'prop-types';
 
-const Breadcrumb = () => {
+const propTypes = {
+    aliases: PropTypes.object,
+}
+
+const Breadcrumb = ({aliases}) => {
     const location = useLocation()
 
     let currentLink = ''
@@ -11,6 +16,10 @@ const Breadcrumb = () => {
     const crumbs = location.pathname.split('/')
         .filter(crumb => crumb !== '')
         .map((crumb, i, arr) => {
+            if(aliases && aliases[crumb]) {
+                crumb = aliases[crumb]
+            }
+
             currentLink += `/${crumb}`
 
             if(arr.length - 1 === i) {
