@@ -7,7 +7,14 @@ const propTypes = {
     reviews: PropTypes.array.isRequired,
     reviewsError: PropTypes.string.isRequired,
     restaurantsError: PropTypes.string.isRequired,
-    currentRestaurant: PropTypes.string.isRequired,
+    currentRestaurant: PropTypes.shape({
+        displayName: PropTypes.shape({
+            text: PropTypes.string,
+            languageCode: PropTypes.string
+        }),
+        formattedAddress: PropTypes.String,
+        id: PropTypes.String
+    }).isRequired,
     requestingRestaurantDetails: PropTypes.bool.isRequired
 };
 
@@ -27,7 +34,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
         <div>
             <ErrorBanner error = {reviewsError} />
             <ErrorBanner error = {restaurantsError} />
-            <Breadcrumb />
+            { currentRestaurant && <Breadcrumb aliases = {{[currentRestaurant.id]: currentRestaurant.displayName.text}}/> }
             { requestingRestaurantDetails && <FrySpinner /> }
             { currentRestaurant &&
                 <div>
