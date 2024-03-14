@@ -7,6 +7,7 @@ import { restaurantsActions } from '../../redux/reducers/restaurants'
 const mapStateToProps = (state) => {
     return {
         reviews: state.reviewsReducer.reviews,
+        averageScore: state.reviewsReducer.averageScore,
         currentRestaurant: state.restaurantsReducer.currentRestaurant,
         reviewsError: state.reviewsReducer.error,
         restaurantsError: state.restaurantsReducer.error,

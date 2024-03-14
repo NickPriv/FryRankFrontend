@@ -7,18 +7,12 @@ const propTypes = {
     reviews: PropTypes.array.isRequired,
     reviewsError: PropTypes.string.isRequired,
     restaurantsError: PropTypes.string.isRequired,
-    currentRestaurant: PropTypes.shape({
-        displayName: PropTypes.shape({
-            text: PropTypes.string,
-            languageCode: PropTypes.string
-        }),
-        formattedAddress: PropTypes.String,
-        id: PropTypes.String
-    }).isRequired,
+    currentRestaurant: PropTypes.object.isRequired,
+    averageScore: PropTypes.number.isRequired,
     requestingRestaurantDetails: PropTypes.bool.isRequired
 };
 
-const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails }) => {
+const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails, averageScore }) => {
 
     const reviewsBody = () => {
         if (reviews.length == 0) {
@@ -38,8 +32,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
             { requestingRestaurantDetails && <FrySpinner /> }
             { currentRestaurant &&
                 <div>
-                   <RestaurantHeader currentRestaurant = {currentRestaurant} />
-                   {reviews && reviewsBody()}
+                   <RestaurantHeader currentRestaurant={currentRestaurant} averageScore={averageScore} />
                    <LinkButton
                        link={'/restaurants/' + currentRestaurant.id + '/create'}
                        children='Write a review'
@@ -51,6 +44,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
                        color='secondary'
                    />
                 </div> }
+                {reviews && reviewsBody()}
         </div>
     )
 }
