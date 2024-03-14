@@ -7,6 +7,7 @@ import { restaurantsActions } from '../../redux/reducers/restaurants'
 const mapStateToProps = (state) => {
     return {
         reviews: state.reviewsReducer.reviews,
+        averageScore: state.reviewsReducer.averageScore,
         currentRestaurant: state.restaurantsReducer.currentRestaurant,
         reviewsError: state.reviewsReducer.error,
         restaurantsError: state.restaurantsReducer.error,
@@ -25,6 +26,7 @@ export default compose(
         componentDidMount() {
             const { match: { params: { restaurantId } }, getRestaurantById, getReviews } = this.props;
             getRestaurantById(restaurantId);
+            console.log("Component did mount");
             getReviews(restaurantId);
         },
     }),
