@@ -22,7 +22,7 @@ const propTypes = {
 const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails, averageScore }) => {
 
     const reviewsBody = () => {
-        if (reviews && reviews.length == 0) {
+        if (reviews.length == 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return reviews.map(review => (

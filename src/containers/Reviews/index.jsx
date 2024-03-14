@@ -26,7 +26,6 @@ export default compose(
         componentDidMount() {
             const { match: { params: { restaurantId } }, getRestaurantById, getReviews } = this.props;
             getRestaurantById(restaurantId);
-            console.log("Component did mount");
             getReviews(restaurantId);
         },
     }),
