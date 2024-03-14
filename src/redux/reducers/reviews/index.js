@@ -11,6 +11,7 @@ export const types = {
 
 export const initialState = {
   reviews: null,
+  averageScore: null,
   currentReview: {
     "restaurantId": null,
     "authorId": null,
@@ -33,7 +34,8 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANT_REVIEWS_SUCCESS: {
             return {
                 ...state,
-                reviews: action.data,
+                reviews: action.data.reviews,
+                averageScore: action.data.averageScore,
                 error: ''
             };
         }
@@ -77,7 +79,7 @@ export default (state = initialState, action) => {
                 ...state,
                 currentReview: {
                     ...state.currentReview,
-                    [action.name]: action.value != "" ? action.value : null
+                    [action.name]: action.value !== "" ? action.value : null
                 }
             }
         }

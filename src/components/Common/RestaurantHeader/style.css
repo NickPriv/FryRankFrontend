@@ -1,0 +1,21 @@
+.score {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    line-height: 55px;
+
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    border-color: red;
+    border-style: solid;
+
+    color: red;
+    text-align: center;
+    font-size: 2em;
+
+    margin-left: 10px;
+}
+
+.title {
+    display: inline-block;
+}

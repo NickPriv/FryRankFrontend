@@ -4,7 +4,7 @@ import { Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 const propTypes = {
     title: PropTypes.string.isRequired,
     authorId: PropTypes.string.isRequired,
-    score: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
     body: PropTypes.string.isRequired,
 };
 
