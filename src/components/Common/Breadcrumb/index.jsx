@@ -18,7 +18,7 @@ const Breadcrumb = ({aliases}) => {
         .map((crumb, i, arr) => {
             let crumbDisplayName = aliases && aliases[crumb] ? aliases[crumb] : crumb;
 
-            currentLink += `/${crumbDisplayName}`
+            currentLink += `/${crumb}`
 
             if(arr.length - 1 === i) {
                 return (
