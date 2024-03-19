@@ -19,7 +19,7 @@ const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentRe
     return (
         <div>
             <ErrorBanner error = {error} />
-            <Breadcrumb />
+            <Breadcrumb aliases = {{[currentRestaurant.id]: currentRestaurant.displayName.text}} />
             <RestaurantHeader currentRestaurant = {currentRestaurant} />
             <ReviewForm
                 createReview = {createReview}
