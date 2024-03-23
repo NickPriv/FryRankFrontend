@@ -21,7 +21,7 @@ function App() {
                       <Route
                           exact
                           path={route.path}
-                          key={key}``
+                          key={key}
                           component={route.component}
                       />
                     ))}
