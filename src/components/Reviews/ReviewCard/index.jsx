@@ -14,7 +14,8 @@ const ReviewCard = ({ title, authorId, score, body }) => {
             color="warning"
             className="mb-2"
             style={{
-                width: '36rem'
+                maxWidth: "36rem",
+                width: "90vw"
             }}
         >
             <CardBody>
