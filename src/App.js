@@ -10,28 +10,28 @@ function App() {
     <div>
       <Header />
       <Container>
-      <Row>
-        <Col />
-        <Col xs="auto">
-          <div class="p-3 d-flex justify-content-center">
-            <Provider store={store}>
-              <Router>
-                <Switch>
-                  {routes.map((route, key) => (
+        <Row>
+          <Col />
+          <Col xs="auto">
+            <div class="p-3 d-flex justify-content-center">
+              <Provider store={store}>
+                <Router>
+                  <Switch>
+                    {routes.map((route, key) => (
                       <Route
                           exact
                           path={route.path}
-                          key={key}
+                          key={key}``
                           component={route.component}
                       />
-                  ))}
-                </Switch>
-              </Router>
-            </Provider>
-          </div>
-        </Col>
-        <Col />
-      </Row>
+                    ))}
+                  </Switch>
+                </Router>
+              </Provider>
+            </div>
+          </Col>
+          <Col />
+        </Row>
       </Container>
     </div>
   );
