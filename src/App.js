@@ -8,31 +8,31 @@ import { Container, Row, Col } from 'reactstrap'
 function App() {
   return (
     <div>
-      <Header />
-      <Container>
-        <Row>
-          <Col />
-          <Col xs="auto">
-            <div class="p-3 d-flex justify-content-center">
-              <Provider store={store}>
-                <Router>
+      <Router>
+        <Header />
+        <Container>
+          <Row>
+            <Col />
+            <Col xs="auto">
+              <div class="p-3 d-flex justify-content-center">
+                <Provider store={store}>
                   <Switch>
                     {routes.map((route, key) => (
                       <Route
-                          exact
-                          path={route.path}
-                          key={key}
-                          component={route.component}
+                        exact
+                        path={route.path}
+                        key={key}
+                        component={route.component}
                       />
                     ))}
                   </Switch>
-                </Router>
-              </Provider>
-            </div>
-          </Col>
-          <Col />
-        </Row>
-      </Container>
+                </Provider>
+              </div>
+            </Col>
+            <Col />
+          </Row>
+        </Container>
+      </Router>
     </div>
   );
 }

@@ -7,9 +7,17 @@
     padding: 1em;
     margin-bottom: 1em;
     background-color: #D9D9D9;
-    color: #000;
 }
 
-h1 {
+.Header a {
+    color: #000;
+    text-decoration: none;
+}
+
+.Header a:hover {
+    color: #8B0000;
+}
+
+.Header h1 {
     font-weight:bold;
 }

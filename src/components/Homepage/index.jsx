@@ -1,6 +1,10 @@
 import { Component } from 'react';
+import { Card, CardBody } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import logo from '../../FrenchFryFoodCritic.png';
-import '../../App.css';
+import { BACKEND_SERVICE_PATH } from '../../constants';
+import styles from './styles.css';
+import Typewriter from "./Typewriter";
 
 export class Homepage extends Component {
 
@@ -9,7 +13,7 @@ export class Homepage extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('https://pure-monk-4ba7721dd9fb.herokuapp.com/api/welcome');
+    const response = await fetch(`${BACKEND_SERVICE_PATH}/welcome`);
     const body = await response.text();
     this.setState({message: body});
   }
@@ -17,17 +21,21 @@ export class Homepage extends Component {
   render() {
     const {message} = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="Food-critic" alt="logo" />
-            <div className="App-intro">
-              <h2>Welcome</h2>
-              <p>{message}</p>
-            </div>
-        </header>
-      </div>
+        <div className="App">
+            <img src={logo} className="Food-critic" alt="food-critic" />
+            <Link to="/restaurants" className="enter">
+                <h2>Enter FryRank</h2>
+            </Link>
+            <Card
+                color="warning"
+                className="text-box"
+            >
+                <CardBody>
+                    <Typewriter text={message} delay={35} />
+                </CardBody>
+            </Card>
+        </div>
     );
-
   }
 }
 
