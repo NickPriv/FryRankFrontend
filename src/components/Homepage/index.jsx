@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Card, CardBody } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import logo from '../../FrenchFryFoodCritic.png';
 import { BACKEND_SERVICE_PATH } from '../../constants';
 import styles from './styles.css';
@@ -22,9 +23,9 @@ export class Homepage extends Component {
     return (
         <div className="App">
             <img src={logo} className="Food-critic" alt="food-critic" />
-            <a href="/restaurants" className='enter'>
+            <Link to="/restaurants" className="enter">
                 <h2>Enter FryRank</h2>
-            </a>
+            </Link>
             <Card
                 color="warning"
                 className="text-box"
