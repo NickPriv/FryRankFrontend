@@ -1,0 +1,19 @@
+.Food-critic {
+  max-width: 80vw;
+  max-height: 66vh;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-box {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 80vw;
+  max-width: 80vw;
+}
+
+.enter {
+    text-align: center
+}

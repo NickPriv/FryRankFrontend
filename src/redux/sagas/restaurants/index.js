@@ -2,8 +2,8 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, restaurantsActions } from '../../reducers/restaurants';
-import { GOOGLE_API_PATH } from '../../constants';
 
+const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
 const HEADER_CONTENT_TYPE = 'Content-Type';
 const HEADER_API_KEY = 'X-Goog-Api-Key';
 const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
