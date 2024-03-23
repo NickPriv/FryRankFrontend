@@ -9,24 +9,30 @@ function App() {
   return (
     <div>
       <Header />
-      <Container><Row><Col></Col><Col xs="auto">
-      <div class="p-3 d-flex justify-content-center">
-        <Provider store={store}>
-          <Router>
-            <Switch>
-              {routes.map((route, key) => (
-                      <Route
-                          exact
-                          path={route.path}
-                          key={key}
-                          component={route.component}
-                      />
-                    ))}
-            </Switch>
-          </Router>
-        </Provider>
-      </div>
-      </Col><Col></Col></Row></Container>
+      <Container>
+      <Row>
+          <Col></Col>
+          <Col xs="auto">
+              <div class="p-3 d-flex justify-content-center">
+                <Provider store={store}>
+                  <Router>
+                    <Switch>
+                      {routes.map((route, key) => (
+                              <Route
+                                  exact
+                                  path={route.path}
+                                  key={key}
+                                  component={route.component}
+                              />
+                            ))}
+                    </Switch>
+                  </Router>
+                </Provider>
+              </div>
+          </Col>
+          <Col></Col>
+      </Row>
+      </Container>
     </div>
   );
 }
