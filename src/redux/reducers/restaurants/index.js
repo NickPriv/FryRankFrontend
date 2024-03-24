@@ -9,7 +9,7 @@ export const types = {
 }
 
 export const initialState = {
-  restaurants: [],
+  restaurants: null,
   currentRestaurant: null,
   error: '',
   requestingRestaurantDetails: false,

@@ -1,10 +1,9 @@
 import { Component } from 'react';
-import { Card, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import logo from '../../FrenchFryFoodCritic.png';
 import { BACKEND_SERVICE_PATH } from '../../constants';
-import styles from './styles.css';
-import Typewriter from "./Typewriter";
+import './styles.css';
+import MessageCard from "./MessageCard";
 
 export class Homepage extends Component {
 
@@ -26,6 +25,7 @@ export class Homepage extends Component {
             <Link to="/restaurants" className="enter">
                 <h2>Enter FryRank</h2>
             </Link>
+<<<<<<< HEAD
             <Card
                 color="warning"
                 className="text-box"
@@ -34,6 +34,9 @@ export class Homepage extends Component {
                     <Typewriter text={message} delay={35} />
                 </CardBody>
             </Card>
+=======
+            <MessageCard message={message} />
+>>>>>>> spinnerUpdate
         </div>
     );
   }

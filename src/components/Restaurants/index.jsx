@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
-import { Breadcrumb, ErrorBanner } from '../Common';
+import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
 import { PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
@@ -15,16 +15,20 @@ const propTypes = {
 const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery }) => {
 
     const restaurantsDisplay = (restaurants) => {
-        return restaurants
-            ? restaurants.map((restaurant, i) => {
+        if (restaurants && restaurants.length > 0) {
+            return restaurants.map((restaurant, i) => {
                 let restaurantLink = `${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
                 return (
                     <Fragment key = {i}>
                         <p><b><a href={restaurantLink}>{restaurant.displayName.text}</a></b></p>
                         <p>{restaurant.formattedAddress}</p>
                     </Fragment>
-                )})
-            : 'No restaurants found for this search.';
+                )});
+        } else if (restaurants && restaurants.length === 0) {
+            return 'No restaurants found for this search.';
+        } else {
+            return <FrySpinner />;
+        }
     }
 
     return (
