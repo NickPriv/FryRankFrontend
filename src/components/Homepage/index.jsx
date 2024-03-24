@@ -25,18 +25,7 @@ export class Homepage extends Component {
             <Link to="/restaurants" className="enter">
                 <h2>Enter FryRank</h2>
             </Link>
-<<<<<<< HEAD
-            <Card
-                color="warning"
-                className="text-box"
-            >
-                <CardBody>
-                    <Typewriter text={message} delay={35} />
-                </CardBody>
-            </Card>
-=======
             <MessageCard message={message} />
->>>>>>> spinnerUpdate
         </div>
     );
   }
