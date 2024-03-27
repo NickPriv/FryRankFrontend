@@ -4,6 +4,8 @@ import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
 import { PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
+import { Score } from "../Common"
+
 const propTypes = {
     restaurants: PropTypes.array.isRequired,
     error: PropTypes.string.isRequired,
@@ -19,8 +21,9 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
             return restaurants.map((restaurant, i) => {
                 let restaurantLink = `${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
                 return (
-                    <Fragment key = {i}>
-                        <p><b><a href={restaurantLink}>{restaurant.displayName.text}</a></b></p>
+                    <Fragment key={i}>
+                        <p style={{ display: "inline-block"}}><b><a href={restaurantLink}>{restaurant.displayName.text}</a></b></p>
+                        <Score size="sm" score="4.6" />
                         <p>{restaurant.formattedAddress}</p>
                     </Fragment>
                 )});
