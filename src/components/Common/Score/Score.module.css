@@ -1,0 +1,36 @@
+.lg {
+    display: inline-block;
+    height: 60px;
+    width: 60px;
+    line-height: 55px;
+
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    border-color: red;
+    border-style: solid;
+
+    color: red;
+    text-align: center;
+    font-size: 2em;
+
+    margin-left: 5px;
+}
+
+.sm {
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 25px;
+
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    border-color: red;
+    border-style: solid;
+    border-width: 2px;
+
+    color: red;
+    text-align: center;
+    font-size: 1em;
+
+    margin-left: 5px;
+}
