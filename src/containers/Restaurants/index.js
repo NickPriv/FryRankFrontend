@@ -27,7 +27,7 @@ export default compose(
                 navigator.permissions
                     .query({ name: "geolocation" })
                     .then(function (result) {
-                        if (result.state === "granted") {
+                        if (result.state === "granted" || result.state === "prompt") {
                             navigator.geolocation.getCurrentPosition (
                                 (position) => {
                                     getRestaurants(FRENCH_FRIES_TEXT_QUERY, position.coords);
@@ -36,16 +36,7 @@ export default compose(
                                     getRestaurants(FRENCH_FRIES_TEXT_QUERY);
                                 }
                             );
-                        } else if (result.state === "prompt") {
-                            navigator.geolocation.getCurrentPosition (
-                                (position) => {
-                                    getRestaurants(FRENCH_FRIES_TEXT_QUERY, position.coords);
-                                },
-                                (error) => {
-                                    getRestaurants(FRENCH_FRIES_TEXT_QUERY);
-                                }
-                            );
-                        } else if (result.state === "denied") {
+                        } else {
                             getRestaurants(FRENCH_FRIES_TEXT_QUERY);
                         }
                     });
