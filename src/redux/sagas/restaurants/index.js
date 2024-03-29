@@ -8,10 +8,25 @@ const HEADER_CONTENT_TYPE = 'Content-Type';
 const HEADER_API_KEY = 'X-Goog-Api-Key';
 const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
 
-export function* callGetRestaurants({ textQuery }) {
+export function* callGetRestaurants({ textQuery, location }) {
+    const locationBias = location ?
+        {
+            "circle": {
+                "center": {
+                    "latitude": location.latitude,
+                    "longitude": location.longitude
+                },
+                "radius": 500.0
+            }
+        } : null;
+
     try {
         const { data } = yield axios.post(GOOGLE_API_PATH + "places:searchText",
-            { 'textQuery': textQuery },
+            {
+                'textQuery': textQuery,
+                'locationBias': locationBias,
+                'maxResultCount': 10,
+            },
             { headers: {
                 [HEADER_CONTENT_TYPE]: 'application/json',
                 [HEADER_API_KEY]: process.env.REACT_APP_GOOGLE_API_KEY,
@@ -37,7 +52,6 @@ export function* callGetRestaurantById({ restaurantId }) {
     } catch (err) {
         yield put(restaurantsActions.failedGetRestaurantByIdRequest(err.response.data.error.message));
     }
-
 }
 
 export default function* watchRestaurantsRequest() {
