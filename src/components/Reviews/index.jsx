@@ -24,8 +24,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
-        }
-        if (reviews.length == 0) {
+        } else if (reviews.length == 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return reviews.map(review => (
