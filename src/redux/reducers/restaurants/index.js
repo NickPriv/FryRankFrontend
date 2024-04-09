@@ -78,7 +78,7 @@ export default (state = initialState, action) => {
 }
 
 export const restaurantsActions = {
-    startGetRestaurantsRequest: textQuery => ({ type: types.GET_RESTAURANTS_REQUEST, textQuery }),
+    startGetRestaurantsRequest: (textQuery, location) => ({ type: types.GET_RESTAURANTS_REQUEST, textQuery, location }),
     successfulGetRestaurantsRequest: (data, aggregateReviewsData) => ({ type: types.GET_RESTAURANTS_SUCCESS, data, aggregateReviewsData}),
     failedGetRestaurantsRequest: error => ({ type: types.GET_RESTAURANTS_FAILURE, error }),
     startGetRestaurantByIdRequest: restaurantId => ({ type: types.GET_RESTAURANT_BY_ID_REQUEST, restaurantId }),
