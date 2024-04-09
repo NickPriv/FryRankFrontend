@@ -9,10 +9,11 @@ const propTypes = {
     error: PropTypes.string.isRequired,
     getRestaurants: PropTypes.func.isRequired,
     currentSearchQuery: PropTypes.string.isRequired,
-    updateSearchQuery: PropTypes.func.isRequired
+    updateSearchQuery: PropTypes.func.isRequired,
+    location: PropTypes.object
 }
 
-const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery }) => {
+const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery, location }) => {
 
     const restaurantsDisplay = (restaurants) => {
         if (restaurants && restaurants.length > 0) {
@@ -39,6 +40,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 getRestaurants = {getRestaurants}
                 currentSearchQuery = {currentSearchQuery}
                 updateSearchQuery = {updateSearchQuery}
+                location = {location}
             />
             {restaurantsDisplay(restaurants)}
         </div>
