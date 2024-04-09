@@ -5,7 +5,8 @@ export const types = {
     GET_RESTAURANT_BY_ID_REQUEST: "GET_RESTAURANT_BY_ID_REQUEST",
     GET_RESTAURANT_BY_ID_SUCCESS: "GET_RESTAURANT_BY_ID_SUCCESS",
     GET_RESTAURANT_BY_ID_FAILURE: "GET_RESTAURANT_BY_ID_FAILURE",
-    UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY"
+    UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY",
+    SET_LOCATION: "SET_LOCATION"
 }
 
 export const initialState = {
@@ -13,7 +14,8 @@ export const initialState = {
   currentRestaurant: null,
   error: '',
   requestingRestaurantDetails: false,
-  searchQuery: ''
+  searchQuery: '',
+  location: null,
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +39,13 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.error,
             }
+        }
+
+        case types.SET_LOCATION: {
+            return {
+                ...state,
+                location: action.data
+            };
         }
 
         case types.UPDATE_CURRENT_SEARCH_QUERY: {
@@ -82,5 +91,6 @@ export const restaurantsActions = {
     startGetRestaurantByIdRequest: restaurantId => ({ type: types.GET_RESTAURANT_BY_ID_REQUEST, restaurantId }),
     successfulGetRestaurantByIdRequest: data => ({ type: types.GET_RESTAURANT_BY_ID_SUCCESS, data }),
     failedGetRestaurantByIdRequest: error => ({ type: types.GET_RESTAURANT_BY_ID_FAILURE, error }),
-    updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data })
+    updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
+    setLocation: data => ({ type: types.SET_LOCATION, data }),
 }
