@@ -1,34 +1,19 @@
-import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../FrenchFryFoodCritic.png';
-import { BACKEND_SERVICE_PATH } from '../../constants';
+import { WELCOME_MESSAGE } from '../../constants';
 import './styles.css';
 import MessageCard from "./MessageCard";
 
-export class Homepage extends Component {
-
-  state = {
-    message: ""
-  };
-
-  async componentDidMount() {
-    const response = await fetch(`${BACKEND_SERVICE_PATH}/welcome`);
-    const body = await response.text();
-    this.setState({message: body});
-  }
-
-  render() {
-    const {message} = this.state;
+const Homepage = () => {
     return (
         <div className="App">
             <img src={logo} className="Food-critic" alt="food-critic" />
             <Link to="/restaurants" className="enter">
                 <h2>Enter FryRank</h2>
             </Link>
-            <MessageCard message={message} />
+            <MessageCard message={WELCOME_MESSAGE} />
         </div>
     );
-  }
 }
 
 export default Homepage;
