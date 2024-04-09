@@ -9,20 +9,22 @@ const mapStateToProps = (state) => {
         restaurants: state.restaurantsReducer.restaurants,
         error: state.restaurantsReducer.error,
         currentSearchQuery: state.restaurantsReducer.searchQuery,
+        location: state.restaurantsReducer.location,
         aggregateReviewsData: state.restaurantsReducer.aggregateReviewsData
     }
 }
 
 const mapDispatchToProps = {
     getRestaurants: restaurantsActions.startGetRestaurantsRequest,
-    updateSearchQuery: restaurantsActions.updateSearchQuery
+    updateSearchQuery: restaurantsActions.updateSearchQuery,
+    setLocation: restaurantsActions.setLocation,
 };
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { getRestaurants } = this.props;
+            const { getRestaurants, setLocation } = this.props;
 
             if (navigator.geolocation) {
                 navigator.permissions
@@ -32,6 +34,7 @@ export default compose(
                             navigator.geolocation.getCurrentPosition (
                                 (position) => {
                                     getRestaurants(FRENCH_FRIES_TEXT_QUERY, position.coords);
+                                    setLocation(position.coords);
                                 },
                                 (error) => {
                                     getRestaurants(FRENCH_FRIES_TEXT_QUERY);

@@ -13,10 +13,11 @@ const propTypes = {
     getRestaurants: PropTypes.func.isRequired,
     currentSearchQuery: PropTypes.string.isRequired,
     updateSearchQuery: PropTypes.func.isRequired,
+    location: PropTypes.object,
     aggregateReviewsData: PropTypes.object.isRequired
 }
 
-const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery, aggregateReviewsData }) => {
+const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData }) => {
     const restaurantsDisplay = (restaurants) => {
         if (restaurants && restaurants.length > 0) {
             return restaurants.map((restaurant, i) => {
@@ -43,6 +44,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 getRestaurants = {getRestaurants}
                 currentSearchQuery = {currentSearchQuery}
                 updateSearchQuery = {updateSearchQuery}
+                location = {location}
             />
             {restaurantsDisplay(restaurants)}
         </div>

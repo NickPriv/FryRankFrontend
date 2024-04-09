@@ -9,7 +9,7 @@ const propTypes = {
     getRestaurants: PropTypes.func.isRequired
 };
 
-const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery }) => {
+const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, location }) => {
 
     return (
         <Form onChange={(event) => {
@@ -29,7 +29,7 @@ const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery }) 
             <Button
                 children='Submit'
                 color='danger'
-                onClick={(event) => {getRestaurants(currentSearchQuery)}}
+                onClick={(event) => {getRestaurants(currentSearchQuery, location)}}
             />
         </Form>
     )
