@@ -1,4 +1,4 @@
-import { Homepage } from './components/Homepage';
+import Homepage from './components/Homepage';
 import Restaurants from './containers/Restaurants';
 import Reviews from './containers/Reviews';
 import CreateReview from './containers/CreateReview';
