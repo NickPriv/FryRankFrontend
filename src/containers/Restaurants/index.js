@@ -23,9 +23,11 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { getRestaurants, setLocation } = this.props;
+            const { getRestaurants, location, setLocation } = this.props;
 
-            if (navigator.geolocation) {
+            if (location) {
+                getRestaurants(FRENCH_FRIES_TEXT_QUERY, location);
+            } else if (navigator.geolocation) {
                 navigator.permissions
                     .query({ name: "geolocation" })
                     .then(function (result) {

@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
 import { PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
@@ -21,7 +22,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 let restaurantLink = `${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
                 return (
                     <Fragment key = {i}>
-                        <p><b><a href={restaurantLink}>{restaurant.displayName.text}</a></b></p>
+                        <p><b><Link to={restaurantLink}>{restaurant.displayName.text}</Link></b></p>
                         <p>{restaurant.formattedAddress}</p>
                     </Fragment>
                 )});
