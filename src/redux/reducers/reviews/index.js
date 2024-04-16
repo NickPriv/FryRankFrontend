@@ -6,7 +6,8 @@ export const types = {
     CREATE_REVIEW_FOR_RESTAURANT_SUCCESS: "CREATE_REVIEW_FOR_RESTAURANT_SUCCESS",
     CREATE_REVIEW_FOR_RESTAURANT_FAILURE: "CREATE_REVIEW_FOR_RESTAURANT_FAILURE",
     UPDATE_CURRENT_REVIEW: "UPDATE_CURRENT_REVIEW",
-    RESET_CREATE_REQUEST: "RESET_CREATE_REQUEST"
+    RESET_CREATE_REQUEST: "RESET_CREATE_REQUEST",
+    RESET_REVIEWS: "RESET_REVIEWS"
 }
 
 export const initialState = {
@@ -91,6 +92,13 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.RESET_REVIEWS: {
+            return {
+                ...state,
+                reviews: initialState.reviews
+            }
+        }
+
         default:
             return state;
   }
@@ -104,5 +112,6 @@ export const reviewsActions = {
     successfulCreateReviewForRestaurantRequest: () => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS }),
     failedCreateReviewForRestaurantRequest: error => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_FAILURE, error }),
     updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value }),
-    resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST })
+    resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST }),
+    resetReviews: () => ({ type: types.RESET_REVIEWS })
 }

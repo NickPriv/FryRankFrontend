@@ -17,14 +17,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getRestaurantById: restaurantsActions.startGetRestaurantByIdRequest,
-    getReviews: reviewsActions.startGetAllReviewsForRestaurantRequest
+    getReviews: reviewsActions.startGetAllReviewsForRestaurantRequest,
+    resetCurrentRestaurant: restaurantsActions.resetCurrentRestaurant,
+    resetReviews: reviewsActions.resetReviews
 };
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantById, getReviews } = this.props;
+            const { match: { params: { restaurantId } }, getRestaurantById, getReviews, resetCurrentRestaurant, resetReviews } = this.props;
+            resetCurrentRestaurant();
+            resetReviews();
             getRestaurantById(restaurantId);
             getReviews(restaurantId);
         },

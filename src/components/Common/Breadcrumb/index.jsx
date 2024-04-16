@@ -1,5 +1,5 @@
 import { React } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Breadcrumb as ReactstrapBreadcrumb, BreadcrumbItem as ReactstrapBreadcrumbItem } from 'reactstrap'
 import { pathToPageName } from '../../../routes'
 import { PropTypes } from 'prop-types';
@@ -30,7 +30,7 @@ const Breadcrumb = ({aliases}) => {
             else {
                 return (
                     <ReactstrapBreadcrumbItem>
-                        <a href={currentLink}>{pathToPageName[currentLink] ? pathToPageName[currentLink] : crumbDisplayName}</a>
+                        <Link to={currentLink}>{pathToPageName[currentLink] ? pathToPageName[currentLink] : crumbDisplayName}</Link>
                     </ReactstrapBreadcrumbItem>
                 )
             }

@@ -6,7 +6,8 @@ export const types = {
     GET_RESTAURANT_BY_ID_SUCCESS: "GET_RESTAURANT_BY_ID_SUCCESS",
     GET_RESTAURANT_BY_ID_FAILURE: "GET_RESTAURANT_BY_ID_FAILURE",
     UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY",
-    SET_LOCATION: "SET_LOCATION"
+    SET_LOCATION: "SET_LOCATION",
+    RESET_CURRENT_RESTAURANT: "RESET_CURRENT_RESTAURANT"
 }
 
 export const initialState = {
@@ -81,6 +82,13 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.RESET_CURRENT_RESTAURANT: {
+            return {
+                ...state,
+                currentRestaurant: initialState.currentRestaurant
+            }
+        }
+
         default:
             return state;
   }
@@ -95,4 +103,5 @@ export const restaurantsActions = {
     failedGetRestaurantByIdRequest: error => ({ type: types.GET_RESTAURANT_BY_ID_FAILURE, error }),
     updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
     setLocation: data => ({ type: types.SET_LOCATION, data }),
+    resetCurrentRestaurant: () => ({ type: types.RESET_CURRENT_RESTAURANT })
 }
