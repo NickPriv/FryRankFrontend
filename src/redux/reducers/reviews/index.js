@@ -34,8 +34,8 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANT_REVIEWS_SUCCESS: {
             return {
                 ...state,
-                reviews: action.data.reviews,
-                averageScore: action.data.averageScore,
+                reviews: action.reviewsData.reviews,
+                averageScore: action.averageScore,
                 error: ''
             };
         }
@@ -98,7 +98,7 @@ export default (state = initialState, action) => {
 
 export const reviewsActions = {
     startGetAllReviewsForRestaurantRequest: restaurantId => ({ type: types.GET_RESTAURANT_REVIEWS_REQUEST, restaurantId }),
-    successfulGetAllReviewsForRestaurantRequest: data => ({ type: types.GET_RESTAURANT_REVIEWS_SUCCESS, data }),
+    successfulGetAllReviewsForRestaurantRequest: (reviewsData, averageScore) => ({ type: types.GET_RESTAURANT_REVIEWS_SUCCESS, reviewsData, averageScore }),
     failedGetAllReviewsForRestaurantRequest: error => ({ type: types.GET_RESTAURANT_REVIEWS_FAILURE, error }),
     startCreateReviewForRestaurantRequest: review => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST, review }),
     successfulCreateReviewForRestaurantRequest: () => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS }),

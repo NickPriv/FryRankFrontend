@@ -20,7 +20,6 @@ const propTypes = {
 };
 
 const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails, averageScore }) => {
-
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;

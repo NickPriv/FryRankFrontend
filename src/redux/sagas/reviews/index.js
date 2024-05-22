@@ -1,15 +1,17 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
+import _ from 'lodash';
 
 import { types, reviewsActions } from '../../reducers/reviews';
-import { BACKEND_SERVICE_PATH } from '../../../constants';
+import { BACKEND_SERVICE_PATH, AGGREGATE_INFORMATION_API_PATH } from '../../../constants';
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/reviews`;
 
 export function* callGetAllReviewsForRestaurant({ restaurantId }) {
     try {
         const { data } = yield axios.get(API_PATH, { params: { restaurantId } });
-        yield put(reviewsActions.successfulGetAllReviewsForRestaurantRequest(data));
+        const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: restaurantId, rating: true } });
+        yield put(reviewsActions.successfulGetAllReviewsForRestaurantRequest(data, !_.isEmpty(aggregateReviewsData.data.restaurantIdToRestaurantInformation) ? aggregateReviewsData.data.restaurantIdToRestaurantInformation[restaurantId].avgScore : null));
     } catch (err) {
         yield put(reviewsActions.failedGetAllReviewsForRestaurantRequest(err.response.data.message));
     }

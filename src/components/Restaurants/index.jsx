@@ -11,11 +11,11 @@ const propTypes = {
     error: PropTypes.string.isRequired,
     getRestaurants: PropTypes.func.isRequired,
     currentSearchQuery: PropTypes.string.isRequired,
-    updateSearchQuery: PropTypes.func.isRequired
+    updateSearchQuery: PropTypes.func.isRequired,
+    aggregateReviewsData: PropTypes.object.isRequired
 }
 
-const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery }) => {
-
+const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery, aggregateReviewsData }) => {
     const restaurantsDisplay = (restaurants) => {
         if (restaurants && restaurants.length > 0) {
             return restaurants.map((restaurant, i) => {
@@ -23,7 +23,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 return (
                     <Fragment key={i}>
                         <p style={{ display: "inline-block"}}><b><a href={restaurantLink}>{restaurant.displayName.text}</a></b></p>
-                        <Score size="sm" score="4.6" />
+                        {aggregateReviewsData[restaurant.id] && <Score size="sm" score={aggregateReviewsData[restaurant.id].avgScore} />}
                         <p>{restaurant.formattedAddress}</p>
                     </Fragment>
                 )});

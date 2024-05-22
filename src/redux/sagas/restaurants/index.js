@@ -2,6 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, restaurantsActions } from '../../reducers/restaurants';
+import {AGGREGATE_INFORMATION_API_PATH} from "../../../constants";
 
 const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
 const HEADER_CONTENT_TYPE = 'Content-Type';
@@ -18,7 +19,9 @@ export function* callGetRestaurants({ textQuery }) {
                 [HEADER_FIELD_MASK]: 'places.displayName,places.formattedAddress,places.id'
             }}
         );
-        yield put(restaurantsActions.successfulGetRestaurantsRequest(data));
+        const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } });
+
+        yield put(restaurantsActions.successfulGetRestaurantsRequest(data, aggregateReviewsData.data.restaurantIdToRestaurantInformation));
     } catch (err) {
         yield put(restaurantsActions.failedGetRestaurantsRequest(err.response.data.error.message));
     }
