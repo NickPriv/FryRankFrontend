@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
 import { PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
-import { Link } from 'react-router-dom'
+
+import style from './style.css';
 
 import { Score } from "../Common"
 
@@ -25,7 +26,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 let restaurantLink = `${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
                 return (
                     <Fragment key = {i}>
-                        <p><b><Link to={restaurantLink}>{restaurant.displayName.text}</Link></b></p>
+                        <p className="inline-paragraph"><b><Link to={restaurantLink}>{restaurant.displayName.text}</Link></b></p>
                         {aggregateReviewsData[restaurant.id] && <Score size="sm" score={aggregateReviewsData[restaurant.id].avgScore} />}
                         <p>{restaurant.formattedAddress}</p>
                     </Fragment>
