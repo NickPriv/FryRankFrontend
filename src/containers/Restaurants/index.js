@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
         restaurants: state.restaurantsReducer.restaurants,
         error: state.restaurantsReducer.error,
         currentSearchQuery: state.restaurantsReducer.searchQuery,
-        location: state.restaurantsReducer.location
+        location: state.restaurantsReducer.location,
+        aggregateReviewsData: state.restaurantsReducer.aggregateReviewsData
     }
 }
 

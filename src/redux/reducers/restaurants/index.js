@@ -17,6 +17,7 @@ export const initialState = {
   requestingRestaurantDetails: false,
   searchQuery: '',
   location: null,
+  aggregateReviewsData: null
 };
 
 export default (state = initialState, action) => {
@@ -31,6 +32,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 restaurants: action.data.places,
+                aggregateReviewsData: action.aggregateReviewsData,
                 error: ''
             };
         }
@@ -94,7 +96,7 @@ export default (state = initialState, action) => {
 
 export const restaurantsActions = {
     startGetRestaurantsRequest: (textQuery, location) => ({ type: types.GET_RESTAURANTS_REQUEST, textQuery, location }),
-    successfulGetRestaurantsRequest: data => ({ type: types.GET_RESTAURANTS_SUCCESS, data }),
+    successfulGetRestaurantsRequest: (data, aggregateReviewsData) => ({ type: types.GET_RESTAURANTS_SUCCESS, data, aggregateReviewsData}),
     failedGetRestaurantsRequest: error => ({ type: types.GET_RESTAURANTS_FAILURE, error }),
     startGetRestaurantByIdRequest: restaurantId => ({ type: types.GET_RESTAURANT_BY_ID_REQUEST, restaurantId }),
     successfulGetRestaurantByIdRequest: data => ({ type: types.GET_RESTAURANT_BY_ID_SUCCESS, data }),

@@ -1,5 +1,6 @@
 import { PropTypes } from 'prop-types';
 import style from './style.css';
+import { Score } from "../"
 
 const propTypes = {
     currentRestaurant: PropTypes.object.isRequired,
@@ -10,7 +11,7 @@ const RestaurantHeader = ({ currentRestaurant, averageScore }) => {
     return (
         <div>
             <h1 className='title'>{currentRestaurant.displayName.text}</h1>
-            {averageScore && (<span className='score'>{averageScore}</span>)}
+            {averageScore && (<Score score={averageScore} size="lg"/>)}
             <p>{currentRestaurant.formattedAddress}</p>
         </div>
     )
