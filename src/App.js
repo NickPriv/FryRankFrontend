@@ -9,13 +9,13 @@ function App() {
   return (
     <div>
       <Router>
-        <Header />
-        <Container>
-          <Row>
-            <Col />
-            <Col xs="auto">
-              <div class="p-3 d-flex justify-content-center">
-                <Provider store={store}>
+        <Provider store={store}>
+          <Header />
+          <Container>
+            <Row>
+              <Col />
+              <Col xs="auto">
+                <div class="p-3 d-flex justify-content-center">
                   <Switch>
                     {routes.map((route, key) => (
                       <Route
@@ -26,12 +26,12 @@ function App() {
                       />
                     ))}
                   </Switch>
-                </Provider>
-              </div>
-            </Col>
-            <Col />
-          </Row>
-        </Container>
+                </div>
+              </Col>
+              <Col />
+            </Row>
+          </Container>
+        </Provider>
       </Router>
     </div>
   );

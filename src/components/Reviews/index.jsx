@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 
 import ReviewCard from './ReviewCard';
-import { Breadcrumb, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader } from '../Common';
+import { Breadcrumb, Button, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -16,10 +16,11 @@ const propTypes = {
         id: PropTypes.String
     }).isRequired,
     averageScore: PropTypes.number.isRequired,
-    requestingRestaurantDetails: PropTypes.bool.isRequired
+    requestingRestaurantDetails: PropTypes.bool.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
 };
 
-const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails, averageScore }) => {
+const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, requestingRestaurantDetails, averageScore, loggedIn }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
@@ -41,11 +42,20 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
                 <div>
                    <Breadcrumb aliases = {{[currentRestaurant.id]: currentRestaurant.displayName.text}}/>
                    <RestaurantHeader currentRestaurant={currentRestaurant} averageScore={averageScore} />
-                   <LinkButton
-                       link={'/restaurants/' + currentRestaurant.id + '/create'}
-                       children='Write a review'
-                       color='danger'
-                   />
+                   { loggedIn &&
+                       <LinkButton
+                           link={'/restaurants/' + currentRestaurant.id + '/create'}
+                           children='Write a review'
+                           color='danger'
+                       />
+                   }
+                   { !loggedIn &&
+                       <Button
+                           children='Log in to Google to write a review'
+                           color='danger'
+                           disabled='true'
+                       />
+                   }
                    <LinkButton
                        link='/restaurants/'
                        children='Back to all restaurants'
