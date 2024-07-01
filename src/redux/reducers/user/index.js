@@ -3,8 +3,8 @@ export const types = {
 }
 
 export const initialState = {
-  userData: null,
-  loggedIn: false,
+    userData: null,
+    loggedIn: false,
 };
 
 export default (state = initialState, action) => {
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
 
         default:
             return state;
-  }
+    }
 }
 
 export const userActions = {
