@@ -7,15 +7,22 @@ const propTypes = {
     currentRestaurant: PropTypes.object.isRequired,
     currentReview: PropTypes.object.isRequired,
     updateCurrentReview: PropTypes.func.isRequired,
-    createReview: PropTypes.func.isRequired
+    createReview: PropTypes.func.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
+    givenName: PropTypes.string.isRequired,
 };
 
-const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview }) => {
+const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview, loggedIn, givenName }) => {
 
     return (
-        <Form onChange={(event) => {
-            updateCurrentReview(event.target.name, event.target.value);
-        }}>
+        <Form
+            onChange={(event) => {
+                if (givenName && !currentReview.authorId) {
+                    updateCurrentReview('authorId', givenName);
+                }
+                updateCurrentReview(event.target.name, event.target.value);
+            }}
+        >
             <FormGroup>
                 <Label for="nameInput">
                     Name
@@ -23,8 +30,9 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                 <Input
                     id="nameInput"
                     name="authorId"
-                    placeholder="Your name here"
+                    value={givenName}
                     type="textarea"
+                    disabled="true"
                 />
             </FormGroup>
             <FormGroup>
@@ -67,11 +75,16 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                     type="textarea"
                 />
             </FormGroup>
-            <Button
+            { loggedIn ? <Button
                 children='Submit'
                 color='danger'
                 onClick={(event) => {createReview(currentReview)}}
-            />
+            /> : <Button
+                    children='Log in to Google to submit a review'
+                    color='danger'
+                    disabled='true'
+                />
+            }
             <LinkButton
                 link={'/restaurants/' + currentRestaurant.id}
                 children='Back to all reviews'

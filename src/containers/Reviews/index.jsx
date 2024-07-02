@@ -1,8 +1,8 @@
 import { compose, lifecycle } from 'react-recompose';
 import { connect } from 'react-redux';
 import Reviews from '../../components/Reviews';
-import { reviewsActions } from '../../redux/reducers/reviews'
-import { restaurantsActions } from '../../redux/reducers/restaurants'
+import { reviewsActions } from '../../redux/reducers/reviews';
+import { restaurantsActions } from '../../redux/reducers/restaurants';
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
         currentRestaurant: state.restaurantsReducer.currentRestaurant,
         reviewsError: state.reviewsReducer.error,
         restaurantsError: state.restaurantsReducer.error,
-        requestingRestaurantDetails: state.restaurantsReducer.requestingRestaurantDetails
+        requestingRestaurantDetails: state.restaurantsReducer.requestingRestaurantDetails,
+        loggedIn: state.userReducer.loggedIn,
     }
 }
 

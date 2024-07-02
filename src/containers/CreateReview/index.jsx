@@ -9,7 +9,9 @@ const mapStateToProps = (state) => {
         currentRestaurant: state.restaurantsReducer.currentRestaurant,
         error: state.reviewsReducer.error,
         currentReview: state.reviewsReducer.currentReview,
-        successfulCreate: state.reviewsReducer.successfulCreate
+        successfulCreate: state.reviewsReducer.successfulCreate,
+        loggedIn: state.userReducer.loggedIn,
+        givenName: state.userReducer.userData ? state.userReducer.userData.given_name : null,
     }
 }
 
