@@ -29,28 +29,28 @@ export default compose(
             // Only load restaurants if they have not already been loaded yet
             if (!restaurants) {
                 if (location) {
-                        getRestaurants(FRENCH_FRIES_TEXT_QUERY, location);
-                    } else if (navigator.geolocation) {
-                        navigator.permissions
-                            .query({ name: "geolocation" })
-                            .then(function (result) {
-                                if (result.state === "granted" || result.state === "prompt") {
-                                    navigator.geolocation.getCurrentPosition (
-                                        (position) => {
-                                            getRestaurants(FRENCH_FRIES_TEXT_QUERY, position.coords);
-                                            setLocation(position.coords);
-                                        },
-                                        (error) => {
-                                            getRestaurants(FRENCH_FRIES_TEXT_QUERY);
-                                        }
-                                    );
-                                } else {
-                                    getRestaurants(FRENCH_FRIES_TEXT_QUERY);
-                                }
-                            });
-                    } else {
-                        getRestaurants(FRENCH_FRIES_TEXT_QUERY);
-                    }
+                    getRestaurants(FRENCH_FRIES_TEXT_QUERY, location);
+                } else if (navigator.geolocation) {
+                    navigator.permissions
+                        .query({ name: "geolocation" })
+                        .then(function (result) {
+                            if (result.state === "granted" || result.state === "prompt") {
+                                navigator.geolocation.getCurrentPosition (
+                                    (position) => {
+                                        getRestaurants(FRENCH_FRIES_TEXT_QUERY, position.coords);
+                                        setLocation(position.coords);
+                                    },
+                                    (error) => {
+                                        getRestaurants(FRENCH_FRIES_TEXT_QUERY);
+                                    }
+                                );
+                            } else {
+                                getRestaurants(FRENCH_FRIES_TEXT_QUERY);
+                            }
+                        });
+                } else {
+                    getRestaurants(FRENCH_FRIES_TEXT_QUERY);
+                }
             }
         },
     }),
