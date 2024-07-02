@@ -1,6 +1,5 @@
 import React from "react";
 import { userActions } from '../../../redux/reducers/user';
-import store from '../../../redux/store';
 
 const GoogleLogin = ({ setUserData, loggedIn, givenName }) => {
 
