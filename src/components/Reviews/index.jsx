@@ -28,7 +28,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return reviews.map(review => (
-                <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} />
+                <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} timestamp={Object.hasOwn(review, "isoDateTime") ? review.isoDateTime : null}/>
             ));
         }
     }
@@ -50,10 +50,10 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
                        />
                    }
                    { !loggedIn &&
-                       <Button
-                           children='Log in to Google to write a review'
+                       <LinkButton
+                           link={'/restaurants/' + currentRestaurant.id + '/create'}
+                           children='Write a review'
                            color='danger'
-                           disabled='true'
                        />
                    }
                    <LinkButton

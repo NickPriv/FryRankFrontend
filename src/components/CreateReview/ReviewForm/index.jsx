@@ -78,7 +78,10 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
             { loggedIn ? <Button
                 children='Submit'
                 color='danger'
-                onClick={(event) => {createReview(currentReview)}}
+                onClick={(event) => {
+                    updateCurrentReview('isoDateTime', new Date().toISOString())
+                    createReview(currentReview)
+                }}
             /> : <Button
                     children='Log in to Google to submit a review'
                     color='danger'
