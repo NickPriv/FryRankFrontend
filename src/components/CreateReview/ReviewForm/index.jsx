@@ -10,15 +10,19 @@ const propTypes = {
     createReview: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     givenName: PropTypes.string.isRequired,
+    accountId: PropTypes.string.isRequired,
 };
 
-const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview, loggedIn, givenName }) => {
+const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview, loggedIn, givenName, accountId }) => {
 
     return (
         <Form
             onChange={(event) => {
-                if (givenName && !currentReview.authorId) {
+                if (!currentReview.authorId && givenName) {
                     updateCurrentReview('authorId', givenName);
+                }
+                if (!currentReview.accountId && accountId) {
+                    updateCurrentReview('accountId', accountId);
                 }
                 updateCurrentReview(event.target.name, event.target.value);
             }}
