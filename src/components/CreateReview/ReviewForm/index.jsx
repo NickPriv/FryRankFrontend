@@ -79,7 +79,6 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                 children='Submit'
                 color='danger'
                 onClick={(event) => {
-                    updateCurrentReview('isoDateTime', new Date().toISOString())
                     createReview(currentReview)
                 }}
             /> : <Button

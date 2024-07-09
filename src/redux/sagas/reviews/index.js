@@ -3,7 +3,7 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import { types, reviewsActions } from '../../reducers/reviews';
-import { BACKEND_SERVICE_PATH, AGGREGATE_INFORMATION_API_PATH } from '../../../constants';
+import { BACKEND_SERVICE_PATH, AGGREGATE_INFORMATION_API_PATH, REVIEW_PROPERTY_ISO_DATE_TIME } from '../../../constants';
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/reviews`;
 
@@ -19,6 +19,7 @@ export function* callGetAllReviewsForRestaurant({ restaurantId }) {
 
 export function* callCreateReviewForRestaurant({ review }) {
     try {
+        review[REVIEW_PROPERTY_ISO_DATE_TIME] = new Date().toISOString();
         yield axios.post(API_PATH, review);
         yield put(reviewsActions.successfulCreateReviewForRestaurantRequest());
     } catch (err) {
