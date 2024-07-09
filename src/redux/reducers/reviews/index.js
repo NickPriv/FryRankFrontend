@@ -18,7 +18,8 @@ export const initialState = {
     "authorId": null,
     "score": null,
     "title": null,
-    "body": null
+    "body": null,
+    "isoDateTime": null
   },
   error: '',
   successfulCreate: null

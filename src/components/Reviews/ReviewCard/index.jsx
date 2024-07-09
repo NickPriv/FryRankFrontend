@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
+import { Card, CardBody, CardSubtitle, CardText, CardTitle, CardHeader } from 'reactstrap';
 
 const propTypes = {
     title: PropTypes.string.isRequired,
@@ -8,7 +8,7 @@ const propTypes = {
     body: PropTypes.string.isRequired,
 };
 
-const ReviewCard = ({ title, authorId, score, body }) => {
+const ReviewCard = ({ title, authorId, score, body, timestamp}) => {
     return (
         <Card
             color="warning"
@@ -37,6 +37,11 @@ const ReviewCard = ({ title, authorId, score, body }) => {
                 <CardText>
                     {body}
                 </CardText>
+                {timestamp &&
+                    <CardSubtitle className="mb-2 text-muted" tag="h6">
+                        {new Date(timestamp).toLocaleString()}
+                    </CardSubtitle>
+                }
             </CardBody>
         </Card>
     )
