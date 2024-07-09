@@ -37,12 +37,10 @@ const ReviewCard = ({ title, authorId, score, body, timestamp}) => {
                 <CardText>
                     {body}
                 </CardText>
-                {timestamp ? <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                >
-                    {new Date(timestamp).toLocaleString()}
-                </CardSubtitle> : undefined
+                {timestamp &&
+                    <CardSubtitle className="mb-2 text-muted" tag="h6">
+                        {new Date(timestamp).toLocaleString()}
+                    </CardSubtitle>
                 }
             </CardBody>
         </Card>
