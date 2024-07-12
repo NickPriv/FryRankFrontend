@@ -11,9 +11,10 @@ const propTypes = {
     createReview: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     givenName: PropTypes.string.isRequired,
+    accountId: PropTypes.string.isRequired,
 };
 
-const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentReview, createReview, loggedIn, givenName }) => {
+const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
     if (!currentRestaurant) {
         return <FrySpinner />;
     }
@@ -30,6 +31,7 @@ const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentRe
                 updateCurrentReview = {updateCurrentReview}
                 loggedIn = {loggedIn}
                 givenName = {givenName}
+                accountId = {accountId}
             />
         </div>
     )

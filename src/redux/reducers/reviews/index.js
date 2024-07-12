@@ -19,7 +19,8 @@ export const initialState = {
     "score": null,
     "title": null,
     "body": null,
-    "isoDateTime": null
+    "isoDateTime": null,
+    "accountId": null,
   },
   error: '',
   successfulCreate: null

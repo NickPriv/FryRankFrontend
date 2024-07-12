@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
         successfulCreate: state.reviewsReducer.successfulCreate,
         loggedIn: state.userReducer.loggedIn,
         givenName: state.userReducer.userData ? state.userReducer.userData.given_name : null,
+        accountId: state.userReducer.userData ? state.userReducer.userData.sub : null,
     }
 }
 
