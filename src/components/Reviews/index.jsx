@@ -29,7 +29,15 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurant, r
         } else {
             return reviews.map(review => (
                 <ReviewCard title={review.title} authorId={review.authorId} score={review.score} body={review.body} timestamp={review.isoDateTime}/>
-            ));
+            )).sort(
+                (a,b) => {
+                    // We declare the past for undefined values so that they sort to the end of the array.
+                    const past = new Date(0)
+                    let dateA = a.props.timestamp ? new Date(a.props.timestamp) : past
+                    let dateB = b.props.timestamp ? new Date(b.props.timestamp) : past
+                    return dateB.getTime() - dateA.getTime()
+                }
+            );
         }
     }
 
