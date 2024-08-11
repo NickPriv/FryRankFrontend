@@ -5,10 +5,13 @@ import { Breadcrumb, Button, ErrorBanner, FrySpinner, LinkButton, ReviewCardList
 const propTypes = {
     reviews: PropTypes.array.isRequired,
     reviewsError: PropTypes.string.isRequired,
-    loggedIn: PropTypes.bool.isRequired,
+    accountId: PropTypes.string.IsRequired,
+    currentRestaurants: PropTypes.object.isRequired,
+    requestingReviews: PropTypes.bool.isRequired,
+    restaurantsError: PropTypes.bool.isRequired,
 };
 
-const Critic = ({ match: { params: { accountId } }, reviews, reviewsError, loggedIn, currentRestaurants, requestingReviews }) => {
+const Critic = ({ match: { params: { accountId } }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
@@ -29,6 +32,7 @@ const Critic = ({ match: { params: { accountId } }, reviews, reviewsError, logge
     return (
         <div>
             <ErrorBanner error = {reviewsError} />
+            <ErrorBanner error = {restaurantsError} />
             { !requestingReviews && reviews && <h1>{criticName}'s Reviews</h1> }
             {reviewsBody()}
         </div>

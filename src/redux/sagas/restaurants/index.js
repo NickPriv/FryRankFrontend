@@ -43,8 +43,6 @@ export function* callGetRestaurants({ textQuery, location }) {
 }
 
 export function* callGetRestaurantsForIds({ restaurantIds }) {
-    console.log("restaurantIds: " + restaurantIds);
-
     try {
         let restaurantIdToDetailsMap = new Map();
 

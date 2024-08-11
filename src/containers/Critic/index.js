@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
         reviewsError: state.reviewsReducer.error,
         loggedIn: state.userReducer.loggedIn,
         currentRestaurants: state.restaurantsReducer.currentRestaurants,
+        restaurantsError: state.restaurantsReducer.restaurantsError,
     }
 }
 
