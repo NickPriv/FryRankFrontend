@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
-import { PATH_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
+import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
 import style from './style.css';
 
@@ -23,7 +23,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
     const restaurantsDisplay = (restaurants) => {
         if (restaurants && restaurants.length > 0) {
             return restaurants.map((restaurant, i) => {
-                let restaurantLink = `${PATH_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
+                let restaurantLink = `${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
                 return (
                     <Fragment key = {i}>
                         <p className="inline-paragraph"><b><Link to={restaurantLink}>{restaurant.displayName.text}</Link></b></p>

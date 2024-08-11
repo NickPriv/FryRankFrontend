@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
     return {
         reviews: state.reviewsReducer.reviews,
         averageScore: state.reviewsReducer.averageScore,
-        currentRestaurant: state.restaurantsReducer.currentRestaurant,
+        currentRestaurants: state.restaurantsReducer.currentRestaurants,
         reviewsError: state.reviewsReducer.error,
         restaurantsError: state.restaurantsReducer.error,
         requestingRestaurantDetails: state.restaurantsReducer.requestingRestaurantDetails,
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    getRestaurantById: restaurantsActions.startGetRestaurantByIdRequest,
+    getRestaurantsForIds: restaurantsActions.startGetRestaurantsForIdsRequest,
     getReviews: reviewsActions.startGetAllReviewsForRestaurantRequest,
     resetCurrentRestaurant: restaurantsActions.resetCurrentRestaurant,
     resetReviews: reviewsActions.resetReviews
@@ -27,10 +27,10 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantById, getReviews, resetCurrentRestaurant, resetReviews } = this.props;
+            const { match: { params: { restaurantId } }, getRestaurantsForIds, getReviews, resetCurrentRestaurant, resetReviews } = this.props;
             resetCurrentRestaurant();
             resetReviews();
-            getRestaurantById(restaurantId);
+            getRestaurantsForIds([restaurantId]);
             getReviews(restaurantId);
         },
     }),

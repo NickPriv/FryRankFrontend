@@ -42,16 +42,25 @@ export function* callGetRestaurants({ textQuery, location }) {
     }
 }
 
-export function* callGetRestaurantById({ restaurantId }) {
+export function* callGetRestaurantsForIds({ restaurantIds }) {
+    console.log("restaurantIds: " + restaurantIds);
+
     try {
-        const { data } = yield axios.get(GOOGLE_API_PATH + "places/" + restaurantId,
-            { headers: {
-                [HEADER_CONTENT_TYPE]: 'application/json',
-                [HEADER_API_KEY]: process.env.REACT_APP_GOOGLE_API_KEY,
-                [HEADER_FIELD_MASK]: 'id,displayName,formattedAddress'
-            }}
-        );
-        yield put(restaurantsActions.successfulGetRestaurantByIdRequest(data));
+        let restaurantIdToDetailsMap = new Map();
+
+        for (const restaurantId of restaurantIds) {
+            const { data } = yield axios.get(GOOGLE_API_PATH + "places/" + restaurantId,
+                { headers: {
+                    [HEADER_CONTENT_TYPE]: 'application/json',
+                    [HEADER_API_KEY]: process.env.REACT_APP_GOOGLE_API_KEY,
+                    [HEADER_FIELD_MASK]: 'id,displayName,formattedAddress'
+                }}
+            );
+
+            restaurantIdToDetailsMap.set(restaurantId, data);
+        }
+
+        yield put(restaurantsActions.successfulGetRestaurantsForIdsRequest(restaurantIdToDetailsMap));
     } catch (err) {
         yield put(restaurantsActions.failedGetRestaurantByIdRequest(err.response.data.error.message));
     }
@@ -59,5 +68,5 @@ export function* callGetRestaurantById({ restaurantId }) {
 
 export default function* watchRestaurantsRequest() {
     yield takeEvery(types.GET_RESTAURANTS_REQUEST, callGetRestaurants);
-    yield takeEvery(types.GET_RESTAURANT_BY_ID_REQUEST, callGetRestaurantById);
+    yield takeEvery(types.GET_RESTAURANTS_FOR_IDS_REQUEST, callGetRestaurantsForIds);
 }
