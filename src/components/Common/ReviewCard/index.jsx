@@ -8,6 +8,7 @@ import {
     PATH_VARIABLE_ACCOUNT_ID,
     PATH_VARIABLE_RESTAURANT_ID
 } from '../../../constants.js'
+import '../style.css'
 
 const propTypes = {
     review: PropTypes.object.isRequired,
@@ -40,7 +41,7 @@ const ReviewCard = ({ review, restaurant }) => {
                         >
                             <Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)}>{restaurant.displayName.text}</Link>
                         </CardSubtitle>
-                        <CardText style={{ display: "inline-block" }}>
+                        <CardText className="inline mb-2">
                             {restaurant.formattedAddress}
                         </CardText>
                     </div>
