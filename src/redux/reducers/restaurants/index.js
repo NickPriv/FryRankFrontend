@@ -2,9 +2,9 @@ export const types = {
     GET_RESTAURANTS_REQUEST: "GET_RESTAURANTS_REQUEST",
     GET_RESTAURANTS_SUCCESS: "GET_RESTAURANTS_SUCCESS",
     GET_RESTAURANTS_FAILURE: "GET_RESTAURANTS_FAILURE",
-    GET_RESTAURANT_BY_ID_REQUEST: "GET_RESTAURANT_BY_ID_REQUEST",
-    GET_RESTAURANT_BY_ID_SUCCESS: "GET_RESTAURANT_BY_ID_SUCCESS",
-    GET_RESTAURANT_BY_ID_FAILURE: "GET_RESTAURANT_BY_ID_FAILURE",
+    GET_RESTAURANTS_FOR_IDS_REQUEST: "GET_RESTAURANTS_FOR_IDS_REQUEST",
+    GET_RESTAURANTS_FOR_IDS_SUCCESS: "GET_RESTAURANTS_FOR_IDS_SUCCESS",
+    GET_RESTAURANTS_FOR_IDS_FAILURE: "GET_RESTAURANTS_FOR_IDS_FAILURE",
     UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY",
     SET_LOCATION: "SET_LOCATION",
     RESET_CURRENT_RESTAURANT: "RESET_CURRENT_RESTAURANT"
@@ -12,7 +12,7 @@ export const types = {
 
 export const initialState = {
   restaurants: null,
-  currentRestaurant: null,
+  currentRestaurants: null,
   error: '',
   requestingRestaurantDetails: false,
   searchQuery: '',
@@ -58,23 +58,23 @@ export default (state = initialState, action) => {
             }
         }
 
-        case types.GET_RESTAURANT_BY_ID_REQUEST: {
+        case types.GET_RESTAURANTS_FOR_IDS_REQUEST: {
             return {
                 ...state,
                 requestingRestaurantDetails: true,
             };
         }
 
-        case types.GET_RESTAURANT_BY_ID_SUCCESS: {
+        case types.GET_RESTAURANTS_FOR_IDS_SUCCESS: {
             return {
                 ...state,
-               currentRestaurant: action.data,
+               currentRestaurants: action.data,
                error: '',
                requestingRestaurantDetails: false,
             }
         }
 
-        case types.GET_RESTAURANT_BY_ID_FAILURE: {
+        case types.GET_RESTAURANTS_FOR_IDS_FAILURE: {
             return {
                 ...state,
                 error: action.error,
@@ -98,9 +98,9 @@ export const restaurantsActions = {
     startGetRestaurantsRequest: (textQuery, location) => ({ type: types.GET_RESTAURANTS_REQUEST, textQuery, location }),
     successfulGetRestaurantsRequest: (data, aggregateReviewsData) => ({ type: types.GET_RESTAURANTS_SUCCESS, data, aggregateReviewsData}),
     failedGetRestaurantsRequest: error => ({ type: types.GET_RESTAURANTS_FAILURE, error }),
-    startGetRestaurantByIdRequest: restaurantId => ({ type: types.GET_RESTAURANT_BY_ID_REQUEST, restaurantId }),
-    successfulGetRestaurantByIdRequest: data => ({ type: types.GET_RESTAURANT_BY_ID_SUCCESS, data }),
-    failedGetRestaurantByIdRequest: error => ({ type: types.GET_RESTAURANT_BY_ID_FAILURE, error }),
+    startGetRestaurantsForIdsRequest: restaurantIds => ({ type: types.GET_RESTAURANTS_FOR_IDS_REQUEST, restaurantIds }),
+    successfulGetRestaurantsForIdsRequest: data => ({ type: types.GET_RESTAURANTS_FOR_IDS_SUCCESS, data }),
+    failedGetRestaurantByIdRequest: error => ({ type: types.GET_RESTAURANTS_FOR_IDS_FAILURE, error }),
     updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
     setLocation: data => ({ type: types.SET_LOCATION, data }),
     resetCurrentRestaurant: () => ({ type: types.RESET_CURRENT_RESTAURANT })

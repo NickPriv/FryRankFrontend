@@ -2,6 +2,9 @@ export const types = {
     GET_RESTAURANT_REVIEWS_REQUEST: "GET_RESTAURANT_REVIEWS_REQUEST",
     GET_RESTAURANT_REVIEWS_SUCCESS: "GET_RESTAURANT_REVIEWS_SUCCESS",
     GET_RESTAURANT_REVIEWS_FAILURE: "GET_RESTAURANT_REVIEWS_FAILURE",
+    GET_ACCOUNT_REVIEWS_REQUEST: "GET_ACCOUNT_REVIEWS_REQUEST",
+    GET_ACCOUNT_REVIEWS_SUCCESS: "GET_ACCOUNT_REVIEWS_SUCCESS",
+    GET_ACCOUNT_REVIEWS_FAILURE: "GET_ACCOUNT_REVIEWS_FAILURE",
     CREATE_REVIEW_FOR_RESTAURANT_REQUEST: "CREATE_REVIEW_FOR_RESTAURANT_REQUEST",
     CREATE_REVIEW_FOR_RESTAURANT_SUCCESS: "CREATE_REVIEW_FOR_RESTAURANT_SUCCESS",
     CREATE_REVIEW_FOR_RESTAURANT_FAILURE: "CREATE_REVIEW_FOR_RESTAURANT_FAILURE",
@@ -23,14 +26,16 @@ export const initialState = {
     "accountId": null,
   },
   error: '',
-  successfulCreate: null
+  successfulCreate: null,
+  requestingReviews: false,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.GET_RESTAURANT_REVIEWS_REQUEST: {
             return {
-                ...state
+                ...state,
+                requestingReviews: true,
             };
         }
 
@@ -39,6 +44,7 @@ export default (state = initialState, action) => {
                 ...state,
                 reviews: action.reviewsData.reviews,
                 averageScore: action.averageScore,
+                requestingReviews: false,
                 error: ''
             };
         }
@@ -46,6 +52,31 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANT_REVIEWS_FAILURE: {
             return {
                 ...state,
+                requestingReviews: false,
+                error: action.error,
+            }
+        }
+
+        case types.GET_ACCOUNT_REVIEWS_REQUEST: {
+                    return {
+                        ...state,
+                        requestingReviews: true,
+                    };
+                }
+
+        case types.GET_ACCOUNT_REVIEWS_SUCCESS: {
+            return {
+                ...state,
+                reviews: action.reviewsData.reviews,
+                requestingReviews: false,
+                error: ''
+            };
+        }
+
+        case types.GET_ACCOUNT_REVIEWS_FAILURE: {
+            return {
+                ...state,
+                requestingReviews: false,
                 error: action.error,
             }
         }
@@ -110,6 +141,9 @@ export const reviewsActions = {
     startGetAllReviewsForRestaurantRequest: restaurantId => ({ type: types.GET_RESTAURANT_REVIEWS_REQUEST, restaurantId }),
     successfulGetAllReviewsForRestaurantRequest: (reviewsData, averageScore) => ({ type: types.GET_RESTAURANT_REVIEWS_SUCCESS, reviewsData, averageScore }),
     failedGetAllReviewsForRestaurantRequest: error => ({ type: types.GET_RESTAURANT_REVIEWS_FAILURE, error }),
+    startGetAllReviewsForAccountRequest: accountId => ({ type: types.GET_ACCOUNT_REVIEWS_REQUEST, accountId }),
+    successfulGetAllReviewsForAccountRequest: (reviewsData) => ({ type: types.GET_ACCOUNT_REVIEWS_SUCCESS, reviewsData }),
+    failedGetAllReviewsForAccountRequest: error => ({ type: types.GET_ACCOUNT_REVIEWS_FAILURE, error }),
     startCreateReviewForRestaurantRequest: review => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST, review }),
     successfulCreateReviewForRestaurantRequest: () => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS }),
     failedCreateReviewForRestaurantRequest: error => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_FAILURE, error }),

@@ -1,7 +1,14 @@
 import React from "react";
-import { userActions } from '../../../redux/reducers/user';
+import { Link } from 'react-router-dom';
 
-const GoogleLogin = ({ setUserData, loggedIn, givenName }) => {
+import { userActions } from '../../../redux/reducers/user';
+import {
+    PATH_ACCOUNT_REVIEWS,
+    PATH_VARIABLE_ACCOUNT_ID,
+} from '../../../constants.js'
+import '../style.css'
+
+const GoogleLogin = ({ setUserData, loggedIn, givenName, accountId }) => {
 
     window.Google_signIn = async (response) => {
         setUserData(decodeJwtResponse(response.credential));
@@ -41,7 +48,17 @@ const GoogleLogin = ({ setUserData, loggedIn, givenName }) => {
 
     return (
         <div>
-            { loggedIn && `Hi, ${givenName}!` }
+            { loggedIn &&
+                <div>
+                    <p className="inline me-1">Hello,</p>
+                    <Link
+                        to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, accountId)}
+                        style={{"color":"blue", "text-decoration": "underline"}}
+                    >
+                        {givenName}
+                    </Link>
+                    <p className="inline">!</p>
+                </div> }
             { !loggedIn &&
                 <>
                     <div ref={scriptRef}></div>

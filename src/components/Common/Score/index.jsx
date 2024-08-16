@@ -5,6 +5,7 @@ const propTypes = {
     score: PropTypes.number.isRequired,
     size: PropTypes.oneOf([
         'lg',
+        'md',
         'sm'
     ])
 }
