@@ -35,9 +35,8 @@ const ReviewCard = ({ review, restaurant }) => {
                 { restaurant &&
                     <div>
                         <CardSubtitle
-                            className="mb-2 me-2 text-danger"
+                            className="inline mb-2 me-2 text-danger"
                             tag="h5"
-                            style={{ display: "inline-block" }}
                         >
                             <Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)}>{restaurant.displayName.text}</Link>
                         </CardSubtitle>
@@ -54,7 +53,7 @@ const ReviewCard = ({ review, restaurant }) => {
                         ? <Link to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, review.accountId)}>
                               {review.authorId ? review.authorId : review.accountId}
                           </Link>
-                        : <div>{review.authorId}</div> }
+                        : <div className="inline">{review.authorId}</div> }
                 </CardSubtitle>
                 <CardText>
                     {review.body}

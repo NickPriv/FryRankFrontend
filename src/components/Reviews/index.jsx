@@ -12,7 +12,7 @@ const propTypes = {
     loggedIn: PropTypes.bool.isRequired,
 };
 
-const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
+const Reviews = ({ match: { params: { restaurantId } }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
@@ -26,7 +26,7 @@ const Reviews = ({ reviews, reviewsError, restaurantsError, currentRestaurants, 
     }
 
     const currentRestaurant = currentRestaurants && currentRestaurants.size > 0
-            ? currentRestaurants.values().next().value
+            ? currentRestaurants.get(restaurantId)
             : null;
 
     return (

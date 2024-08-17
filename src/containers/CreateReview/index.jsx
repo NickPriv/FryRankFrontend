@@ -6,7 +6,7 @@ import { restaurantsActions } from '../../redux/reducers/restaurants'
 
 const mapStateToProps = (state) => {
     return {
-        currentRestaurant: state.restaurantsReducer.currentRestaurant,
+        currentRestaurants: state.restaurantsReducer.currentRestaurants,
         error: state.reviewsReducer.error,
         currentReview: state.reviewsReducer.currentReview,
         successfulCreate: state.reviewsReducer.successfulCreate,
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    getRestaurantById: restaurantsActions.startGetRestaurantByIdRequest,
+    getRestaurantsForIds: restaurantsActions.startGetRestaurantsForIdsRequest,
     createReview: reviewsActions.startCreateReviewForRestaurantRequest,
     updateCurrentReview: reviewsActions.updateCurrentReview,
     resetCreateRequest: reviewsActions.resetCreateRequest
@@ -27,9 +27,9 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantById, updateCurrentReview, resetCreateRequest } = this.props;
+            const { match: { params: { restaurantId } }, getRestaurantsForIds, updateCurrentReview, resetCreateRequest } = this.props;
             resetCreateRequest();
-            getRestaurantById(restaurantId);
+            getRestaurantsForIds([restaurantId]);
             updateCurrentReview("restaurantId", restaurantId);
         },
         componentDidUpdate() {
