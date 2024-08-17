@@ -29,9 +29,16 @@ export default (state = initialState, action) => {
         }
 
         case types.GET_RESTAURANTS_SUCCESS: {
+            const restaurants = action.data.places,
+            const newRestaurants = new Map();
+            for (var restaurant in restaurants) {
+                newRestaurants.put(restaurant.id, restaurant);
+            }
+
             return {
                 ...state,
-                restaurants: action.data.places,
+                restaurants: restaurants,
+                currentRestaurants: new Map([...currentRestaurants, ...newRestaurants])
                 aggregateReviewsData: action.aggregateReviewsData,
                 error: ''
             };
@@ -66,9 +73,15 @@ export default (state = initialState, action) => {
         }
 
         case types.GET_RESTAURANTS_FOR_IDS_SUCCESS: {
+            const restaurants = action.data,
+            const newRestaurants = new Map();
+            for (var restaurant in restaurants) {
+                newRestaurants.put(restaurant.id, restaurant);
+            }
+
             return {
                 ...state,
-               currentRestaurants: action.data,
+               currentRestaurants: new Map([...currentRestaurants, ...newRestaurants])
                error: '',
                requestingRestaurantDetails: false,
             }
@@ -79,13 +92,6 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.error,
                 requestingRestaurantDetails: false,
-            }
-        }
-
-        case types.RESET_CURRENT_RESTAURANT: {
-            return {
-                ...state,
-                currentRestaurant: initialState.currentRestaurant
             }
         }
 
@@ -102,6 +108,5 @@ export const restaurantsActions = {
     successfulGetRestaurantsForIdsRequest: data => ({ type: types.GET_RESTAURANTS_FOR_IDS_SUCCESS, data }),
     failedGetRestaurantByIdRequest: error => ({ type: types.GET_RESTAURANTS_FOR_IDS_FAILURE, error }),
     updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
-    setLocation: data => ({ type: types.SET_LOCATION, data }),
-    resetCurrentRestaurant: () => ({ type: types.RESET_CURRENT_RESTAURANT })
+    setLocation: data => ({ type: types.SET_LOCATION, data })
 }

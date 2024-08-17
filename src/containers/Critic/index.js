@@ -9,7 +9,6 @@ const mapStateToProps = (state) => {
         reviews: state.reviewsReducer.reviews,
         requestingReviews: state.reviewsReducer.requestingReviews,
         reviewsError: state.reviewsReducer.error,
-        loggedIn: state.userReducer.loggedIn,
         currentRestaurants: state.restaurantsReducer.currentRestaurants,
         restaurantsError: state.restaurantsReducer.restaurantsError,
     }
@@ -32,11 +31,12 @@ export default compose(
         componentDidUpdate() {
             const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
             if ((reviews && !currentRestaurants)
-                || (currentRestaurants && reviews && currentRestaurants.size != reviews.length)) {
+                || ) {
                 const restaurantIds = reviews.map(review => review.restaurantId);
                 getRestaurantsForIds(restaurantIds);
-            }
+            } else if (currentRestaurants && reviews && currentRestaurants.size != reviews.length) {
 
+            }
         }
     }),
 )(Critic);
