@@ -26,8 +26,8 @@ const Reviews = ({ match: { params: { restaurantId } }, reviews, reviewsError, r
     }
 
     const currentRestaurant = currentRestaurants && currentRestaurants.size > 0
-            ? currentRestaurants.get(restaurantId)
-            : null;
+        ? currentRestaurants.get(restaurantId)
+        : null;
 
     return (
         <div>
