@@ -3,7 +3,7 @@ import { ReviewCard } from '../';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
-    currentRestaurants: PropTypes.object.isRequired,
+    currentRestaurants: PropTypes.object,
 };
 
 const ReviewCardList = ({ reviews, currentRestaurants }) => {
