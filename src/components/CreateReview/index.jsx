@@ -14,7 +14,11 @@ const propTypes = {
     accountId: PropTypes.string.isRequired,
 };
 
-const CreateReview = ({ error, currentRestaurant, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
+const CreateReview = ({ match: { params: { restaurantId } }, error, currentRestaurants, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
+    const currentRestaurant = currentRestaurants && currentRestaurants.size > 0
+        ? currentRestaurants.get(restaurantId)
+        : null;
+
     if (!currentRestaurant) {
         return <FrySpinner />;
     }

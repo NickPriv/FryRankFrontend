@@ -16,7 +16,7 @@ const Critic = ({ match: { params: { accountId } }, reviews, reviewsError, curre
         if (!reviews) {
             return <FrySpinner />;
         } else if (reviews.length == 0) {
-            return <p>Sorry, we could not identify this critic.</p>
+            return <p>Sorry, this critic has not yet published a review.</p>
         } else {
             return (
                 <ReviewCardList
