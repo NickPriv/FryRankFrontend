@@ -31,14 +31,16 @@ export default compose(
         },
         componentDidUpdate() {
             const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
-            if ((reviews && !currentRestaurants)
-                || (currentRestaurants && reviews && currentRestaurants.size != reviews.length)) {
+            // The following code logic may run every time the state changes
+            if (reviews) {
                 const restaurantIds = Array.from(new Set(reviews.map(review => review.restaurantId)));
-                const idsForRestaurantsToGetFromGoogle = currentRestaurants
-                    ? restaurantIds.filter(restaurantId => !currentRestaurants.has(restaurantId))
-                    : restaurantIds;
-                if (idsForRestaurantsToGetFromGoogle.length > 0) {
-                    getRestaurantsForIds(idsForRestaurantsToGetFromGoogle);
+                if (!currentRestaurants || (currentRestaurants && currentRestaurants.size != restaurantIds.size)) {
+                    const idsForRestaurantsToGetFromGoogle = currentRestaurants
+                        ? restaurantIds.filter(restaurantId => !currentRestaurants.has(restaurantId))
+                        : restaurantIds;
+                    if (idsForRestaurantsToGetFromGoogle.length > 0) {
+                        getRestaurantsForIds(idsForRestaurantsToGetFromGoogle);
+                    }
                 }
             }
         }
