@@ -31,6 +31,7 @@ export default compose(
         },
         componentDidUpdate() {
             const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
+            // The following code logic may run every time the state changes
             if (reviews) {
                 const restaurantIds = Array.from(new Set(reviews.map(review => review.restaurantId)));
                 if (!currentRestaurants || (currentRestaurants && currentRestaurants.size != restaurantIds.size)) {
