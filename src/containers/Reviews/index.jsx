@@ -27,10 +27,11 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantsForIds, getReviews, resetCurrentRestaurant, resetReviews } = this.props;
-            resetCurrentRestaurant();
+            const { match: { params: { restaurantId } }, currentRestaurants, getRestaurantsForIds, getReviews, resetReviews } = this.props;
             resetReviews();
-            getRestaurantsForIds([restaurantId]);
+            if (!currentRestaurants || !currentRestaurants.has(restaurantId)) {
+                getRestaurantsForIds([restaurantId]);
+            }
             getReviews(restaurantId);
         },
     }),
