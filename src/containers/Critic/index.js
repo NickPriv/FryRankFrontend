@@ -31,12 +31,13 @@ export default compose(
         },
         componentDidUpdate() {
             const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
-            if ((reviews && !currentRestaurants)
-                || (currentRestaurants && reviews && currentRestaurants.size != reviews.length)) {
-                const restaurantIds = reviews.map(review => review.restaurantId);
-                getRestaurantsForIds(restaurantIds);
-            }
 
+            if (reviews) {
+                const restaurantIds = new Set(reviews.map(review => review.restaurantId));
+                if (!currentRestaurants || (currentRestaurants && currentRestaurants.size != restaurantIds.size)) {
+                    getRestaurantsForIds(restaurantIds);
+                }
+            }
         }
     }),
 )(Critic);
