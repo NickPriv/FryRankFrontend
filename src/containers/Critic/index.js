@@ -33,10 +33,14 @@ export default compose(
             const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
             if ((reviews && !currentRestaurants)
                 || (currentRestaurants && reviews && currentRestaurants.size != reviews.length)) {
-                const restaurantIds = reviews.map(review => review.restaurantId);
-                getRestaurantsForIds(restaurantIds);
+                const restaurantIds = Array.from(new Set(reviews.map(review => review.restaurantId)));
+                const idsForRestaurantsToGetFromGoogle = currentRestaurants
+                    ? restaurantIds.filter(restaurantId => !currentRestaurants.has(restaurantId))
+                    : restaurantIds;
+                if (idsForRestaurantsToGetFromGoogle.length > 0) {
+                    getRestaurantsForIds(idsForRestaurantsToGetFromGoogle);
+                }
             }
-
         }
     }),
 )(Critic);

@@ -27,9 +27,11 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantsForIds, updateCurrentReview, resetCreateRequest } = this.props;
+            const { match: { params: { restaurantId } }, getRestaurantsForIds, updateCurrentReview, resetCreateRequest, currentRestaurants } = this.props;
             resetCreateRequest();
-            getRestaurantsForIds([restaurantId]);
+            if (!currentRestaurants || !currentRestaurants.has(restaurantId)) {
+                getRestaurantsForIds([restaurantId]);
+            }
             updateCurrentReview("restaurantId", restaurantId);
         },
         componentDidUpdate() {
