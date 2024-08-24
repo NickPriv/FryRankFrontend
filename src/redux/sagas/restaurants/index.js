@@ -9,7 +9,7 @@ const HEADER_CONTENT_TYPE = 'Content-Type';
 const HEADER_API_KEY = 'X-Goog-Api-Key';
 const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
 
-export function* callGetRestaurants({ textQuery, location }) {
+export function* callGetRestaurantsForQuery({ textQuery, location }) {
     const locationBias = location ?
         {
             "circle": {
@@ -36,9 +36,9 @@ export function* callGetRestaurants({ textQuery, location }) {
         );
         const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } });
 
-        yield put(restaurantsActions.successfulGetRestaurantsRequest(data, aggregateReviewsData.data.restaurantIdToRestaurantInformation));
+        yield put(restaurantsActions.successfulGetRestaurantsForQueryRequest(data, aggregateReviewsData.data.restaurantIdToRestaurantInformation));
     } catch (err) {
-        yield put(restaurantsActions.failedGetRestaurantsRequest(err.response.data.error.message));
+        yield put(restaurantsActions.failedGetRestaurantsForQueryRequest(err.response.data.error.message));
     }
 }
 
@@ -60,11 +60,11 @@ export function* callGetRestaurantsForIds({ restaurantIds }) {
 
         yield put(restaurantsActions.successfulGetRestaurantsForIdsRequest(restaurantIdToDetailsMap));
     } catch (err) {
-        yield put(restaurantsActions.failedGetRestaurantByIdRequest(err.response.data.error.message));
+        yield put(restaurantsActions.failedGetRestaurantsForIdsRequest(err.response.data.error.message));
     }
 }
 
 export default function* watchRestaurantsRequest() {
-    yield takeEvery(types.GET_RESTAURANTS_REQUEST, callGetRestaurants);
+    yield takeEvery(types.GET_RESTAURANTS_FOR_QUERY_REQUEST, callGetRestaurantsForQuery);
     yield takeEvery(types.GET_RESTAURANTS_FOR_IDS_REQUEST, callGetRestaurantsForIds);
 }

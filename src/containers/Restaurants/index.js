@@ -6,7 +6,8 @@ import { FRENCH_FRIES_TEXT_QUERY } from '../../constants';
 
 const mapStateToProps = (state) => {
     return {
-        restaurants: state.restaurantsReducer.restaurants,
+        restaurantIdsForQuery: state.restaurantsReducer.restaurantIdsForQuery,
+        currentRestaurants: state.restaurantsReducer.currentRestaurants,
         error: state.restaurantsReducer.error,
         currentSearchQuery: state.restaurantsReducer.searchQuery,
         location: state.restaurantsReducer.location,
@@ -15,7 +16,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    getRestaurants: restaurantsActions.startGetRestaurantsRequest,
+    getRestaurants: restaurantsActions.startGetRestaurantsForQueryRequest,
     updateSearchQuery: restaurantsActions.updateSearchQuery,
     setLocation: restaurantsActions.setLocation,
 };
@@ -24,10 +25,10 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { getRestaurants, location, setLocation, restaurants } = this.props;
+            const { getRestaurants, location, setLocation, restaurantIdsForQuery } = this.props;
 
-            // Only load restaurants if they have not already been loaded yet
-            if (!restaurants) {
+            // Only load nearby restaurants if they have not already been loaded yet
+            if (!restaurantIdsForQuery) {
                 if (location) {
                     getRestaurants(FRENCH_FRIES_TEXT_QUERY, location);
                 } else if (navigator.geolocation) {
