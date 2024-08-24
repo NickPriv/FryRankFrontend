@@ -23,8 +23,8 @@ const propTypes = {
 const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData, currentRestaurants }) => {
 
     const restaurantsDisplay = (restaurantIds) => {
-        const restaurants = restaurantIds && currentRestaurants ?
-            Array.from(currentRestaurants.values()).filter(restaurant => restaurantIds.includes(restaurant.id))
+        const restaurants = restaurantIds && currentRestaurants
+            ? Array.from(currentRestaurants.values()).filter(restaurant => restaurantIds.includes(restaurant.id))
             : null;
 
         if (restaurants && restaurants.length > 0) {
