@@ -10,7 +10,8 @@ import style from './style.css';
 import { Score } from "../Common"
 
 const propTypes = {
-    restaurants: PropTypes.array.isRequired,
+    restaurantIdsForQuery: PropTypes.array.isRequired,
+    currentRestaurants: PropTypes.object.isRequired,
     error: PropTypes.string.isRequired,
     getRestaurants: PropTypes.func.isRequired,
     currentSearchQuery: PropTypes.string.isRequired,
@@ -19,8 +20,13 @@ const propTypes = {
     aggregateReviewsData: PropTypes.object.isRequired
 }
 
-const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData }) => {
-    const restaurantsDisplay = (restaurants) => {
+const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData, currentRestaurants }) => {
+
+    const restaurantsDisplay = (restaurantIds) => {
+        const restaurants = restaurantIds && currentRestaurants
+            ? Array.from(currentRestaurants.values()).filter(restaurant => restaurantIds.includes(restaurant.id))
+            : null;
+
         if (restaurants && restaurants.length > 0) {
             return restaurants.map((restaurant, i) => {
                 let restaurantLink = `${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
@@ -38,6 +44,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
         }
     }
 
+
     return (
         <div>
             <ErrorBanner error = {error} />
@@ -48,7 +55,7 @@ const Restaurants = ({ restaurants, error, getRestaurants, currentSearchQuery, u
                 updateSearchQuery = {updateSearchQuery}
                 location = {location}
             />
-            {restaurantsDisplay(restaurants)}
+            {restaurantsDisplay(restaurantIdsForQuery)}
         </div>
     );
 }
