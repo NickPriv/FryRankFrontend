@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Header } from './components/Common';
@@ -16,16 +16,16 @@ function App() {
               <Col />
               <Col xs="auto">
                 <div class="p-3 d-flex justify-content-center">
-                  <Switch>
+                  <Routes>
                     {routes.map((route, key) => (
                       <Route
                         exact
                         path={route.path}
                         key={key}
-                        component={route.component}
+                        element={<route.component />}
                       />
                     ))}
-                  </Switch>
+                  </Routes>
                 </div>
               </Col>
               <Col />

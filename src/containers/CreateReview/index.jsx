@@ -1,8 +1,9 @@
 import { compose, lifecycle } from 'react-recompose';
 import { connect } from 'react-redux';
 import CreateReview from '../../components/CreateReview';
-import { reviewsActions } from '../../redux/reducers/reviews'
-import { restaurantsActions } from '../../redux/reducers/restaurants'
+import { reviewsActions } from '../../redux/reducers/reviews';
+import { restaurantsActions } from '../../redux/reducers/restaurants';
+import withRouter from '../Common/withRouter';
 
 const mapStateToProps = (state) => {
     return {
@@ -24,10 +25,11 @@ const mapDispatchToProps = {
 };
 
 export default compose(
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, getRestaurantsForIds, updateCurrentReview, resetCreateRequest, currentRestaurants } = this.props;
+            const { params: { restaurantId }, getRestaurantsForIds, updateCurrentReview, resetCreateRequest, currentRestaurants } = this.props;
             resetCreateRequest();
             if (!currentRestaurants || !currentRestaurants.has(restaurantId)) {
                 getRestaurantsForIds([restaurantId]);
@@ -35,9 +37,9 @@ export default compose(
             updateCurrentReview("restaurantId", restaurantId);
         },
         componentDidUpdate() {
-            const { match: { params: { restaurantId } }, successfulCreate, history } = this.props;
+            const { params: { restaurantId }, successfulCreate, navigate } = this.props;
             if (successfulCreate) {
-                history.push(`/restaurants/${restaurantId}`);
+                navigate(`/restaurants/${restaurantId}`);
             }
         },
     }),

@@ -11,7 +11,7 @@ const propTypes = {
     restaurantsError: PropTypes.bool.isRequired,
 };
 
-const Critic = ({ match: { params: { accountId } }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError }) => {
+const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;

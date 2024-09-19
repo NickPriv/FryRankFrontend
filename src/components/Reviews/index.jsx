@@ -12,7 +12,7 @@ const propTypes = {
     loggedIn: PropTypes.bool.isRequired,
 };
 
-const Reviews = ({ match: { params: { restaurantId } }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
+const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
