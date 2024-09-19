@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchTopReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
-import { FrySpinner, ReviewCardList, ErrorBanner } from '../Common';
+import { FrySpinner, ReviewCardList, Banner } from '../Common';
 
 const RecentReviews = () => {
     const [recentReviews, setRecentReviews] = useState();
@@ -42,7 +42,7 @@ const RecentReviews = () => {
     if (loading) {
         return <FrySpinner />;
     } else if (recentReviews.length === 0) {
-        return <ErrorBanner error={error} />;
+        return <Banner type="error" message={error} />;
     }
 
     return (

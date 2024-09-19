@@ -5,7 +5,7 @@ import style from "./style.module.css"
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
 import {Link} from "react-router-dom";
 
-export default function Header() {
+export default function Header({loggedIn}) {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
 
@@ -24,7 +24,7 @@ export default function Header() {
                     <Nav className="me-auto" navbar>
                         <NavItem>  
                             <NavLink>                      
-                                <Link to='/restaurants' className={style.link}>
+                                <Link to='/restaurants'>
                                     <h4> Restaurants </h4>
                                 </Link> 
                             </NavLink>                         
@@ -32,7 +32,7 @@ export default function Header() {
 
                         <NavItem>  
                             <NavLink>                      
-                                <Link to='/recent-reviews' className={style.link}>
+                                <Link to='/recent-reviews'>
                                     <h4> Recent Reviews </h4>
                                 </Link> 
                             </NavLink>                         
@@ -43,13 +43,24 @@ export default function Header() {
                                 <h4> Merch Shop </h4>
                             </NavLink>
                         </NavItem>
+
+                        {
+                            loggedIn &&
+                            <NavItem>
+                                <NavLink>
+                                    <Link to="/userSettings">
+                                        <h4>User Settings</h4>
+                                    </Link>
+                                </NavLink>
+                            </NavItem>
+                        }
                     </Nav>
                 </Collapse>                      
             </Navbar> 
             
             <div className={style.GoogleLoginContainer}>
                 <GoogleLogin/>   
-            </div>             
+            </div>
         </div>
     )
 }

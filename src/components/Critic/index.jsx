@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import { Breadcrumb, Button, ErrorBanner, FrySpinner, LinkButton, ReviewCardList } from '../Common';
+import { Banner, FrySpinner, ReviewCardList } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -11,7 +11,7 @@ const propTypes = {
     restaurantsError: PropTypes.bool.isRequired,
 };
 
-const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError }) => {
+const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError, otherUserSettings }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
@@ -27,12 +27,12 @@ const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestauran
         }
     }
 
-    const criticName = reviews && reviews.length > 0 && reviews[0].authorId ? reviews[0].authorId : accountId;
+    const criticName = otherUserSettings && otherUserSettings.username ? otherUserSettings.username : accountId;
 
     return (
         <div>
-            <ErrorBanner error = {reviewsError} />
-            <ErrorBanner error = {restaurantsError} />
+            <Banner type="error" message = {reviewsError} />
+            <Banner type="error" message = {restaurantsError} />
             { !requestingReviews && reviews && <h1>{criticName}'s Reviews</h1> }
             {reviewsBody()}
         </div>
