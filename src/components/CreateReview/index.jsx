@@ -14,7 +14,7 @@ const propTypes = {
     accountId: PropTypes.string.isRequired,
 };
 
-const CreateReview = ({ match: { params: { restaurantId } }, error, currentRestaurants, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
+const CreateReview = ({ params: { restaurantId }, error, currentRestaurants, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
     const currentRestaurant = currentRestaurants && currentRestaurants.size > 0
         ? currentRestaurants.get(restaurantId)
         : null;

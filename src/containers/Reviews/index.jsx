@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Reviews from '../../components/Reviews';
 import { reviewsActions } from '../../redux/reducers/reviews';
 import { restaurantsActions } from '../../redux/reducers/restaurants';
+import withRouter from '../Common/withRouter';
 
 const mapStateToProps = (state) => {
     return {
@@ -24,10 +25,11 @@ const mapDispatchToProps = {
 };
 
 export default compose(
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { restaurantId } }, currentRestaurants, getRestaurantsForIds, getReviews, resetReviews } = this.props;
+            const { params: { restaurantId }, currentRestaurants, getRestaurantsForIds, getReviews, resetReviews } = this.props;
             resetReviews();
             if (!currentRestaurants || !currentRestaurants.has(restaurantId)) {
                 getRestaurantsForIds([restaurantId]);

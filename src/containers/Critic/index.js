@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Critic from '../../components/Critic';
 import { reviewsActions } from '../../redux/reducers/reviews';
 import { restaurantsActions } from '../../redux/reducers/restaurants';
+import withRouter from '../Common/withRouter';
 
 const mapStateToProps = (state) => {
     return {
@@ -22,16 +23,22 @@ const mapDispatchToProps = {
 };
 
 export default compose(
+    withRouter,
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { match: { params: { accountId } }, getReviews, resetReviews } = this.props;
+            const { params: { accountId }, getReviews, resetReviews } = this.props;
             resetReviews();
             getReviews(accountId);
         },
-        componentDidUpdate() {
-            const { currentRestaurants, getRestaurantsForIds, reviews } = this.props;
+        componentDidUpdate(prevProps) {
+            const { currentRestaurants, getRestaurantsForIds, reviews, params: { accountId }, getReviews } = this.props;
             // The following code logic may run every time the state changes
+
+            if (accountId !== prevProps.params.accountId) {
+                getReviews(accountId);
+            }
+
             if (reviews) {
                 const restaurantIds = Array.from(new Set(reviews.map(review => review.restaurantId)));
                 if (!currentRestaurants || (currentRestaurants && currentRestaurants.size != restaurantIds.size)) {
