@@ -49,6 +49,9 @@ export default (state = initialState, action) => {
         }
 
         case types.SET_LOCATION: {
+
+            console.log("location set to: " + action.data);
+            console.log("latitude: " + action.data.latitude);
             return {
                 ...state,
                 location: action.data
