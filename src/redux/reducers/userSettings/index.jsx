@@ -5,11 +5,14 @@ export const types = {
     SET_USER_SETTINGS_REQUEST: "SET_USER_SETTINGS_REQUEST",
     SET_USER_SETTINGS_SUCCESS: "SET_USER_SETTINGS_SUCCESS",
     SET_USER_SETTINGS_FAILURE: "SET_USER_SETTINGS_FAILURE",
+    UPDATE_CURRENT_USER_SETTINGS: "UPDATE_CURRENT_USER_SETTINGS",
 }
 
 export const initialState = {
+    currentUserSettings: null,
     userSettings: null,
     error: '',
+    setUserSettingsSuccess: null,
 };
 
 export default (state = initialState, action) => {
@@ -21,9 +24,11 @@ export default (state = initialState, action) => {
         }
 
         case types.GET_USER_SETTINGS_SUCCESS: {
+            console.log(action.data)
             return {
                 ...state,
                 userSettings: action.data,
+                currentUserSettings: action.data,
                 error: ''
             }
         }
@@ -45,7 +50,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 userSettings: action.data,
-                error: ''
+                error: '',
+                setUserSettingsSuccess: true
             }
         }
 
@@ -56,11 +62,27 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.UPDATE_CURRENT_USER_SETTINGS: {
+            return {
+                ...state,
+                currentUserSettings: {
+                    ...state.currentUserSettings,
+                    [action.name]: action.value !== "" ? action.value : null
+                }
+            }
+        }
+
         default:
             return state;
     }
 }
 
 export const userSettingsActions = {
-    startGetUserSettingsRequest: ()
+    startGetUserSettingsRequest: accountId => ({ type: types.GET_USER_SETTINGS_REQUEST, accountId }),
+    successfulGetUserSettingsRequest: data => ({ type: types.GET_USER_SETTINGS_SUCCESS, data }),
+    failedGetUserSettingsRequest: error => ({ type: types.GET_USER_SETTINGS_FAILURE, error }),
+    startSetUserSettingsRequest: userSettings => ({ type: types.SET_USER_SETTINGS_REQUEST, userSettings }),
+    successfulSetUserSettingsRequest: data => ({ type: types.SET_USER_SETTINGS_SUCCESS, data }),
+    failedSetUserSettingsRequest: error => ({ type:types.SET_USER_SETTINGS_FAILURE, error }),
+    updateCurrentUserSettings: (name, value) => ({ type:types.UPDATE_CURRENT_USER_SETTINGS, name, value })
 }

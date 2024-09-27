@@ -1,26 +1,45 @@
 import {compose, lifecycle} from "react-recompose";
 import {connect} from "react-redux";
 import UserSettings from "../../components/UserSettings";
-import {restaurantsActions} from "../../redux/reducers/restaurants";
-import {reviewsActions} from "../../redux/reducers/reviews";
+import { userSettingsActions } from "../../redux/reducers/userSettings";
 
 const mapStateToProps = (state) => {
+    const accountId = state.userReducer.userData ? state.userReducer.userData.sub : null;
     return {
         loggedIn: state.userReducer.loggedIn,
         givenName: state.userReducer.userData ? state.userReducer.userData.given_name : null,
-        accountId: state.userReducer.userData ? state.userReducer.userData.sub : null,
+        accountId: accountId,
+        userSettings: state.userSettingsReducer.userSettings ? state.userSettingsReducer.userSettings : null,
+        currentUserSettings: state.userSettingsReducer.currentUserSettings ? {...state.userSettingsReducer.currentUserSettings, "accountId": accountId} : null,
+        error: state.userSettingsReducer.error,
+        setUserSettingsSuccess: state.userSettingsReducer.setUserSettingsSuccess,
     }
 }
 
 const mapDispatchToProps = {
-
+    getUserSettings: userSettingsActions.startGetUserSettingsRequest,
+    setUserSettings: userSettingsActions.startSetUserSettingsRequest,
+    updateCurrentUserSettings: userSettingsActions.updateCurrentUserSettings,
 };
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const {} = this.props;
+            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
+            console.log(this.props)
+            if(loggedIn && userSettings === null) {
+                console.log(accountId)
+                getUserSettings(accountId);
+            }
+        },
+        componentDidUpdate() {
+            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
+            console.log(this.props)
+            if(loggedIn && userSettings === null) {
+                console.log(accountId)
+                getUserSettings(accountId);
+            }
         },
     }),
 )(UserSettings);

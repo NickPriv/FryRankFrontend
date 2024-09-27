@@ -19,7 +19,7 @@ const routes = [
     { path: PATH_ACCOUNT_REVIEWS, component: Critic },
     { path: PATH_CREATE_REVIEW, component: CreateReview },
     { path: PATH_RESTAURANTS, component: Restaurants },
-    { path: PATH_USER_SETTINGS, component: UserSettings}
+    { path: PATH_USER_SETTINGS, component: UserSettings},
 ];
 
 const pathToPageName = {
