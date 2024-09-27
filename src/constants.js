@@ -20,3 +20,8 @@ export const WELCOME_MESSAGE = "Bonjour, my name is Monsieur LeFry. Bienvenue to
     "meticulously sampling each fry, and dissecting their every nuance? This is my world, the world of a French Fry food critic. " +
     "Join me as we explore the art of evaluating, appreciating, and savoring the remarkable world of French Fries. " +
     "Ok, enough talk. Off you go now!"
+
+export const SELECTED_VIEW = Object.freeze({
+    MAP: Symbol('map'),
+    LIST: Symbol('list'),
+});

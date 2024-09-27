@@ -1,3 +1,5 @@
+import { SELECTED_VIEW } from '../../../constants';
+
 export const types = {
     GET_RESTAURANTS_FOR_QUERY_REQUEST: "GET_RESTAURANTS_FOR_QUERY_REQUEST",
     GET_RESTAURANTS_FOR_QUERY_SUCCESS: "GET_RESTAURANTS_FOR_QUERY_SUCCESS",
@@ -7,6 +9,7 @@ export const types = {
     GET_RESTAURANTS_FOR_IDS_FAILURE: "GET_RESTAURANTS_FOR_IDS_FAILURE",
     UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY",
     SET_LOCATION: "SET_LOCATION",
+    SET_SELECTED_VIEW: "SET_SELECTED_VIEW",
 }
 
 export const initialState = {
@@ -16,7 +19,8 @@ export const initialState = {
   requestingRestaurantDetails: false,
   searchQuery: '',
   location: null,
-  aggregateReviewsData: null
+  aggregateReviewsData: null,
+  selectedView: SELECTED_VIEW.MAP,
 };
 
 export default (state = initialState, action) => {
@@ -56,6 +60,13 @@ export default (state = initialState, action) => {
                 ...state,
                 location: action.data
             };
+        }
+
+        case types.SET_SELECTED_VIEW: {
+            return {
+                ...state,
+                selectedView: action.data
+            }
         }
 
         case types.UPDATE_CURRENT_SEARCH_QUERY: {
@@ -103,4 +114,5 @@ export const restaurantsActions = {
     failedGetRestaurantsForIdsRequest: error => ({ type: types.GET_RESTAURANTS_FOR_IDS_FAILURE, error }),
     updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
     setLocation: data => ({ type: types.SET_LOCATION, data }),
+    setSelectedView: data => ({ type: types.SET_SELECTED_VIEW, data })
 }

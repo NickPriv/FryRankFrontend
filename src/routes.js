@@ -3,7 +3,6 @@ import Restaurants from './containers/Restaurants';
 import Reviews from './containers/Reviews';
 import Critic from './containers/Critic';
 import CreateReview from './containers/CreateReview';
-import Map from './containers/Map';
 import {
     PATH_HOME,
     PATH_RESTAURANTS,
@@ -18,7 +17,6 @@ const routes = [
     { path: PATH_ACCOUNT_REVIEWS, component: Critic },
     { path: PATH_CREATE_REVIEW, component: CreateReview },
     { path: PATH_RESTAURANTS, component: Restaurants },
-    { path: '/map', component: Map }
 ];
 
 const pathToPageName = {
