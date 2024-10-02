@@ -12,7 +12,7 @@ export const initialState = {
     currentUserSettings: null,
     userSettings: null,
     error: '',
-    setUserSettingsSuccess: null,
+    successfulSetUserSettings: '',
 };
 
 export default (state = initialState, action) => {
@@ -24,7 +24,6 @@ export default (state = initialState, action) => {
         }
 
         case types.GET_USER_SETTINGS_SUCCESS: {
-            console.log(action.data)
             return {
                 ...state,
                 userSettings: action.data,
@@ -51,7 +50,7 @@ export default (state = initialState, action) => {
                 ...state,
                 userSettings: action.data,
                 error: '',
-                setUserSettingsSuccess: true
+                successfulSetUserSettings: 'Successfully updated user settings'
             }
         }
 

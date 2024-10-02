@@ -3,9 +3,21 @@ import {Form, FormGroup, Input, Label} from 'reactstrap'
 import {Button, Banner} from "../Common";
 
 const propTypes = {
+    userSettings: PropTypes.shape({
+        username: PropTypes.string
+    }),
+    currentUserSettings: PropTypes.shape({
+        username: PropTypes.string,
+        accountId: PropTypes.string
+    }),
+    loggedIn: PropTypes.bool.isRequired,
+    setUserSettings: PropTypes.func.isRequired,
+    updateCurrentUserSettings: PropTypes.func.isRequired,
+    error: PropTypes.string,
+    successfulSetUserSettings: PropTypes.string
 }
 
-const UserSettings = ({ userSettings, currentUserSettings, loggedIn, setUserSettings, updateCurrentUserSettings, error }) => {
+const UserSettings = ({ userSettings, currentUserSettings, loggedIn, setUserSettings, updateCurrentUserSettings, error, successfulSetUserSettings }) => {
     return (
         <div>
         {
@@ -16,7 +28,8 @@ const UserSettings = ({ userSettings, currentUserSettings, loggedIn, setUserSett
             loggedIn &&
             userSettings &&
                 <div>
-                    <ErrorBanner error = {error} />
+                    <Banner type="error" message={error} />
+                    <Banner type="success" message={successfulSetUserSettings} />
                     <h2>Settings</h2>
                     <Form
                         onChange={(event) => {

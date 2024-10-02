@@ -7,9 +7,7 @@ const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
 
 export function* callGetUserSettings({ accountId }){
     try {
-        console.log(accountId)
         const { data } = yield axios.get(API_PATH, { params: { accountId: accountId } });
-        console.log(data)
         yield put(userSettingsActions.successfulGetUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedGetUserSettingsRequest(err.response.data.message));

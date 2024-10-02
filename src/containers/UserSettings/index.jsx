@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
         userSettings: state.userSettingsReducer.userSettings ? state.userSettingsReducer.userSettings : null,
         currentUserSettings: state.userSettingsReducer.currentUserSettings ? {...state.userSettingsReducer.currentUserSettings, "accountId": accountId} : null,
         error: state.userSettingsReducer.error,
-        setUserSettingsSuccess: state.userSettingsReducer.setUserSettingsSuccess,
+        successfulSetUserSettings: state.userSettingsReducer.successfulSetUserSettings,
     }
 }
 
@@ -27,17 +27,13 @@ export default compose(
     lifecycle({
         componentDidMount() {
             const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
-            console.log(this.props)
             if(loggedIn && userSettings === null) {
-                console.log(accountId)
                 getUserSettings(accountId);
             }
         },
         componentDidUpdate() {
             const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
-            console.log(this.props)
             if(loggedIn && userSettings === null) {
-                console.log(accountId)
                 getUserSettings(accountId);
             }
         },
