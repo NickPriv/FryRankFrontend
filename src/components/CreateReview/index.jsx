@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import { Breadcrumb, ErrorBanner, FrySpinner, RestaurantHeader } from '../Common/';
+import { Breadcrumb, Banner, FrySpinner, RestaurantHeader } from '../Common/';
 import ReviewForm from './ReviewForm';
 
 const propTypes = {
@@ -25,7 +25,7 @@ const CreateReview = ({ params: { restaurantId }, error, currentRestaurants, cur
 
     return (
         <div>
-            <ErrorBanner error = {error} />
+            <Banner type="error" message={error} />
             <Breadcrumb aliases = {{[currentRestaurant.id]: currentRestaurant.displayName.text}} />
             <RestaurantHeader currentRestaurant = {currentRestaurant} />
             <ReviewForm

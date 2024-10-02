@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
+import { Breadcrumb, Banner, FrySpinner } from '../Common';
 import SearchInput from './SearchInput';
 import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
 
@@ -47,7 +47,7 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
 
     return (
         <div>
-            <ErrorBanner error = {error} />
+            <Banner type="error" message={error} />
             <Breadcrumb />
             <SearchInput
                 getRestaurants = {getRestaurants}

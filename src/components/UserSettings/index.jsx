@@ -1,6 +1,6 @@
 import {PropTypes} from "prop-types";
 import {Form, FormGroup, Input, Label} from 'reactstrap'
-import {Button, ErrorBanner} from "../Common";
+import {Button, Banner} from "../Common";
 
 const propTypes = {
 }
