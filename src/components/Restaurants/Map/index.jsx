@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {createRoot} from 'react-dom/client';
 import { PropTypes } from 'prop-types';
 import {
@@ -6,7 +6,8 @@ import {
   Map as GoogleMap,
   AdvancedMarker,
   MapCameraChangedEvent,
-  Pin
+  Pin,
+  useMap
 } from '@vis.gl/react-google-maps';
 import { FrySpinner } from '../../Common';
 
@@ -18,11 +19,10 @@ const propTypes = {
 
 const Map = ({ location, restaurantIds, currentRestaurants }) => {
 
+    const map = useMap();
+
     type Poi ={ key: string, location: google.maps.LatLngLiteral }
     const getLocations: Poi[] = (restaurantIds, currentRestaurants) => {
-        console.log("Getting locaitons");
-        console.log("restaurantIds: " + restaurantIds);
-        console.log("Current restaurants: " + currentRestaurants);
         if (restaurantIds) {
             return restaurantIds.map(restaurantId => {
                 return {
@@ -52,31 +52,37 @@ const Map = ({ location, restaurantIds, currentRestaurants }) => {
     );
 }
 
+
   const placesOfInterest = getLocations(restaurantIds, currentRestaurants);
-  placesOfInterest.forEach(place => {
-    console.log("place: " + place);
-    console.log("place location " + place.location);
-    console.log("place location longitude " + place.location.longitude);
-  })
+
+  const fieldOfView = () => {
+      const bounds = new google.maps.LatLngBounds();
+      placesOfInterest.forEach(place => {
+          bounds.extend({
+              lat: place.location.lat,
+              lng: place.location.lng
+          });
+      });
+      map && map.fitBounds(bounds);
+
+      return bounds.getCenter();
+  }
 
   return (
     <div>
         { !location || !restaurantIds || !currentRestaurants
             ? <FrySpinner />
-            : <APIProvider apiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
+            : <div style={{ maxWidth: '500px' }}>
                 <GoogleMap
-                  style={{width: '100vw', height: '100vh'}}
-                  defaultCenter={{lat: location?.latitude, lng: location?.longitude}}
-                  defaultZoom={14}
-                  gestureHandling={'greedy'}
-                  disableDefaultUI={true}
-                  mapId={'ced49c98e3ab91a3'}
-                  onCameraChanged={ (ev: MapCameraChangedEvent) =>
-                      console.log('camera changed:', ev.detail.center, 'zoom:', ev.detail.zoom)
-                  }>
-                    <PoiMarkers pois={placesOfInterest} />
+                    style={{width: "28em", height: "50em"}}
+                    defaultCenter={{lat: location?.latitude, lng: location?.longitude}}
+                    center={fieldOfView().averageLocation}
+                    gestureHandling={'none'}
+                    disableDefaultUI={true}
+                    mapId={'ced49c98e3ab91a3'}>
+                      <PoiMarkers pois={placesOfInterest} />
                 </GoogleMap>
-              </APIProvider>
+            </div>
         }
     </div>
   );

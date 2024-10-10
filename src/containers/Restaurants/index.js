@@ -20,7 +20,7 @@ const mapDispatchToProps = {
     getRestaurants: restaurantsActions.startGetRestaurantsForQueryRequest,
     updateSearchQuery: restaurantsActions.updateSearchQuery,
     setLocation: restaurantsActions.setLocation,
-    setSelectedView: restaurantsActions.setSelectedView
+    setSelectedView: restaurantsActions.setSelectedView,
 };
 
 export default compose(
