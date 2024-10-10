@@ -10,10 +10,9 @@ const propTypes = {
 const RestaurantsViewSelect = ({ selectedView, setSelectedView }) => {
     return (
         <div>
-            <h5>Radio Buttons</h5>
             <ButtonGroup>
                 <Button
-                    color="primary"
+                    color="secondary"
                     outline
                     onClick={() => setSelectedView(SELECTED_VIEW.MAP)}
                     active={selectedView === SELECTED_VIEW.MAP}
@@ -21,7 +20,7 @@ const RestaurantsViewSelect = ({ selectedView, setSelectedView }) => {
                     Map
                 </Button>
                 <Button
-                    color="primary"
+                    color="secondary"
                     outline
                     onClick={() => setSelectedView(SELECTED_VIEW.LIST)}
                     active={selectedView === SELECTED_VIEW.LIST}

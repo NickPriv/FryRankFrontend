@@ -1,7 +1,6 @@
 import { PropTypes } from 'prop-types';
-import { Form, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Input, InputGroup, Label } from 'reactstrap';
 
-import { Button } from '../../Common';
 import { FRENCH_FRIES_TEXT_QUERY } from '../../../constants';
 
 const propTypes = {
@@ -13,21 +12,18 @@ const propTypes = {
 const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, location }) => {
 
     return (
-        <Form onChange={(event) => {
-            updateSearchQuery(event.target.value);
-        }}>
-            <FormGroup>
-                <Label for="searchInput">
-                    Search for a restaurant
-                </Label>
-                <Input
-                    id="searchInput"
-                    name="search"
-                    placeholder="Search for a restaurant"
-                    type="textarea"
-                    value={currentSearchQuery}
-                />
-            </FormGroup>
+        <InputGroup
+            className="me-2 my-2"
+            onChange={(event) => {
+                updateSearchQuery(event.target.value);
+            }}
+        >
+            <Input
+                id="searchInput"
+                name="search"
+                placeholder="Search for a restaurant"
+                value={currentSearchQuery}
+            />
             <Button
                 children='Submit'
                 color='danger'
@@ -36,7 +32,7 @@ const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, lo
                     getRestaurants(searchQuery, location);
                 }}
             />
-        </Form>
+        </InputGroup>
     )
 }
 

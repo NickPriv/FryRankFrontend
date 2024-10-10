@@ -1,11 +1,9 @@
-import React, { useCallback } from 'react';
-import {createRoot} from 'react-dom/client';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import {
-  APIProvider,
   Map as GoogleMap,
   AdvancedMarker,
-  MapCameraChangedEvent,
+  InfoWindow,
   Pin,
   useMap
 } from '@vis.gl/react-google-maps';
@@ -27,10 +25,11 @@ const Map = ({ location, restaurantIds, currentRestaurants }) => {
             return restaurantIds.map(restaurantId => {
                 return {
                     key: restaurantId,
-                        location: {
-                            lat: currentRestaurants.get(restaurantId).location.latitude,
-                            lng: currentRestaurants.get(restaurantId).location.longitude
-                        }
+                    location: {
+                        lat: currentRestaurants.get(restaurantId).location.latitude,
+                        lng: currentRestaurants.get(restaurantId).location.longitude
+                    },
+                    name: currentRestaurants.get(restaurantId).name
                 };
             });
         } else {
@@ -44,7 +43,8 @@ const Map = ({ location, restaurantIds, currentRestaurants }) => {
         {props.pois.map( (poi: Poi) => (
           <AdvancedMarker
             key={poi.key}
-            position={poi.location}>
+            position={poi.location}
+            onClick={() => console.log("clicked")}>
           <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
           </AdvancedMarker>
         ))}
@@ -72,17 +72,15 @@ const Map = ({ location, restaurantIds, currentRestaurants }) => {
     <div>
         { !location || !restaurantIds || !currentRestaurants
             ? <FrySpinner />
-            : <div style={{ maxWidth: '500px' }}>
-                <GoogleMap
-                    style={{width: "28em", height: "50em"}}
-                    defaultCenter={{lat: location?.latitude, lng: location?.longitude}}
-                    center={fieldOfView().averageLocation}
-                    gestureHandling={'none'}
-                    disableDefaultUI={true}
-                    mapId={'ced49c98e3ab91a3'}>
-                      <PoiMarkers pois={placesOfInterest} />
-                </GoogleMap>
-            </div>
+            : <GoogleMap
+                className='google-map'
+                defaultCenter={{lat: location?.latitude, lng: location?.longitude}}
+                center={fieldOfView().averageLocation}
+                gestureHandling={'none'}
+                disableDefaultUI={true}
+                mapId={'ced49c98e3ab91a3'}>
+                    <PoiMarkers pois={placesOfInterest} />
+            </GoogleMap>
         }
     </div>
   );
