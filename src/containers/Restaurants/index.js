@@ -13,6 +13,8 @@ const mapStateToProps = (state) => {
         location: state.restaurantsReducer.location,
         aggregateReviewsData: state.restaurantsReducer.aggregateReviewsData,
         selectedView: state.restaurantsReducer.selectedView,
+        showInfoWindow: state.restaurantsReducer.showInfoWindow,
+        infoWindowProps: state.restaurantsReducer.infoWindowProps,
     }
 }
 
@@ -21,6 +23,8 @@ const mapDispatchToProps = {
     updateSearchQuery: restaurantsActions.updateSearchQuery,
     setLocation: restaurantsActions.setLocation,
     setSelectedView: restaurantsActions.setSelectedView,
+    setShowInfoWindow: restaurantsActions.setShowInfoWindow,
+    setInfoWindowProps: restaurantsActions.setInfoWindowProps,
 };
 
 export default compose(

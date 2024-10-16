@@ -16,11 +16,13 @@ const propTypes = {
     currentSearchQuery: PropTypes.string.isRequired,
     updateSearchQuery: PropTypes.func.isRequired,
     location: PropTypes.object,
-    aggregateReviewsData: PropTypes.object.isRequired
+    aggregateReviewsData: PropTypes.object.isRequired,
+    showInfoWindow: PropTypes.bool.isRequired,
+    setShowInfoWindow: PropTypes.func.isRequired,
 }
 
 const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData,
-                       currentRestaurants, setSelectedView, selectedView
+                       currentRestaurants, setSelectedView, selectedView, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps
 }) => {
     return (
         <div>
@@ -41,6 +43,11 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                     location = {location}
                     restaurantIds = {restaurantIdsForQuery}
                     currentRestaurants = {currentRestaurants}
+                    showInfoWindow = {showInfoWindow}
+                    setShowInfoWindow = {setShowInfoWindow}
+                    setInfoWindowProps = {setInfoWindowProps}
+                    infoWindowProps = {infoWindowProps}
+                    aggregateReviewsData = {aggregateReviewsData}
                 />
             }
             {selectedView === SELECTED_VIEW.LIST &&

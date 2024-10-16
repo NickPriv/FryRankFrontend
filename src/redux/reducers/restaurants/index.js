@@ -10,6 +10,8 @@ export const types = {
     UPDATE_CURRENT_SEARCH_QUERY: "UPDATE_CURRENT_SEARCH_QUERY",
     SET_LOCATION: "SET_LOCATION",
     SET_SELECTED_VIEW: "SET_SELECTED_VIEW",
+    SET_SHOW_INFO_WINDOW: "SET_SHOW_INFO_WINDOW",
+    SET_INFO_WINDOW_PROPS: "SET_INFO_WINDOW_PROPS"
 }
 
 export const initialState = {
@@ -21,6 +23,10 @@ export const initialState = {
   location: null,
   aggregateReviewsData: null,
   selectedView: SELECTED_VIEW.MAP,
+  showInfoWindow: false,
+  infoWindowProps: {
+      name: 'default name',
+   },
 };
 
 export default (state = initialState, action) => {
@@ -100,9 +106,24 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.SET_SHOW_INFO_WINDOW: {
+            return {
+                ...state,
+                showInfoWindow: action.data,
+            }
+        }
+
+        case types.SET_INFO_WINDOW_PROPS: {
+            console.log("called set info window props: " + JSON.stringify(action.data));
+            return {
+                ...state,
+                infoWindowProps: action.data,
+            }
+        }
+
         default:
             return state;
-  }
+    }
 }
 
 export const restaurantsActions = {
@@ -114,5 +135,7 @@ export const restaurantsActions = {
     failedGetRestaurantsForIdsRequest: error => ({ type: types.GET_RESTAURANTS_FOR_IDS_FAILURE, error }),
     updateSearchQuery: data => ({ type: types.UPDATE_CURRENT_SEARCH_QUERY, data }),
     setLocation: data => ({ type: types.SET_LOCATION, data }),
-    setSelectedView: data => ({ type: types.SET_SELECTED_VIEW, data })
+    setSelectedView: data => ({ type: types.SET_SELECTED_VIEW, data }),
+    setShowInfoWindow: data => ({ type: types.SET_SHOW_INFO_WINDOW, data }),
+    setInfoWindowProps: data => ({ type: types.SET_INFO_WINDOW_PROPS, data })
 }
