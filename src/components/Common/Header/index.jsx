@@ -1,28 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import {useState} from 'react'
+
 import  GoogleLogin from '../../../containers/Common/GoogleLogin';
-import style from "./style.module.css";
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
 
 export default function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
+
     return (
-        <div className={style.Header}>
-            <Link to=''>
-                <h1 className="FryRank"> FryRank </h1>               
-            </Link>
-
-            <Link to=''>
-                <h4 className="Restaurants"> Restaurants</h4>               
-            </Link>
-
-            <Link to='' >
-                <h4 className="Recent"> Recent Reviews</h4>               
-            </Link>
-
-            <a href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer"> 
-                <h4 className="Merch">Merch Shop</h4> 
-            </a>
-
-            <GoogleLogin />
+        <div>
+            <Navbar className="p-lg-2 sign" color="secondary" dark expand="md">
+                <NavbarBrand href='/'>
+                    <h1 >FryRank</h1>
+                </NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="me-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/userSettings">User Settings</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+                <GoogleLogin />
+            </Navbar>
         </div>
     )
 }
