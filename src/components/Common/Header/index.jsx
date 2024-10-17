@@ -1,19 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import {useState} from 'react'
 
 import  GoogleLogin from '../../../containers/Common/GoogleLogin';
-import style from "./style.module.css"
+import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
 
 export default function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
+
     return (
-        <div className={style["header"]}>
-            <Link to=''>
-                <h1 className="FryRank"> FryRank </h1>
-            </Link>
-            <Link className={style["header-item-right"]} to='/userSettings'>
-                <h4>User Settings</h4>
-            </Link>
-            <GoogleLogin />
+        <div>
+            <Navbar className="p-lg-2 sign" color="secondary" dark expand="md">
+                <NavbarBrand href='/'>
+                    <h1 >FryRank</h1>
+                </NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="me-auto" navbar>
+                        <NavItem>
+                            <NavLink href="/userSettings">User Settings</NavLink>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+                <GoogleLogin />
+            </Navbar>
         </div>
     )
 }
