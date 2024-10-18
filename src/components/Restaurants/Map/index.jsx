@@ -7,7 +7,10 @@ import {
   Pin,
   useMap
 } from '@vis.gl/react-google-maps';
+import { Link } from 'react-router-dom';
 import { FrySpinner } from '../../Common';
+import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
+import MapPins from '../MapPins';
 
 const propTypes = {
     restaurantIds: PropTypes.array.isRequired,
@@ -18,70 +21,19 @@ const propTypes = {
     setInfoWindowProps: PropTypes.func.isRequired,
     infoWindowProps: PropTypes.func.isRequired,
     aggregateReviewsData: PropTypes.object.isRequired,
+    pinData: PropTypes.object,
 }
 
-const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData }) => {
+const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData,
+               pinData }) => {
 
     const map = useMap();
 
-    console.log("aggregateReviewsData: " + JSON.stringify(aggregateReviewsData));
-
     type Poi ={ key: string, location: google.maps.LatLngLiteral }
-    const getLocations: Poi[] = (restaurantIds, currentRestaurants) => {
-        if (restaurantIds) {
-            return restaurantIds.map(restaurantId => {
-                console.log(aggregateReviewsData[restaurantId]);
-                return {
-                    key: restaurantId,
-                    location: {
-                        lat: currentRestaurants.get(restaurantId).location.latitude,
-                        lng: currentRestaurants.get(restaurantId).location.longitude
-                    },
-                    name: currentRestaurants.get(restaurantId).displayName.text,
-                    address: currentRestaurants.get(restaurantId).formattedAddress,
-                    score: aggregateReviewsData[restaurantId]?.avgScore
-                };
-            });
-        } else {
-            return [];
-        }
-    };
-
-const handleMarkerClick = useCallback(
-      () => setShowInfoWindow(isShown => !isShown),
-      []
-    );
-
-
-    const PoiMarkers = ({ pois, setShowInfoWindow }) => {
-        return (
-          <>
-            {pois.map( (poi: Poi) => (
-              <AdvancedMarker
-                key={poi.key}
-                position={poi.location}
-                onClick={() => {
-                    setShowInfoWindow(true);
-                    setInfoWindowProps({
-                       name: poi.name,
-                       location: poi.location,
-                       address: poi.address,
-                       score: poi.score
-                    });
-                }}>>
-              <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
-              </AdvancedMarker>
-            ))}
-          </>
-        );
-    }
-
-
-  const placesOfInterest = getLocations(restaurantIds, currentRestaurants);
 
   const fieldOfView = () => {
       const bounds = new google.maps.LatLngBounds();
-      placesOfInterest.forEach(place => {
+      pinData.forEach(place => {
           bounds.extend({
               lat: place.location.lat,
               lng: place.location.lng
@@ -94,8 +46,9 @@ const handleMarkerClick = useCallback(
 
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
 
-
-  console.log("showInfoWindow is " + showInfoWindow);
+  // notes: we need to get anchor tag working instead of position
+  // problem: map zooms out after you click on a marker
+  // next feature will have to be for the search results to change depending on map position (but only if map is toggled)
 
   return (
     <div>
@@ -108,18 +61,20 @@ const handleMarkerClick = useCallback(
                     center={fieldOfView().averageLocation}
                     gestureHandling={'cooperative'}
                     disableDefaultUI={true}
+                    maxZoom={18}
                     mapId={'ced49c98e3ab91a3'}>
-                        <PoiMarkers
-                            pois = {placesOfInterest}
+                        <MapPins
+                            pinData = {pinData}
                             setShowInfoWindow = {setShowInfoWindow}
+                            setInfoWindowProps = {setInfoWindowProps}
                         />
                 </GoogleMap>
                 {showInfoWindow &&
                     <InfoWindow
-                        position={{ lat: infoWindowProps?.location.lat + .005, lng: infoWindowProps?.location.lng }}
-                        onClose={handleClose}
+                        position={{ lat: infoWindowProps?.location.lat, lng: infoWindowProps?.location.lng }}
+                        onCloseClick={handleClose}
                     >
-                        <h6>{infoWindowProps?.name}</h6>
+                        <h6><Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, infoWindowProps?.id)}>{infoWindowProps?.name}</Link></h6>
                         {infoWindowProps.score && <p>Score: {infoWindowProps.score}</p>}
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>

@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
         selectedView: state.restaurantsReducer.selectedView,
         showInfoWindow: state.restaurantsReducer.showInfoWindow,
         infoWindowProps: state.restaurantsReducer.infoWindowProps,
+        pinData: state.restaurantsReducer.pinData,
     }
 }
 

@@ -1,4 +1,5 @@
 import { SELECTED_VIEW } from '../../../constants';
+import { getPinData } from './helpers';
 
 export const types = {
     GET_RESTAURANTS_FOR_QUERY_REQUEST: "GET_RESTAURANTS_FOR_QUERY_REQUEST",
@@ -11,7 +12,7 @@ export const types = {
     SET_LOCATION: "SET_LOCATION",
     SET_SELECTED_VIEW: "SET_SELECTED_VIEW",
     SET_SHOW_INFO_WINDOW: "SET_SHOW_INFO_WINDOW",
-    SET_INFO_WINDOW_PROPS: "SET_INFO_WINDOW_PROPS"
+    SET_INFO_WINDOW_PROPS: "SET_INFO_WINDOW_PROPS",
 }
 
 export const initialState = {
@@ -24,9 +25,8 @@ export const initialState = {
   aggregateReviewsData: null,
   selectedView: SELECTED_VIEW.MAP,
   showInfoWindow: false,
-  infoWindowProps: {
-      name: 'default name',
-   },
+  infoWindowProps: null,
+  pinData: null,
 };
 
 export default (state = initialState, action) => {
@@ -42,11 +42,15 @@ export default (state = initialState, action) => {
             const queriedRestaurantsMap = new Map();
             action.data.places.forEach(place => queriedRestaurantsMap.set(place.id, place));
 
+            const newCurrentRestaurants = state.currentRestaurants ? new Map([...state.currentRestaurants, ...queriedRestaurantsMap]) : queriedRestaurantsMap;
+            const newRestaurantIdsForQuery = action.data.places.map(place => place.id);
+
             return {
                 ...state,
-                currentRestaurants: state.currentRestaurants ? new Map([...state.currentRestaurants, ...queriedRestaurantsMap]) : queriedRestaurantsMap,
-                restaurantIdsForQuery: action.data.places.map(place => place.id),
+                currentRestaurants: newCurrentRestaurants,
+                restaurantIdsForQuery: newRestaurantIdsForQuery,
                 aggregateReviewsData: action.aggregateReviewsData,
+                pinData: getPinData(newRestaurantIdsForQuery, newCurrentRestaurants, action.aggregateReviewsData),
                 error: ''
             };
         }
@@ -90,11 +94,14 @@ export default (state = initialState, action) => {
         }
 
         case types.GET_RESTAURANTS_FOR_IDS_SUCCESS: {
+            const newCurrentRestaurants = state.currentRestaurants ? new Map([...state.currentRestaurants, ...action.data]) : action.data;
+
             return {
                 ...state,
-                currentRestaurants: state.currentRestaurants ? new Map([...state.currentRestaurants, ...action.data]) : action.data,
+                currentRestaurants: newCurrentRestaurants,
                 error: '',
                 requestingRestaurantDetails: false,
+                pinData: getPinData(state.restaurantIdsForQuery, newCurrentRestaurants, state.aggregateReviewsData)
             }
         }
 
@@ -137,5 +144,5 @@ export const restaurantsActions = {
     setLocation: data => ({ type: types.SET_LOCATION, data }),
     setSelectedView: data => ({ type: types.SET_SELECTED_VIEW, data }),
     setShowInfoWindow: data => ({ type: types.SET_SHOW_INFO_WINDOW, data }),
-    setInfoWindowProps: data => ({ type: types.SET_INFO_WINDOW_PROPS, data })
+    setInfoWindowProps: data => ({ type: types.SET_INFO_WINDOW_PROPS, data }),
 }

@@ -10,7 +10,7 @@ const propTypes = {
 const RestaurantsViewSelect = ({ selectedView, setSelectedView }) => {
     return (
         <div>
-            <ButtonGroup>
+            <ButtonGroup className="my-2">
                 <Button
                     color="secondary"
                     outline
