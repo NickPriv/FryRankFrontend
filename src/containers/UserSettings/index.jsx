@@ -7,7 +7,6 @@ const mapStateToProps = (state) => {
     const accountId = state.userReducer.userData ? state.userReducer.userData.sub : null;
     return {
         loggedIn: state.userReducer.loggedIn,
-        givenName: state.userReducer.userData ? state.userReducer.userData.given_name : null,
         accountId: accountId,
         userSettings: state.userSettingsReducer.userSettings ? state.userSettingsReducer.userSettings : null,
         currentUserSettings: state.userSettingsReducer.currentUserSettings ? {...state.userSettingsReducer.currentUserSettings, "accountId": accountId} : null,

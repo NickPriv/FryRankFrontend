@@ -10,11 +10,11 @@ const propTypes = {
     updateCurrentReview: PropTypes.func.isRequired,
     createReview: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool.isRequired,
-    givenName: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     accountId: PropTypes.string.isRequired,
 };
 
-const CreateReview = ({ params: { restaurantId }, error, currentRestaurants, currentReview, updateCurrentReview, createReview, loggedIn, givenName, accountId }) => {
+const CreateReview = ({ params: { restaurantId }, error, currentRestaurants, currentReview, updateCurrentReview, createReview, loggedIn, username, accountId }) => {
     const currentRestaurant = currentRestaurants && currentRestaurants.size > 0
         ? currentRestaurants.get(restaurantId)
         : null;
@@ -34,7 +34,7 @@ const CreateReview = ({ params: { restaurantId }, error, currentRestaurants, cur
                 currentReview = {currentReview}
                 updateCurrentReview = {updateCurrentReview}
                 loggedIn = {loggedIn}
-                givenName = {givenName}
+                username = {username}
                 accountId = {accountId}
             />
         </div>

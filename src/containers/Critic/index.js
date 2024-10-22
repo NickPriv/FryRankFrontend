@@ -4,6 +4,7 @@ import Critic from '../../components/Critic';
 import { reviewsActions } from '../../redux/reducers/reviews';
 import { restaurantsActions } from '../../redux/reducers/restaurants';
 import withRouter from '../Common/withRouter';
+import {getUsernameFromState} from "../Common/utils";
 
 const mapStateToProps = (state) => {
     return {
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
         loggedIn: state.userReducer.loggedIn,
         currentRestaurants: state.restaurantsReducer.currentRestaurants,
         restaurantsError: state.restaurantsReducer.restaurantsError,
+        username: getUsernameFromState(state),
     }
 }
 
