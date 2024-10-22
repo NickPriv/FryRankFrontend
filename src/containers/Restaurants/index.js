@@ -63,34 +63,3 @@ export default compose(
         },
     }),
 )(Restaurants);
-
-/*
-export default compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    lifecycle({
-        componentDidMount() {
-            const { location, setLocation } = this.props;
-
-            // Only load nearby restaurants if they have not already been loaded yet
-            if (!location && navigator.geolocation) {
-                navigator.permissions
-                    .query({ name: "geolocation" })
-                    .then(function (result) {
-                        if (result.state === "granted" || result.state === "prompt") {
-                            navigator.geolocation.getCurrentPosition (
-                                (position) => {
-                                    console.log("position: " + position);
-                                    console.log("position.coords: " + position.coords);
-                                    console.log("position.coords.latitude: " + position.coords.latitude);
-                                    setLocation(position.coords);
-                                },
-                                (error) => {
-                                }
-                            );
-                        }
-                    });
-            }
-        },
-    }),
-)(Map);
-*/
