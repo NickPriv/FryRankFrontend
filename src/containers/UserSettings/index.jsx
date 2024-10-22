@@ -1,0 +1,40 @@
+import {compose, lifecycle} from "react-recompose";
+import {connect} from "react-redux";
+import UserSettings from "../../components/UserSettings";
+import { userSettingsActions } from "../../redux/reducers/userSettings";
+
+const mapStateToProps = (state) => {
+    const accountId = state.userReducer.userData ? state.userReducer.userData.sub : null;
+    return {
+        loggedIn: state.userReducer.loggedIn,
+        accountId: accountId,
+        userSettings: state.userSettingsReducer.userSettings ? state.userSettingsReducer.userSettings : null,
+        currentUserSettings: state.userSettingsReducer.currentUserSettings ? {...state.userSettingsReducer.currentUserSettings, "accountId": accountId} : null,
+        error: state.userSettingsReducer.error,
+        successfulSetUserSettings: state.userSettingsReducer.successfulSetUserSettings,
+    }
+}
+
+const mapDispatchToProps = {
+    getUserSettings: userSettingsActions.startGetUserSettingsRequest,
+    setUserSettings: userSettingsActions.startSetUserSettingsRequest,
+    updateCurrentUserSettings: userSettingsActions.updateCurrentUserSettings,
+};
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    lifecycle({
+        componentDidMount() {
+            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
+            if(loggedIn && userSettings === null) {
+                getUserSettings(accountId);
+            }
+        },
+        componentDidUpdate() {
+            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
+            if(loggedIn && userSettings === null) {
+                getUserSettings(accountId);
+            }
+        },
+    }),
+)(UserSettings);

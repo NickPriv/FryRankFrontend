@@ -8,15 +8,18 @@ import {
     PATH_RESTAURANTS,
     PATH_RESTAURANT_REVIEWS,
     PATH_ACCOUNT_REVIEWS,
-    PATH_CREATE_REVIEW
+    PATH_CREATE_REVIEW,
+    PATH_USER_SETTINGS
 } from "./constants.js"
+import UserSettings from './containers/UserSettings'
 
 const routes = [
     { path: PATH_HOME, component: Homepage },
     { path: PATH_RESTAURANT_REVIEWS, component: Reviews },
     { path: PATH_ACCOUNT_REVIEWS, component: Critic },
     { path: PATH_CREATE_REVIEW, component: CreateReview },
-    { path: PATH_RESTAURANTS, component: Restaurants }
+    { path: PATH_RESTAURANTS, component: Restaurants },
+    { path: PATH_USER_SETTINGS, component: UserSettings},
 ];
 
 const pathToPageName = {
