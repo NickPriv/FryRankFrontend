@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { Button, Input, InputGroup, Label } from 'reactstrap';
+import { Button, Input, InputGroup } from 'reactstrap';
 
 import { FRENCH_FRIES_TEXT_QUERY } from '../../../constants';
 

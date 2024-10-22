@@ -2,9 +2,7 @@ import React, { useCallback } from 'react';
 import { PropTypes } from 'prop-types';
 import {
   Map as GoogleMap,
-  AdvancedMarker,
   InfoWindow,
-  Pin,
   useMap
 } from '@vis.gl/react-google-maps';
 import { Link } from 'react-router-dom';
