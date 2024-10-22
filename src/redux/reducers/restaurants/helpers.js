@@ -1,6 +1,5 @@
 export const getPinData = (restaurantIds, currentRestaurants, aggregateReviewsData) => {
     return restaurantIds.map(restaurantId => {
-        console.log(aggregateReviewsData[restaurantId]);
         return {
             key: restaurantId,
             location: {

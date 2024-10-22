@@ -63,9 +63,6 @@ export default (state = initialState, action) => {
         }
 
         case types.SET_LOCATION: {
-
-            console.log("location set to: " + action.data);
-            console.log("latitude: " + action.data.latitude);
             return {
                 ...state,
                 location: action.data
@@ -121,7 +118,6 @@ export default (state = initialState, action) => {
         }
 
         case types.SET_INFO_WINDOW_PROPS: {
-            console.log("called set info window props: " + JSON.stringify(action.data));
             return {
                 ...state,
                 infoWindowProps: action.data,

@@ -56,11 +56,11 @@ const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setS
                     maxZoom={18}
                     mapId={'ced49c98e3ab91a3'}
                 >
-                        <MapPins
-                            pinData = {pinData}
-                            setShowInfoWindow = {setShowInfoWindow}
-                            setInfoWindowProps = {setInfoWindowProps}
-                        />
+                    <MapPins
+                        pinData = {pinData}
+                        setShowInfoWindow = {setShowInfoWindow}
+                        setInfoWindowProps = {setInfoWindowProps}
+                    />
                 </GoogleMap>
                 {showInfoWindow &&
                     <InfoWindow
