@@ -27,7 +27,7 @@ const MapPins = ({ pinData, setShowInfoWindow, setInfoWindowProps }) => {
                    id: place.key
                 });
             }}>>
-          <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
+            <Pin background={'#FBBC04'} glyphColor={'#000'} borderColor={'#000'} />
           </AdvancedMarker>
         ))}
       </>

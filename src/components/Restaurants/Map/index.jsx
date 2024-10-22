@@ -8,7 +8,7 @@ import {
   useMap
 } from '@vis.gl/react-google-maps';
 import { Link } from 'react-router-dom';
-import { FrySpinner } from '../../Common';
+import { FrySpinner, Score } from '../../Common';
 import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
 import MapPins from '../MapPins';
 
@@ -29,26 +29,20 @@ const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setS
 
     const map = useMap();
 
-    type Poi ={ key: string, location: google.maps.LatLngLiteral }
+    type coords = google.maps.LatLngLiteral
 
-  const fieldOfView = () => {
-      const bounds = new google.maps.LatLngBounds();
-      pinData.forEach(place => {
-          bounds.extend({
-              lat: place.location.lat,
-              lng: place.location.lng
-          });
-      });
-      map && map.fitBounds(bounds);
-
-      return bounds.getCenter();
+    const adjustBounds = () => {
+        const bounds: coords = new google.maps.LatLngBounds();
+        pinData.forEach(place => {
+            bounds.extend({
+                lat: place.location.lat,
+                lng: place.location.lng
+            });
+        });
+        map && map.fitBounds(bounds);
   }
 
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
-
-  // notes: we need to get anchor tag working instead of position
-  // problem: map zooms out after you click on a marker
-  // next feature will have to be for the search results to change depending on map position (but only if map is toggled)
 
   return (
     <div>
@@ -57,12 +51,11 @@ const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setS
             : <>
                 <GoogleMap
                     className='google-map'
-                    defaultCenter={{lat: location?.latitude, lng: location?.longitude}}
-                    center={fieldOfView().averageLocation}
                     gestureHandling={'cooperative'}
                     disableDefaultUI={true}
                     maxZoom={18}
-                    mapId={'ced49c98e3ab91a3'}>
+                    mapId={'ced49c98e3ab91a3'}
+                >
                         <MapPins
                             pinData = {pinData}
                             setShowInfoWindow = {setShowInfoWindow}
@@ -74,11 +67,14 @@ const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setS
                         position={{ lat: infoWindowProps?.location.lat, lng: infoWindowProps?.location.lng }}
                         onCloseClick={handleClose}
                     >
-                        <h6><Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, infoWindowProps?.id)}>{infoWindowProps?.name}</Link></h6>
-                        {infoWindowProps.score && <p>Score: {infoWindowProps.score}</p>}
+                        <h6 style={{ display: "inline-block" }}>
+                            <Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, infoWindowProps?.id)}>{infoWindowProps?.name}</Link>
+                        </h6>
+                        {infoWindowProps.score && <Score score={infoWindowProps.score} size="sm" />}
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
+                {adjustBounds()}
             </>
         }
     </div>
