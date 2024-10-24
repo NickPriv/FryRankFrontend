@@ -40,10 +40,10 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANTS_FOR_QUERY_SUCCESS: {
 
             const queriedRestaurantsMap = new Map();
-            action.data.places.forEach(place => queriedRestaurantsMap.set(place.id, place));
+            action.data.places?.forEach(place => queriedRestaurantsMap.set(place.id, place));
 
             const newCurrentRestaurants = state.currentRestaurants ? new Map([...state.currentRestaurants, ...queriedRestaurantsMap]) : queriedRestaurantsMap;
-            const newRestaurantIdsForQuery = action.data.places.map(place => place.id);
+            const newRestaurantIdsForQuery = action.data.places ? action.data.places.map(place => place.id) : [];
 
             return {
                 ...state,
@@ -51,6 +51,7 @@ export default (state = initialState, action) => {
                 restaurantIdsForQuery: newRestaurantIdsForQuery,
                 aggregateReviewsData: action.aggregateReviewsData,
                 pinData: getPinData(newRestaurantIdsForQuery, newCurrentRestaurants, action.aggregateReviewsData),
+                showInfoWindow: false,
                 error: ''
             };
         }
