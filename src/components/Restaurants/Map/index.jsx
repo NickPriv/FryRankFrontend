@@ -68,7 +68,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
-                {pinData.length > 0 && adjustBounds()}
+                {pinData.length > 0 && !showInfoWindow && adjustBounds()}
             </>
         }
     </div>
