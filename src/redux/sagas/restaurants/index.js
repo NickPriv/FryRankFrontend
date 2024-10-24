@@ -35,7 +35,6 @@ export function* callGetRestaurantsForQuery({ textQuery, location }) {
                 [HEADER_FIELD_MASK]: 'places.displayName,places.formattedAddress,places.id,places.location'
             }}
         );
-        console.log("here2");
 
         const aggregateReviewsData = data && data.places
             ? yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } })
