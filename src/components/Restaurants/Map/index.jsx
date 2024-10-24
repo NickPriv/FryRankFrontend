@@ -11,9 +11,6 @@ import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../c
 import MapPins from '../MapPins';
 
 const propTypes = {
-    restaurantIds: PropTypes.array.isRequired,
-    currentRestaurants: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     showInfoWindow: PropTypes.bool.isRequired,
     setShowInfoWindow: PropTypes.func.isRequired,
     setInfoWindowProps: PropTypes.func.isRequired,
@@ -22,8 +19,7 @@ const propTypes = {
     pinData: PropTypes.object,
 }
 
-const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData,
-               pinData }) => {
+const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData }) => {
 
     const map = useMap();
 
@@ -44,7 +40,7 @@ const Map = ({ location, restaurantIds, currentRestaurants, showInfoWindow, setS
 
   return (
     <div>
-        { !location || !restaurantIds || !currentRestaurants
+        { !pinData
             ? <FrySpinner />
             : <>
                 <GoogleMap

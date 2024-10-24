@@ -41,9 +41,6 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
             />
             {selectedView === SELECTED_VIEW.MAP &&
                 <Map
-                    location = {location}
-                    restaurantIds = {restaurantIdsForQuery}
-                    currentRestaurants = {currentRestaurants}
                     showInfoWindow = {showInfoWindow}
                     setShowInfoWindow = {setShowInfoWindow}
                     setInfoWindowProps = {setInfoWindowProps}
