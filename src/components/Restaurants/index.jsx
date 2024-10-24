@@ -1,13 +1,12 @@
 import { PropTypes } from 'prop-types';
-import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Breadcrumb, ErrorBanner, FrySpinner } from '../Common';
+import { Breadcrumb, ErrorBanner } from '../Common';
 import SearchInput from './SearchInput';
-import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../constants.js'
+import RestaurantsViewSelect from './RestaurantsViewSelect';
+import Map from './Map';
+import RestaurantsList from './RestaurantsList';
+import { SELECTED_VIEW } from '../../constants';
 
 import style from './style.css';
-
-import { Score } from "../Common"
 
 const propTypes = {
     restaurantIdsForQuery: PropTypes.array.isRequired,
@@ -17,34 +16,15 @@ const propTypes = {
     currentSearchQuery: PropTypes.string.isRequired,
     updateSearchQuery: PropTypes.func.isRequired,
     location: PropTypes.object,
-    aggregateReviewsData: PropTypes.object.isRequired
+    aggregateReviewsData: PropTypes.object.isRequired,
+    showInfoWindow: PropTypes.bool.isRequired,
+    setShowInfoWindow: PropTypes.func.isRequired,
 }
 
-const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData, currentRestaurants }) => {
-
-    const restaurantsDisplay = (restaurantIds) => {
-        const restaurants = restaurantIds && currentRestaurants
-            ? Array.from(currentRestaurants.values()).filter(restaurant => restaurantIds.includes(restaurant.id))
-            : null;
-
-        if (restaurants && restaurants.length > 0) {
-            return restaurants.map((restaurant, i) => {
-                let restaurantLink = `${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)
-                return (
-                    <Fragment key = {i}>
-                        <p className="inline-paragraph"><b><Link to={restaurantLink}>{restaurant.displayName.text}</Link></b></p>
-                        {aggregateReviewsData[restaurant.id] && <Score size="sm" score={aggregateReviewsData[restaurant.id].avgScore} />}
-                        <p>{restaurant.formattedAddress}</p>
-                    </Fragment>
-                )});
-        } else if (restaurants && restaurants.length === 0) {
-            return 'No restaurants found for this search.';
-        } else {
-            return <FrySpinner />;
-        }
-    }
-
-
+const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData,
+                       currentRestaurants, setSelectedView, selectedView, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps,
+                       pinData
+}) => {
     return (
         <div>
             <ErrorBanner error = {error} />
@@ -55,7 +35,27 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                 updateSearchQuery = {updateSearchQuery}
                 location = {location}
             />
-            {restaurantsDisplay(restaurantIdsForQuery)}
+            <RestaurantsViewSelect
+                selectedView = {selectedView}
+                setSelectedView = {setSelectedView}
+            />
+            {selectedView === SELECTED_VIEW.MAP &&
+                <Map
+                    showInfoWindow = {showInfoWindow}
+                    setShowInfoWindow = {setShowInfoWindow}
+                    setInfoWindowProps = {setInfoWindowProps}
+                    infoWindowProps = {infoWindowProps}
+                    aggregateReviewsData = {aggregateReviewsData}
+                    pinData = {pinData}
+                />
+            }
+            {selectedView === SELECTED_VIEW.LIST &&
+                <RestaurantsList
+                    restaurantIds = {restaurantIdsForQuery}
+                    currentRestaurants = {currentRestaurants}
+                    aggregateReviewsData = {aggregateReviewsData}
+                />
+            }
         </div>
     );
 }

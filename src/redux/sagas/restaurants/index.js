@@ -31,7 +31,7 @@ export function* callGetRestaurantsForQuery({ textQuery, location }) {
             { headers: {
                 [HEADER_CONTENT_TYPE]: 'application/json',
                 [HEADER_API_KEY]: process.env.REACT_APP_GOOGLE_API_KEY,
-                [HEADER_FIELD_MASK]: 'places.displayName,places.formattedAddress,places.id'
+                [HEADER_FIELD_MASK]: 'places.displayName,places.formattedAddress,places.id,places.location'
             }}
         );
         const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } });

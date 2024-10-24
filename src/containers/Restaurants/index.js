@@ -11,7 +11,11 @@ const mapStateToProps = (state) => {
         error: state.restaurantsReducer.error,
         currentSearchQuery: state.restaurantsReducer.searchQuery,
         location: state.restaurantsReducer.location,
-        aggregateReviewsData: state.restaurantsReducer.aggregateReviewsData
+        aggregateReviewsData: state.restaurantsReducer.aggregateReviewsData,
+        selectedView: state.restaurantsReducer.selectedView,
+        showInfoWindow: state.restaurantsReducer.showInfoWindow,
+        infoWindowProps: state.restaurantsReducer.infoWindowProps,
+        pinData: state.restaurantsReducer.pinData,
     }
 }
 
@@ -19,6 +23,9 @@ const mapDispatchToProps = {
     getRestaurants: restaurantsActions.startGetRestaurantsForQueryRequest,
     updateSearchQuery: restaurantsActions.updateSearchQuery,
     setLocation: restaurantsActions.setLocation,
+    setSelectedView: restaurantsActions.setSelectedView,
+    setShowInfoWindow: restaurantsActions.setShowInfoWindow,
+    setInfoWindowProps: restaurantsActions.setInfoWindowProps,
 };
 
 export default compose(
