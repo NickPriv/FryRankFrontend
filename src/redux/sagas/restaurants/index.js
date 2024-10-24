@@ -22,11 +22,13 @@ export function* callGetRestaurantsForQuery({ textQuery, location }) {
         } : null;
 
     try {
+        console.log("here1");
         const { data } = yield axios.post(GOOGLE_API_PATH + "places:searchText",
             {
                 'textQuery': textQuery,
                 'locationBias': locationBias,
                 'maxResultCount': 10,
+                'includedType': 'restaurant'
             },
             { headers: {
                 [HEADER_CONTENT_TYPE]: 'application/json',
@@ -34,10 +36,21 @@ export function* callGetRestaurantsForQuery({ textQuery, location }) {
                 [HEADER_FIELD_MASK]: 'places.displayName,places.formattedAddress,places.id,places.location'
             }}
         );
-        const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } });
+        console.log("here2");
 
-        yield put(restaurantsActions.successfulGetRestaurantsForQueryRequest(data, aggregateReviewsData.data.restaurantIdToRestaurantInformation));
+        if (data && data.places) {
+        console.log("here3");
+            const aggregateReviewsData = yield axios.get(AGGREGATE_INFORMATION_API_PATH, { params: { ids: (data.places.map(place => place.id).join()), rating: true } });
+            console.log("here4");
+            yield put(restaurantsActions.successfulGetRestaurantsForQueryRequest(data, aggregateReviewsData.data.restaurantIdToRestaurantInformation));
+            console.log("here5");
+        } else {
+            console.log("here6");
+            yield put(restaurantsActions.successfulGetRestaurantsForQueryRequest(data, null));
+            console.log("here7");
+        }
     } catch (err) {
+        console.log("here8");
         yield put(restaurantsActions.failedGetRestaurantsForQueryRequest(err.response.data.error.message));
     }
 }

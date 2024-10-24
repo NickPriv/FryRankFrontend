@@ -15,6 +15,8 @@ const RestaurantsList = ({ restaurantIds, currentRestaurants, aggregateReviewsDa
         ? Array.from(currentRestaurants.values()).filter(restaurant => restaurantIds.includes(restaurant.id))
         : null;
 
+    console.log("restaurants is " + JSON.stringify(restaurants));
+
     if (restaurants && restaurants.length > 0) {
         return restaurants.map((restaurant, i) => {
             let restaurantLink = `${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, restaurant.id)

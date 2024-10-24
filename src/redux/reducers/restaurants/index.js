@@ -40,10 +40,17 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANTS_FOR_QUERY_SUCCESS: {
 
             const queriedRestaurantsMap = new Map();
-            action.data.places.forEach(place => queriedRestaurantsMap.set(place.id, place));
+            console.log("inside reducer");
+            console.log("action: " + JSON.stringify(action));
+            action.data.places?.forEach(place => queriedRestaurantsMap.set(place.id, place));
+
+            console.log("hi there 1")
 
             const newCurrentRestaurants = state.currentRestaurants ? new Map([...state.currentRestaurants, ...queriedRestaurantsMap]) : queriedRestaurantsMap;
-            const newRestaurantIdsForQuery = action.data.places.map(place => place.id);
+            console.log("hi there 2")
+            const newRestaurantIdsForQuery = action.data.places ? action.data.places.map(place => place.id) : [];
+            console.log("hi there 3")
+            console.log("newRestaurantIdsForQuery: " + JSON.stringify(newRestaurantIdsForQuery));
 
             return {
                 ...state,

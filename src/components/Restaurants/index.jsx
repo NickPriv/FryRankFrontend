@@ -25,6 +25,8 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                        currentRestaurants, setSelectedView, selectedView, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps,
                        pinData
 }) => {
+    console.log("restaurantIdsForQuery is " + JSON.stringify(restaurantIdsForQuery));
+
     return (
         <div>
             <ErrorBanner error = {error} />

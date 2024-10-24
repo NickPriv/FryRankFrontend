@@ -36,6 +36,8 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
         map && map.fitBounds(bounds);
   }
 
+  console.log("current pinData: " + JSON.stringify(pinData));
+
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
 
   return (
@@ -68,7 +70,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
-                {adjustBounds()}
+                {pinData.length > 0 && adjustBounds()}
             </>
         }
     </div>
