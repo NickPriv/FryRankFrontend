@@ -40,17 +40,10 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANTS_FOR_QUERY_SUCCESS: {
 
             const queriedRestaurantsMap = new Map();
-            console.log("inside reducer");
-            console.log("action: " + JSON.stringify(action));
             action.data.places?.forEach(place => queriedRestaurantsMap.set(place.id, place));
 
-            console.log("hi there 1")
-
             const newCurrentRestaurants = state.currentRestaurants ? new Map([...state.currentRestaurants, ...queriedRestaurantsMap]) : queriedRestaurantsMap;
-            console.log("hi there 2")
             const newRestaurantIdsForQuery = action.data.places ? action.data.places.map(place => place.id) : [];
-            console.log("hi there 3")
-            console.log("newRestaurantIdsForQuery: " + JSON.stringify(newRestaurantIdsForQuery));
 
             return {
                 ...state,
@@ -58,6 +51,7 @@ export default (state = initialState, action) => {
                 restaurantIdsForQuery: newRestaurantIdsForQuery,
                 aggregateReviewsData: action.aggregateReviewsData,
                 pinData: getPinData(newRestaurantIdsForQuery, newCurrentRestaurants, action.aggregateReviewsData),
+                showInfoWindow: false,
                 error: ''
             };
         }
