@@ -23,18 +23,4 @@ const mapDispatchToProps = {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    lifecycle({
-        componentDidMount() {
-            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
-            if(loggedIn && userSettings === null) {
-                getUserSettings(accountId);
-            }
-        },
-        componentDidUpdate() {
-            const { getUserSettings, accountId, loggedIn, userSettings } = this.props;
-            if(loggedIn && userSettings === null) {
-                getUserSettings(accountId);
-            }
-        },
-    }),
 )(UserSettings);
