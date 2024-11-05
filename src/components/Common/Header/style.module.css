@@ -1,0 +1,30 @@
+.Header {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: #767676;
+    position: relative;
+}
+
+.Header a {
+    color: #000;
+    text-decoration: none;
+}
+
+.Header h4 {
+    color: #000;
+    
+}
+
+.Header a:hover {
+    color: #dc3545;
+}
+
+.FryRank {
+    width: min(15rem, 40vw);
+}
+
+
+

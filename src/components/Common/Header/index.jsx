@@ -1,6 +1,8 @@
 import {useState} from 'react'
 
 import  GoogleLogin from '../../../containers/Common/GoogleLogin';
+import logo from '../../../FryRankLogo.png';
+import style from "./style.module.css"
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
 
 export default function Header() {
@@ -8,26 +10,32 @@ export default function Header() {
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div>
-            <Navbar className="p-lg-2 sign" color="secondary" dark expand="md">
+        <div className={style.Header}>
+            <Navbar className="p-lg-2 sign" dark expand="md">
+                
                 <NavbarBrand href='/'>
-                    <h1 >FryRank</h1>
+                    <img src={logo} className={style.FryRank} alt="FryRank" />
                 </NavbarBrand>
+                
                 <NavbarToggler onClick={toggle} />
+                
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
                         <NavItem>
-                            <NavLink href='/restaurants'>Restaurants</NavLink>
+                            <NavLink href='/restaurants'>
+                                <h4>Restaurants</h4>
+                            </NavLink>
                         </NavItem>
                         <NavItem> 
                             <NavLink href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer">
-                                Merch Shop
+                                <h4> Merch Shop </h4>
                             </NavLink> 
                         </NavItem>
                     </Nav>
-                </Collapse>
-                <GoogleLogin />
-            </Navbar>
+                </Collapse>          
+            
+            </Navbar> 
+            <GoogleLogin/>                
         </div>
     )
 }
