@@ -17,10 +17,7 @@ export default function Header() {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
                         <NavItem>
-                            <NavLink href=''>Restaurants</NavLink>
-                        </NavItem>
-                        <NavItem> 
-                            <NavLink href=''>Recent Reviews</NavLink>
+                            <NavLink href='/restaurants'>Restaurants</NavLink>
                         </NavItem>
                         <NavItem> 
                             <NavLink href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer">
