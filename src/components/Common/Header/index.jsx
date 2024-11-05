@@ -11,8 +11,7 @@ export default function Header() {
 
     return (
         <div className={style.Header}>
-            <Navbar className="p-lg-2 sign" dark expand="md">
-                
+            <Navbar className="p-lg-2 sign" dark expand="md">               
                 <NavbarBrand href='/'>
                     <img src={logo} className={style.FryRank} alt="FryRank" />
                 </NavbarBrand>
@@ -23,17 +22,17 @@ export default function Header() {
                     <Nav className="me-auto" navbar>
                         <NavItem>
                             <NavLink href='/restaurants'>
-                                <h4>Restaurants</h4>
+                                <h4> Restaurants </h4>
                             </NavLink>
                         </NavItem>
+                        
                         <NavItem> 
                             <NavLink href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer">
                                 <h4> Merch Shop </h4>
                             </NavLink> 
                         </NavItem>
                     </Nav>
-                </Collapse>          
-            
+                </Collapse>                      
             </Navbar> 
             <GoogleLogin/>                
         </div>
