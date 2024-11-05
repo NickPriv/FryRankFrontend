@@ -15,14 +15,14 @@ const Homepage = () => {
                     <h4 className="inline"><span class="text-danger">Discover</span> fries</h4>
                     <h4 className="inline"><span class="text-danger">Write</span> a review</h4>
                 </div>
+                <Link to="/restaurants" className="enter">
+                    <h2 className="mt-3">Explore restaurants</h2>
+                </Link>
             </div>
             <div className="welcome">
                 <img src={logo} className="Food-critic inline" alt="food-critic" />
                 <div>
                     <MessageCard message={WELCOME_MESSAGE} />
-                    <Link style={{'text-align': 'left'}} to="/restaurants" className="enter">
-                        <h3>Explore restaurants</h3>
-                    </Link>
                 </div>
             </div>
             <div className="merch">
