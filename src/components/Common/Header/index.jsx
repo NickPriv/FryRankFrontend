@@ -34,7 +34,10 @@ export default function Header() {
                     </Nav>
                 </Collapse>                      
             </Navbar> 
-            <GoogleLogin/>                
+            
+            <div className={style.GoogleLoginContainer}>
+                <GoogleLogin/>   
+            </div>             
         </div>
     )
 }

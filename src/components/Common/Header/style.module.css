@@ -25,5 +25,11 @@
     width: min(15rem, 40vw);
 }
 
+.GoogleLoginContainer { 
+    display: flex; 
+    align-items: center; 
+    padding-right: 1rem; 
+}
+
 
 
