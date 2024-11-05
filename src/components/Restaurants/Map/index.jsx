@@ -1,14 +1,18 @@
 import React, { useCallback } from 'react';
 import { PropTypes } from 'prop-types';
 import {
-  Map as GoogleMap,
+  ControlPosition,
   InfoWindow,
+  Map as GoogleMap,
+  MapControl,
   useMap
 } from '@vis.gl/react-google-maps';
 import { Link } from 'react-router-dom';
+import { Button } from 'reactstrap';
 import { FrySpinner, Score } from '../../Common';
-import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
+import { FRENCH_FRIES_TEXT_QUERY, PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
 import MapPins from '../MapPins';
+import { getDistance } from './helpers';
 
 const propTypes = {
     showInfoWindow: PropTypes.bool.isRequired,
@@ -17,9 +21,12 @@ const propTypes = {
     infoWindowProps: PropTypes.func.isRequired,
     aggregateReviewsData: PropTypes.object.isRequired,
     pinData: PropTypes.object,
+    getRestaurants: PropTypes.func.isRequired,
+    requestingRestaurantsForQuery: PropTypes.bool.isRequired,
 }
 
-const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData }) => {
+const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData, showMapSearchButton, setShowMapSearchButton,
+               getRestaurants, requestingRestaurantsForQuery, setAdjustBounds, shouldAdjustBounds }) => {
 
     const map = useMap();
 
@@ -38,6 +45,22 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
 
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
 
+  const getRestaurantsForMapView = () => {
+      const mapCenter = map.getCenter();
+      const mapBounds = map.getBounds();
+
+      const mapRadius = getDistance(
+          mapCenter.lat(),
+          mapBounds.getNorthEast().lng(),
+          mapCenter.lat(),
+          mapBounds.getSouthWest().lng()
+      ) / 2;
+
+      getRestaurants(FRENCH_FRIES_TEXT_QUERY, { latitude: mapCenter.lat(), longitude: mapCenter.lng() }, mapRadius);
+  }
+
+  console.log("Should adjust bounds: " + shouldAdjustBounds);
+
   return (
     <div>
         { !pinData
@@ -49,12 +72,23 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                     disableDefaultUI={true}
                     maxZoom={18}
                     mapId={'ced49c98e3ab91a3'}
+                    onCenterChanged={() => setShowMapSearchButton(true)}
                 >
                     <MapPins
                         pinData = {pinData}
                         setShowInfoWindow = {setShowInfoWindow}
                         setInfoWindowProps = {setInfoWindowProps}
                     />
+                    <MapControl position={ControlPosition.TOP_CENTER}>
+                        { showMapSearchButton &&
+                            <Button className="my-2" onClick={() => {
+                                getRestaurantsForMapView();
+                                setShowMapSearchButton(false);
+                            }}>
+                                Search map area
+                            </Button>
+                        }
+                      </MapControl>
                 </GoogleMap>
                 {showInfoWindow &&
                     <InfoWindow
@@ -68,7 +102,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
-                {pinData.length > 0 && !showInfoWindow && adjustBounds()}
+                {pinData.length > 0 && !showInfoWindow && !requestingRestaurantsForQuery && shouldAdjustBounds && adjustBounds() && setAdjustBounds(false)}
             </>
         }
     </div>

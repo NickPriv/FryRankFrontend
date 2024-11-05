@@ -23,7 +23,7 @@ const propTypes = {
 
 const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData,
                        currentRestaurants, setSelectedView, selectedView, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps,
-                       pinData
+                       pinData, showMapSearchButton, setShowMapSearchButton, requestingRestaurantsForQuery, shouldAdjustBounds, setAdjustBounds
 }) => {
     return (
         <div>
@@ -47,6 +47,12 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                     infoWindowProps = {infoWindowProps}
                     aggregateReviewsData = {aggregateReviewsData}
                     pinData = {pinData}
+                    showMapSearchButton = {showMapSearchButton}
+                    setShowMapSearchButton = {setShowMapSearchButton}
+                    getRestaurants = {getRestaurants}
+                    requestingRestaurantsForQuery = {requestingRestaurantsForQuery}
+                    shouldAdjustBounds = {shouldAdjustBounds}
+                    setAdjustBounds = {setAdjustBounds}
                 />
             }
             {selectedView === SELECTED_VIEW.LIST &&

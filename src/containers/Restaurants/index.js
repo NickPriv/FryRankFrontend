@@ -16,6 +16,9 @@ const mapStateToProps = (state) => {
         showInfoWindow: state.restaurantsReducer.showInfoWindow,
         infoWindowProps: state.restaurantsReducer.infoWindowProps,
         pinData: state.restaurantsReducer.pinData,
+        showMapSearchButton: state.restaurantsReducer.showMapSearchButton,
+        requestingRestaurantsForQuery: state.restaurantsReducer.requestingRestaurantsForQuery,
+        shouldAdjustBounds: state.restaurantsReducer.shouldAdjustBounds,
     }
 }
 
@@ -26,6 +29,8 @@ const mapDispatchToProps = {
     setSelectedView: restaurantsActions.setSelectedView,
     setShowInfoWindow: restaurantsActions.setShowInfoWindow,
     setInfoWindowProps: restaurantsActions.setInfoWindowProps,
+    setShowMapSearchButton: restaurantsActions.setShowMapSearchButton,
+    setAdjustBounds: restaurantsActions.setAdjustBounds,
 };
 
 export default compose(

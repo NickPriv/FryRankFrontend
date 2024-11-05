@@ -9,7 +9,7 @@ const HEADER_CONTENT_TYPE = 'Content-Type';
 const HEADER_API_KEY = 'X-Goog-Api-Key';
 const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
 
-export function* callGetRestaurantsForQuery({ textQuery, location }) {
+export function* callGetRestaurantsForQuery({ textQuery, location, radius }) {
     const locationBias = location ?
         {
             "circle": {
@@ -17,7 +17,7 @@ export function* callGetRestaurantsForQuery({ textQuery, location }) {
                     "latitude": location.latitude,
                     "longitude": location.longitude
                 },
-                "radius": 500.0
+                "radius": radius ? Math.min(radius, 50000) : 500.0
             }
         } : null;
 

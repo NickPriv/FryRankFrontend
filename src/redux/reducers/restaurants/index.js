@@ -13,6 +13,8 @@ export const types = {
     SET_SELECTED_VIEW: "SET_SELECTED_VIEW",
     SET_SHOW_INFO_WINDOW: "SET_SHOW_INFO_WINDOW",
     SET_INFO_WINDOW_PROPS: "SET_INFO_WINDOW_PROPS",
+    SET_SHOW_MAP_SEARCH_BUTTON: "SET_SHOW_MAP_SEARCH_BUTTON",
+    SET_ADJUST_BOUNDS: "SET_ADJUST_BOUNDS",
 }
 
 export const initialState = {
@@ -20,6 +22,7 @@ export const initialState = {
   restaurantIdsForQuery: null,
   error: '',
   requestingRestaurantDetails: false,
+  requestingRestaurantsForQuery: false,
   searchQuery: '',
   location: null,
   aggregateReviewsData: null,
@@ -27,13 +30,16 @@ export const initialState = {
   showInfoWindow: false,
   infoWindowProps: null,
   pinData: null,
+  showMapSearchButton: false,
+  shouldAdjustBounds: true,
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case types.GET_RESTAURANTS_FOR_QUERY_REQUEST: {
             return {
-                ...state
+                ...state,
+                requestingRestaurantsForQuery: true,
             };
         }
 
@@ -52,6 +58,8 @@ export default (state = initialState, action) => {
                 aggregateReviewsData: action.aggregateReviewsData,
                 pinData: getPinData(newRestaurantIdsForQuery, newCurrentRestaurants, action.aggregateReviewsData),
                 showInfoWindow: false,
+                requestingRestaurantsForQuery: false,
+                shouldAdjustBounds: true,
                 error: ''
             };
         }
@@ -59,6 +67,7 @@ export default (state = initialState, action) => {
         case types.GET_RESTAURANTS_FOR_QUERY_FAILURE: {
             return {
                 ...state,
+                requestingRestaurantsForQuery: false,
                 error: action.error,
             }
         }
@@ -125,13 +134,27 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.SET_SHOW_MAP_SEARCH_BUTTON: {
+            return {
+                ...state,
+                showMapSearchButton: action.data,
+            }
+        }
+
+        case types.SET_ADJUST_BOUNDS: {
+            return {
+                ...state,
+                shouldAdjustBounds: action.data,
+            }
+        }
+
         default:
             return state;
     }
 }
 
 export const restaurantsActions = {
-    startGetRestaurantsForQueryRequest: (textQuery, location) => ({ type: types.GET_RESTAURANTS_FOR_QUERY_REQUEST, textQuery, location }),
+    startGetRestaurantsForQueryRequest: (textQuery, location, radius) => ({ type: types.GET_RESTAURANTS_FOR_QUERY_REQUEST, textQuery, location, radius }),
     successfulGetRestaurantsForQueryRequest: (data, aggregateReviewsData) => ({ type: types.GET_RESTAURANTS_FOR_QUERY_SUCCESS, data, aggregateReviewsData}),
     failedGetRestaurantsForQueryRequest: error => ({ type: types.GET_RESTAURANTS_FOR_QUERY_FAILURE, error }),
     startGetRestaurantsForIdsRequest: restaurantIds => ({ type: types.GET_RESTAURANTS_FOR_IDS_REQUEST, restaurantIds }),
@@ -142,4 +165,6 @@ export const restaurantsActions = {
     setSelectedView: data => ({ type: types.SET_SELECTED_VIEW, data }),
     setShowInfoWindow: data => ({ type: types.SET_SHOW_INFO_WINDOW, data }),
     setInfoWindowProps: data => ({ type: types.SET_INFO_WINDOW_PROPS, data }),
+    setShowMapSearchButton: data => ({ type: types.SET_SHOW_MAP_SEARCH_BUTTON, data }),
+    setAdjustBounds: data => ({ type: types.SET_ADJUST_BOUNDS, data }),
 }
