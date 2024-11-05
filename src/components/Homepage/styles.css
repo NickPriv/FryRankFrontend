@@ -1,18 +1,60 @@
 .Food-critic {
-  max-width: 80vw;
-  max-height: 66vh;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 50%;
+  max-height:300px;
+  object-fit: scale-down;
 }
 
 .text-box {
-  width: 36rem;
-  max-width: 80vw;
+  max-width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
 .enter {
-    text-align: center
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.subtitle {
+    width: min(600px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+}
+
+.pitch {
+    background-color: #E7D273;
+    width: 100vw;
+    padding: 2em;
+}
+
+.welcome {
+    background-color: #D9D9D9;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.merch-title {
+    padding: 1em;
+}
+
+.store-items {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    max-width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
 }

@@ -17,7 +17,7 @@ function App() {
               <Row>
                 <Col />
                 <Col xs="auto">
-                  <div class="p-3 d-flex justify-content-center">
+                  <div class="d-flex justify-content-center">
                     <Routes>
                       {routes.map((route, key) => (
                         <Route

@@ -37,7 +37,7 @@ const Breadcrumb = ({aliases}) => {
         })
 
     return (
-        <ReactstrapBreadcrumb>
+        <ReactstrapBreadcrumb className='mt-2'>
             {crumbs}
         </ReactstrapBreadcrumb>
     )
