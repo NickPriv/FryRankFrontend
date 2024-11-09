@@ -30,7 +30,6 @@ const mapDispatchToProps = {
     setShowInfoWindow: restaurantsActions.setShowInfoWindow,
     setInfoWindowProps: restaurantsActions.setInfoWindowProps,
     setShowMapSearchButton: restaurantsActions.setShowMapSearchButton,
-    setAdjustBounds: restaurantsActions.setAdjustBounds,
 };
 
 export default compose(

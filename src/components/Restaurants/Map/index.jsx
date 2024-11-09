@@ -23,10 +23,12 @@ const propTypes = {
     pinData: PropTypes.object,
     getRestaurants: PropTypes.func.isRequired,
     requestingRestaurantsForQuery: PropTypes.bool.isRequired,
+    shouldAdjustBounds: PropTypes.bool.isRequired,
+    currentSearchQuery: PropTypes.string.isRequired,
 }
 
 const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData, showMapSearchButton, setShowMapSearchButton,
-               getRestaurants, requestingRestaurantsForQuery, setAdjustBounds, shouldAdjustBounds }) => {
+               getRestaurants, requestingRestaurantsForQuery, shouldAdjustBounds, currentSearchQuery }) => {
 
     const map = useMap();
 
@@ -40,7 +42,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                 lng: place.location.lng
             });
         });
-        map && map.fitBounds(bounds);
+        map && shouldAdjustBounds && map.fitBounds(bounds);
   }
 
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
@@ -56,10 +58,8 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
           mapBounds.getSouthWest().lng()
       ) / 2;
 
-      getRestaurants(FRENCH_FRIES_TEXT_QUERY, { latitude: mapCenter.lat(), longitude: mapCenter.lng() }, mapRadius);
+      getRestaurants(currentSearchQuery, { latitude: mapCenter.lat(), longitude: mapCenter.lng() }, mapRadius);
   }
-
-  console.log("Should adjust bounds: " + shouldAdjustBounds);
 
   return (
     <div>
@@ -102,7 +102,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
-                {pinData.length > 0 && !showInfoWindow && !requestingRestaurantsForQuery && shouldAdjustBounds && adjustBounds() && setAdjustBounds(false)}
+                {pinData.length > 0 && !showInfoWindow && !requestingRestaurantsForQuery && shouldAdjustBounds && adjustBounds()}
             </>
         }
     </div>

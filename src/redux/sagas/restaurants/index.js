@@ -2,7 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 
 import { types, restaurantsActions } from '../../reducers/restaurants';
-import {AGGREGATE_INFORMATION_API_PATH} from "../../../constants";
+import {AGGREGATE_INFORMATION_API_PATH, FRENCH_FRIES_TEXT_QUERY} from "../../../constants";
 
 const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
 const HEADER_CONTENT_TYPE = 'Content-Type';
@@ -24,7 +24,7 @@ export function* callGetRestaurantsForQuery({ textQuery, location, radius }) {
     try {
         const { data } = yield axios.post(GOOGLE_API_PATH + "places:searchText",
             {
-                'textQuery': textQuery,
+                'textQuery': textQuery && textQuery !== "" ? textQuery : FRENCH_FRIES_TEXT_QUERY,
                 'locationBias': locationBias,
                 'maxResultCount': 10,
                 'includedType': 'restaurant'

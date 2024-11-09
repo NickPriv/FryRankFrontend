@@ -19,11 +19,12 @@ const propTypes = {
     aggregateReviewsData: PropTypes.object.isRequired,
     showInfoWindow: PropTypes.bool.isRequired,
     setShowInfoWindow: PropTypes.func.isRequired,
+    shouldAdjustBounds: PropTypes.bool.isRequired,
 }
 
 const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSearchQuery, updateSearchQuery, location, aggregateReviewsData,
                        currentRestaurants, setSelectedView, selectedView, showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps,
-                       pinData, showMapSearchButton, setShowMapSearchButton, requestingRestaurantsForQuery, shouldAdjustBounds, setAdjustBounds
+                       pinData, showMapSearchButton, setShowMapSearchButton, requestingRestaurantsForQuery, shouldAdjustBounds
 }) => {
     return (
         <div>
@@ -52,7 +53,7 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                     getRestaurants = {getRestaurants}
                     requestingRestaurantsForQuery = {requestingRestaurantsForQuery}
                     shouldAdjustBounds = {shouldAdjustBounds}
-                    setAdjustBounds = {setAdjustBounds}
+                    currentSearchQuery = {currentSearchQuery}
                 />
             }
             {selectedView === SELECTED_VIEW.LIST &&

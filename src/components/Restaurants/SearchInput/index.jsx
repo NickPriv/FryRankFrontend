@@ -30,7 +30,6 @@ const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, lo
                 children='Submit'
                 color='danger'
                 onClick={(event) => {
-                    const searchQuery = currentSearchQuery == '' ? FRENCH_FRIES_TEXT_QUERY : currentSearchQuery;
                     let searchLocation;
                     if (map) {
                         const mapCenter = map.getCenter();
@@ -39,7 +38,7 @@ const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, lo
                         searchLocation = location;
                     }
 
-                    getRestaurants(searchQuery, searchLocation);
+                    getRestaurants(currentSearchQuery, searchLocation);
                 }}
             />
         </InputGroup>

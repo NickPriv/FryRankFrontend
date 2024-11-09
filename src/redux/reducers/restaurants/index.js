@@ -14,7 +14,6 @@ export const types = {
     SET_SHOW_INFO_WINDOW: "SET_SHOW_INFO_WINDOW",
     SET_INFO_WINDOW_PROPS: "SET_INFO_WINDOW_PROPS",
     SET_SHOW_MAP_SEARCH_BUTTON: "SET_SHOW_MAP_SEARCH_BUTTON",
-    SET_ADJUST_BOUNDS: "SET_ADJUST_BOUNDS",
 }
 
 export const initialState = {
@@ -31,7 +30,7 @@ export const initialState = {
   infoWindowProps: null,
   pinData: null,
   showMapSearchButton: false,
-  shouldAdjustBounds: true,
+  shouldAdjustBounds: false,
 };
 
 export default (state = initialState, action) => {
@@ -89,7 +88,8 @@ export default (state = initialState, action) => {
         case types.UPDATE_CURRENT_SEARCH_QUERY: {
             return {
                 ...state,
-                searchQuery: action.data
+                searchQuery: action.data,
+                shouldAdjustBounds: false
             }
         }
 
@@ -141,13 +141,6 @@ export default (state = initialState, action) => {
             }
         }
 
-        case types.SET_ADJUST_BOUNDS: {
-            return {
-                ...state,
-                shouldAdjustBounds: action.data,
-            }
-        }
-
         default:
             return state;
     }
@@ -166,5 +159,4 @@ export const restaurantsActions = {
     setShowInfoWindow: data => ({ type: types.SET_SHOW_INFO_WINDOW, data }),
     setInfoWindowProps: data => ({ type: types.SET_INFO_WINDOW_PROPS, data }),
     setShowMapSearchButton: data => ({ type: types.SET_SHOW_MAP_SEARCH_BUTTON, data }),
-    setAdjustBounds: data => ({ type: types.SET_ADJUST_BOUNDS, data }),
 }
