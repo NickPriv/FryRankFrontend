@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Button } from 'reactstrap';
 import { FrySpinner, Score } from '../../Common';
-import { FRENCH_FRIES_TEXT_QUERY, PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
+import { PATH_RESTAURANT_REVIEWS, PATH_VARIABLE_RESTAURANT_ID } from '../../../constants';
 import MapPins from '../MapPins';
 import { getDistance } from './helpers';
 
@@ -27,8 +27,8 @@ const propTypes = {
     currentSearchQuery: PropTypes.string.isRequired,
 }
 
-const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData, showMapSearchButton, setShowMapSearchButton,
-               getRestaurants, requestingRestaurantsForQuery, shouldAdjustBounds, currentSearchQuery }) => {
+const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData, showMapSearchButton,
+               setShowMapSearchButton, getRestaurants, requestingRestaurantsForQuery, shouldAdjustBounds, currentSearchQuery }) => {
 
     const map = useMap();
 
@@ -42,7 +42,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                 lng: place.location.lng
             });
         });
-        map && shouldAdjustBounds && map.fitBounds(bounds);
+        map && map.fitBounds(bounds);
   }
 
   const handleClose = useCallback(() => setShowInfoWindow(false), []);
@@ -96,7 +96,10 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         onCloseClick={handleClose}
                     >
                         <h6 style={{ display: "inline-block" }}>
-                            <Link to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, infoWindowProps?.id)}>{infoWindowProps?.name}</Link>
+                            <Link
+                                to={`${PATH_RESTAURANT_REVIEWS}`.replace(PATH_VARIABLE_RESTAURANT_ID, infoWindowProps?.id)}
+                                onClick={() => setShowInfoWindow(false)}
+                            >{infoWindowProps?.name}</Link>
                         </h6>
                         {infoWindowProps.score && <Score score={infoWindowProps.score} size="sm" />}
                         <p>{infoWindowProps?.address}</p>

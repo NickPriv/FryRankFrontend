@@ -124,6 +124,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 showInfoWindow: action.data,
+                shouldAdjustBounds: !action.data,
             }
         }
 
@@ -131,6 +132,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 infoWindowProps: action.data,
+                shouldAdjustBounds: false,
             }
         }
 
@@ -138,6 +140,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 showMapSearchButton: action.data,
+                shouldAdjustBounds: false,
             }
         }
 
