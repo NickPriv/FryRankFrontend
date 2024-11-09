@@ -22,13 +22,12 @@ const propTypes = {
     aggregateReviewsData: PropTypes.object.isRequired,
     pinData: PropTypes.object,
     getRestaurants: PropTypes.func.isRequired,
-    requestingRestaurantsForQuery: PropTypes.bool.isRequired,
     shouldAdjustBounds: PropTypes.bool.isRequired,
     currentSearchQuery: PropTypes.string.isRequired,
 }
 
 const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindowProps, aggregateReviewsData, pinData, showMapSearchButton,
-               setShowMapSearchButton, getRestaurants, requestingRestaurantsForQuery, shouldAdjustBounds, currentSearchQuery }) => {
+               setShowMapSearchButton, getRestaurants, shouldAdjustBounds, currentSearchQuery }) => {
 
     const map = useMap();
 
@@ -88,7 +87,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                                 Search map area
                             </Button>
                         }
-                      </MapControl>
+                    </MapControl>
                 </GoogleMap>
                 {showInfoWindow &&
                     <InfoWindow
@@ -105,7 +104,7 @@ const Map = ({ showInfoWindow, setShowInfoWindow, setInfoWindowProps, infoWindow
                         <p>{infoWindowProps?.address}</p>
                     </InfoWindow>
                 }
-                {pinData.length > 0 && !showInfoWindow && !requestingRestaurantsForQuery && shouldAdjustBounds && adjustBounds()}
+                {pinData.length > 0 && !showInfoWindow && shouldAdjustBounds && adjustBounds()}
             </>
         }
     </div>

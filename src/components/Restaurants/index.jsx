@@ -35,6 +35,7 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                 currentSearchQuery = {currentSearchQuery}
                 updateSearchQuery = {updateSearchQuery}
                 location = {location}
+                selectedView = {selectedView}
             />
             <RestaurantsViewSelect
                 selectedView = {selectedView}
@@ -51,7 +52,6 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
                     showMapSearchButton = {showMapSearchButton}
                     setShowMapSearchButton = {setShowMapSearchButton}
                     getRestaurants = {getRestaurants}
-                    requestingRestaurantsForQuery = {requestingRestaurantsForQuery}
                     shouldAdjustBounds = {shouldAdjustBounds}
                     currentSearchQuery = {currentSearchQuery}
                 />

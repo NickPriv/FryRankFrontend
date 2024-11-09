@@ -2,15 +2,16 @@ import { PropTypes } from 'prop-types';
 import { Button, Input, InputGroup } from 'reactstrap';
 import { useMap } from '@vis.gl/react-google-maps';
 
-import { FRENCH_FRIES_TEXT_QUERY } from '../../../constants';
+import { FRENCH_FRIES_TEXT_QUERY, SELECTED_VIEW } from '../../../constants';
 
 const propTypes = {
     currentSearchQuery: PropTypes.string.isRequired,
     updateSearchQuery: PropTypes.func.isRequired,
-    getRestaurants: PropTypes.func.isRequired
+    getRestaurants: PropTypes.func.isRequired,
+    selectedView: PropTypes.string.isRequired,
 };
 
-const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, location }) => {
+const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, location, selectedView }) => {
     const map = useMap();
 
     return (
@@ -31,7 +32,7 @@ const SearchInput = ({ getRestaurants, currentSearchQuery, updateSearchQuery, lo
                 color='danger'
                 onClick={(event) => {
                     let searchLocation;
-                    if (map) {
+                    if (map && selectedView === SELECTED_VIEW.MAP) {
                         const mapCenter = map.getCenter();
                         searchLocation = { latitude: mapCenter.lat(), longitude: mapCenter.lng() };
                     } else {

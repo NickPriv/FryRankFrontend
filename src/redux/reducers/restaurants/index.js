@@ -81,7 +81,8 @@ export default (state = initialState, action) => {
         case types.SET_SELECTED_VIEW: {
             return {
                 ...state,
-                selectedView: action.data
+                selectedView: action.data,
+                shouldAdjustBounds: action.data === SELECTED_VIEW.MAP
             }
         }
 
