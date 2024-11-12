@@ -1,9 +1,9 @@
 import {useState} from 'react'
-
 import  GoogleLogin from '../../../containers/Common/GoogleLogin';
 import logo from '../../../FryRankLogo.png';
 import style from "./style.module.css"
 import {Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from "reactstrap";
+import {Link} from "react-router-dom";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,17 +13,21 @@ export default function Header() {
         <div className={style.Header}>
             <Navbar className="p-lg-2 sign" dark expand="md">               
                 <NavbarBrand href='/'>
-                    <img src={logo} className={style.FryRank} alt="FryRank" />
+                    <Link to="/">
+                        <img src={logo} className={style.FryRank} alt="FryRank" />
+                    </Link>
                 </NavbarBrand>
                 
                 <NavbarToggler onClick={toggle} />
                 
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="me-auto" navbar>
-                        <NavItem>
-                            <NavLink href='/restaurants'>
-                                <h4> Restaurants </h4>
-                            </NavLink>
+                        <NavItem>  
+                            <NavLink>                      
+                                <Link to='/restaurants' className={style.link}>
+                                    <h4> Restaurants </h4>
+                                </Link> 
+                            </NavLink>                         
                         </NavItem>
                         
                         <NavItem> 
