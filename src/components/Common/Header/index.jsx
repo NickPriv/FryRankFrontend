@@ -29,7 +29,7 @@ export default function Header() {
                         <NavItem> 
                             <NavLink href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer">
                                 <h4> Merch Shop </h4>
-                            </NavLink> 
+                            </NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>                      
