@@ -50,14 +50,14 @@ const GoogleLogin = ({ setUserData, loggedIn, givenName, accountId }) => {
         <div>
             { loggedIn &&
                 <div>
-                    <p className="inline me-1 text-white">Hello,</p>
+                    <p className="inline me-1">Hello,</p>
                     <Link
                         to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, accountId)}
                         style={{"color":"blue", "text-decoration": "underline"}}
                     >
                         {givenName}
                     </Link>
-                    <p className="inline text-white">!</p>
+                    <p className="inline">!</p>
                 </div> }
             { !loggedIn &&
                 <>
