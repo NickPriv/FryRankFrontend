@@ -5,6 +5,7 @@
     justify-content: space-between;
     padding: 1em;
     background-color: #767676;
+    position: relative;
 }
 
 .Header a {
@@ -12,14 +13,21 @@
     text-decoration: none;
 }
 
+.Header h4 {
+    color: black;
+}
+
 .Header a:hover {
     color: #dc3545;
 }
 
-.Header h1 {
-    font-weight:bold;
-}
-
 .FryRank {
     width: min(15rem, 40vw);
+}
+
+.GoogleLoginContainer { 
+    display: flex; 
+    align-items: center; 
+    padding-right: 1rem; 
+    padding-left: 1rem; 
 }
