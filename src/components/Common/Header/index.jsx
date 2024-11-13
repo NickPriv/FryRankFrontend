@@ -29,6 +29,14 @@ export default function Header() {
                                 </Link> 
                             </NavLink>                         
                         </NavItem>
+
+                        <NavItem>  
+                            <NavLink>                      
+                                <Link to='/recent-reviews' className={style.link}>
+                                    <h4> Recent Reviews</h4>
+                                </Link> 
+                            </NavLink>                         
+                        </NavItem>
                         
                         <NavItem> 
                             <NavLink href="https://www.etsy.com/shop/fryrank/" target="_blank" rel="noopener noreferrer">
