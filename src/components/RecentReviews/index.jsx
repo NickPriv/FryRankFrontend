@@ -10,9 +10,7 @@ const RecentReviews = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             const reviews = await fetchTopReviews();
-            console.log(reviews);
-            setRecentReviews(reviews);
-           
+            setRecentReviews(reviews);         
         };
 
         fetchReviews();
