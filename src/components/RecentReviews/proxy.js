@@ -25,4 +25,3 @@ export const fetchRestaurantDetails = async (restaurantIds) => {
     const results = await Promise.all(promises);
     return results;
 };
-
