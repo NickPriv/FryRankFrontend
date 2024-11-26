@@ -1,19 +1,8 @@
 import { useState, useEffect } from 'react';
 import { fetchTopReviews, fetchRestaurantDetails } from './proxy';
 import { FrySpinner, ReviewCardList } from '../Common';
-import { connect } from 'react-redux';
-import { restaurantsActions } from '../../redux/reducers/restaurants/index';
 
-const mapStateToProps = (state) => ({
-    restaurantMap: state.restaurantsReducer.currentRestaurants, // Correctly map from the Redux state
-    restaurantsError: state.restaurantsReducer.restaurantsError,
-});
-
-const mapDispatchToProps = {
-    getRestaurantsForIds: restaurantsActions.startGetRestaurantsForIdsRequest,
-};
-
-const RecentReviews = ({ restaurantMap, getRestaurantsForIds }) => {
+const RecentReviews = () => {
     const [recentReviews, setRecentReviews] = useState([]);
     const [restaurantData, setRestaurantData] = useState(new Map());
     const [loading, setLoading] = useState(true);
@@ -35,9 +24,7 @@ const RecentReviews = ({ restaurantMap, getRestaurantsForIds }) => {
             
             const fetchDetails= async()=>{
                 const details= await fetchRestaurantDetails(restaurantIds);
-
                 let restaurantDict=new Map();
-                
                 details.forEach(detail=>{
                     restaurantDict.set(detail.id,detail);
                 });
@@ -66,7 +53,6 @@ const RecentReviews = ({ restaurantMap, getRestaurantsForIds }) => {
             />
         </div>
     );
-
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecentReviews);
+export default RecentReviews;
