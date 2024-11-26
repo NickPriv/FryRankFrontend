@@ -42,8 +42,7 @@ const RecentReviews = () => {
     }
  
     return (
-        <div>
-            
+        <div>          
             <h1>Recent Reviews</h1>
             <ReviewCardList
                 reviews={recentReviews}
