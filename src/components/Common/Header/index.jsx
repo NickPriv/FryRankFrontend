@@ -33,7 +33,7 @@ export default function Header() {
                         <NavItem>  
                             <NavLink>                      
                                 <Link to='/recent-reviews' className={style.link}>
-                                    <h4> Recent Reviews</h4>
+                                    <h4> Recent Reviews </h4>
                                 </Link> 
                             </NavLink>                         
                         </NavItem>
