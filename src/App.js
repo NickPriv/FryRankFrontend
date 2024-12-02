@@ -6,11 +6,11 @@ import { routes } from "./routes"
 import { Container, Row, Col } from 'reactstrap'
 
 function App() {
-  const state = useSelector((state) => state);
+  const loggedIn = useSelector((state) => state.userReducer.loggedIn);
   return (
     <div>
       <Router>
-        <Header loggedIn={state.userReducer.loggedIn}/>
+        <Header loggedIn={loggedIn}/>
         <Container>
           <Row>
             <Col />

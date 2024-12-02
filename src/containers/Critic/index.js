@@ -5,6 +5,7 @@ import { reviewsActions } from '../../redux/reducers/reviews';
 import { restaurantsActions } from '../../redux/reducers/restaurants';
 import withRouter from '../Common/withRouter';
 import {getUsernameFromState} from "../Common/utils";
+import {userSettingsActions} from "../../redux/reducers/userSettings";
 
 const mapStateToProps = (state) => {
     return {
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => {
         currentRestaurants: state.restaurantsReducer.currentRestaurants,
         restaurantsError: state.restaurantsReducer.restaurantsError,
         username: getUsernameFromState(state),
+        otherUserSettings: state.userSettingsReducer.otherUserSettings,
     }
 }
 
@@ -22,6 +24,8 @@ const mapDispatchToProps = {
     getReviews: reviewsActions.startGetAllReviewsForAccountRequest,
     resetReviews: reviewsActions.resetReviews,
     getRestaurantsForIds: restaurantsActions.startGetRestaurantsForIdsRequest,
+    getOtherUserSettings: userSettingsActions.startGetOtherUserSettingsRequest,
+    resetOtherUserSettings: userSettingsActions.resetOtherUserSettings,
 };
 
 export default compose(
@@ -29,9 +33,11 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidMount() {
-            const { params: { accountId }, getReviews, resetReviews } = this.props;
+            const { params: { accountId }, getReviews, resetReviews, getOtherUserSettings, resetOtherUserSettings } = this.props;
             resetReviews();
             getReviews(accountId);
+            resetOtherUserSettings();
+            getOtherUserSettings(accountId);
         },
         componentDidUpdate(prevProps) {
             const { currentRestaurants, getRestaurantsForIds, reviews, params: { accountId }, getReviews } = this.props;

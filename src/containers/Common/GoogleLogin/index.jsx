@@ -11,21 +11,22 @@ const mapStateToProps = (state) => {
         username: getUsernameFromState(state),
         accountId: state.userReducer.userData ? state.userReducer.userData.sub : null,
         userSettings: state.userSettingsReducer.userSettings ? state.userSettingsReducer.userSettings : null,
+        defaultUsername: state.userReducer.userData ? state.userReducer.userData.given_name : null,
     }
 }
 
 const mapDispatchToProps = {
     setUserData: userActions.setUserData,
-    getUserSettings: userSettingsActions.startGetUserSettingsRequest,
+    putUserSettings: userSettingsActions.startPutUserSettingsRequest,
 };
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     lifecycle({
         componentDidUpdate() {
-            const { loggedIn, getUserSettings, userSettings, accountId } = this.props;
+            const { loggedIn, putUserSettings, userSettings, accountId, defaultUsername } = this.props;
             if(loggedIn && userSettings === null) {
-                getUserSettings(accountId);
+                putUserSettings(accountId, defaultUsername);
             }
         }
     }),

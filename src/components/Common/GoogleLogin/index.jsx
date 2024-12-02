@@ -48,7 +48,7 @@ const GoogleLogin = ({ setUserData, loggedIn, username, accountId }) => {
 
     return (
         <div>
-            { loggedIn &&
+            { loggedIn && username &&
                 <div>
                     <p className="inline me-1 text-white">Hello,</p>
                     <Link

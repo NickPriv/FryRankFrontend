@@ -1,29 +1,34 @@
 export const types = {
-    GET_USER_SETTINGS_REQUEST: "GET_USER_SETTINGS_REQUEST",
-    GET_USER_SETTINGS_SUCCESS: "GET_USER_SETTINGS_SUCCESS",
-    GET_USER_SETTINGS_FAILURE: "GET_USER_SETTINGS_FAILURE",
+    PUT_USER_SETTINGS_REQUEST: "PUT_USER_SETTINGS_REQUEST",
+    PUT_USER_SETTINGS_SUCCESS: "PUT_USER_SETTINGS_SUCCESS",
+    PUT_USER_SETTINGS_FAILURE: "PUT_USER_SETTINGS_FAILURE",
     SET_USER_SETTINGS_REQUEST: "SET_USER_SETTINGS_REQUEST",
     SET_USER_SETTINGS_SUCCESS: "SET_USER_SETTINGS_SUCCESS",
     SET_USER_SETTINGS_FAILURE: "SET_USER_SETTINGS_FAILURE",
     UPDATE_CURRENT_USER_SETTINGS: "UPDATE_CURRENT_USER_SETTINGS",
+    GET_OTHER_USER_SETTINGS_REQUEST: "GET_OTHER_USER_SETTINGS_REQUEST",
+    GET_OTHER_USER_SETTINGS_SUCCESS: "GET_OTHER_USER_SETTINGS_SUCCESS",
+    GET_OTHER_USER_SETTINGS_FAILURE: "GET_OTHER_USER_SETTINGS_FAILURE",
+    RESET_OTHER_USER_SETTINGS: "RESET_OTHER_USER_SETTINGS"
 }
 
 export const initialState = {
     currentUserSettings: null,
     userSettings: null,
+    otherUserSettings: null,
     error: '',
     successfulSetUserSettings: '',
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case types.GET_USER_SETTINGS_REQUEST: {
+        case types.PUT_USER_SETTINGS_REQUEST: {
             return {
                 ...state
             };
         }
 
-        case types.GET_USER_SETTINGS_SUCCESS: {
+        case types.PUT_USER_SETTINGS_SUCCESS: {
             return {
                 ...state,
                 userSettings: action.data,
@@ -32,7 +37,7 @@ export default (state = initialState, action) => {
             }
         }
 
-        case types.GET_USER_SETTINGS_FAILURE: {
+        case types.PUT_USER_SETTINGS_FAILURE: {
             return {
                 ...state,
                 error: action.error
@@ -71,17 +76,49 @@ export default (state = initialState, action) => {
             }
         }
 
+        case types.GET_OTHER_USER_SETTINGS_REQUEST: {
+            return {
+                ...state
+            };
+        }
+
+        case types.GET_OTHER_USER_SETTINGS_SUCCESS: {
+            return {
+                ...state,
+                otherUserSettings: action.data,
+                error: ''
+            }
+        }
+
+        case types.GET_OTHER_USER_SETTINGS_FAILURE: {
+            return {
+                ...state,
+                error: action.error
+            }
+        }
+
+        case types.RESET_OTHER_USER_SETTINGS: {
+            return {
+                ...state,
+                otherUserSettings: initialState.otherUserSettings
+            }
+        }
+
         default:
             return state;
     }
 }
 
 export const userSettingsActions = {
-    startGetUserSettingsRequest: accountId => ({ type: types.GET_USER_SETTINGS_REQUEST, accountId }),
-    successfulGetUserSettingsRequest: data => ({ type: types.GET_USER_SETTINGS_SUCCESS, data }),
-    failedGetUserSettingsRequest: error => ({ type: types.GET_USER_SETTINGS_FAILURE, error }),
+    startPutUserSettingsRequest: (accountId, defaultUsername) => ({ type: types.PUT_USER_SETTINGS_REQUEST, accountId, defaultUsername }),
+    successfulPutUserSettingsRequest: data => ({ type: types.PUT_USER_SETTINGS_SUCCESS, data }),
+    failedPutUserSettingsRequest: error => ({ type: types.PUT_USER_SETTINGS_FAILURE, error }),
     startSetUserSettingsRequest: userSettings => ({ type: types.SET_USER_SETTINGS_REQUEST, userSettings }),
     successfulSetUserSettingsRequest: data => ({ type: types.SET_USER_SETTINGS_SUCCESS, data }),
     failedSetUserSettingsRequest: error => ({ type:types.SET_USER_SETTINGS_FAILURE, error }),
-    updateCurrentUserSettings: (name, value) => ({ type:types.UPDATE_CURRENT_USER_SETTINGS, name, value })
+    updateCurrentUserSettings: (name, value) => ({ type:types.UPDATE_CURRENT_USER_SETTINGS, name, value }),
+    startGetOtherUserSettingsRequest: (accountId) => ({ type: types.GET_OTHER_USER_SETTINGS_REQUEST, accountId }),
+    successfulGetOtherUserSettingsRequest: data => ({ type: types.GET_OTHER_USER_SETTINGS_SUCCESS, data }),
+    failedGetOtherUserSettingsRequest: error => ({ type: types.GET_OTHER_USER_SETTINGS_FAILURE, error }),
+    resetOtherUserSettings: () => ({ type: types.RESET_OTHER_USER_SETTINGS })
 }

@@ -11,7 +11,7 @@ const propTypes = {
     restaurantsError: PropTypes.bool.isRequired,
 };
 
-const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError }) => {
+const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError, otherUserSettings }) => {
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
@@ -27,7 +27,7 @@ const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestauran
         }
     }
 
-    const criticName = reviews && reviews.length > 0 && reviews[0].authorId ? reviews[0].authorId : accountId;
+    const criticName = otherUserSettings.username ? otherUserSettings.username : accountId;
 
     return (
         <div>

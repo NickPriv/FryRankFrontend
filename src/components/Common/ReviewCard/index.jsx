@@ -51,7 +51,7 @@ const ReviewCard = ({ review, restaurant }) => {
                 >
                     By: { review.accountId
                         ? <Link to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, review.accountId)}>
-                              {review.authorId ? review.authorId : review.accountId}
+                              {review.userMetadata ? review.userMetadata.username : (review.authorId ? review.authorId : review.accountId)}
                           </Link>
                         : <div className="inline">{review.authorId}</div> }
                 </CardSubtitle>

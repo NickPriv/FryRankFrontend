@@ -4,9 +4,6 @@ export function getUsernameFromState(state) {
     if (state.userSettingsReducer.userSettings && state.userSettingsReducer.userSettings.username !== '') {
         return state.userSettingsReducer.userSettings.username;
     }
-    else if(state.userReducer.userData) {
-        return state.userReducer.userData.given_name;
-    }
     else {
         return null;
     }
