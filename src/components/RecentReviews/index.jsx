@@ -1,30 +1,34 @@
 import { useState, useEffect } from 'react';
-import { fetchTopReviews, fetchRestaurantDetails } from './proxy';
-import { FrySpinner, ReviewCardList } from '../Common';
+import { fetchTopReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
+import { FrySpinner, ReviewCardList, ErrorBanner } from '../Common';
 
 const RecentReviews = () => {
-    const [recentReviews, setRecentReviews] = useState([]);
+    const [recentReviews, setRecentReviews] = useState();
     const [restaurantData, setRestaurantData] = useState(new Map());
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchReviews = async () => {
-            const reviews = await fetchTopReviews();
-            setRecentReviews(reviews);         
+            try {
+                const reviews = await fetchTopReviews();
+                setRecentReviews(reviews);
+            } catch (error) {
+                setError(error.message);
+            }
         };
 
         fetchReviews();
     }, []);
 
     useEffect(() => {
-        if (recentReviews && recentReviews.length > 0) {
+        if (recentReviews) {
             const restaurantIds = Array.from(new Set(recentReviews.map(review => review.restaurantId)));
-            
-            const fetchDetails= async()=>{
-                const details= await fetchRestaurantDetails(restaurantIds);
-                let restaurantDict=new Map();
-                details.forEach(detail=>{
-                    restaurantDict.set(detail.id,detail);
+            const fetchDetails = async () => {
+                const details = await fetchRestaurantDetails(restaurantIds);
+                let restaurantDict = new Map();
+                details.forEach(detail => {
+                    restaurantDict.set(detail.id, detail);
                 });
 
                 setRestaurantData(restaurantDict);
@@ -38,11 +42,11 @@ const RecentReviews = () => {
     if (loading) {
         return <p><FrySpinner /></p>;
     } else if (recentReviews.length === 0) {
-        return <p>Sorry, no reviews published yet.</p>;
+        return <p><ErrorBanner error={error} /></p>;
     }
- 
+
     return (
-        <div>          
+        <div>
             <h1>Recent Reviews</h1>
             <ReviewCardList
                 reviews={recentReviews}
