@@ -4,10 +4,10 @@ import axios from 'axios';
 import { types, restaurantsActions } from '../../reducers/restaurants';
 import {AGGREGATE_INFORMATION_API_PATH, FRENCH_FRIES_TEXT_QUERY} from "../../../constants";
 
-const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
-const HEADER_CONTENT_TYPE = 'Content-Type';
-const HEADER_API_KEY = 'X-Goog-Api-Key';
-const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
+export const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
+export const HEADER_CONTENT_TYPE = 'Content-Type';
+export const HEADER_API_KEY = 'X-Goog-Api-Key';
+export const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
 
 export function* callGetRestaurantsForQuery({ textQuery, location, radius }) {
     const locationBias = location ?

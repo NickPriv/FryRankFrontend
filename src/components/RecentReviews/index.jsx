@@ -40,9 +40,9 @@ const RecentReviews = () => {
     }, [recentReviews]);
 
     if (loading) {
-        return <p><FrySpinner /></p>;
+        return <FrySpinner />;
     } else if (recentReviews.length === 0) {
-        return <p><ErrorBanner error={error} /></p>;
+        return <ErrorBanner error={error} />;
     }
 
     return (

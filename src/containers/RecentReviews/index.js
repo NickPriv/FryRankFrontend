@@ -1,12 +1,9 @@
-import {BACKEND_SERVICE_PATH} from '../../constants';
+import { BACKEND_SERVICE_PATH } from '../../constants';
+import { GOOGLE_API_PATH, HEADER_CONTENT_TYPE, HEADER_API_KEY, HEADER_FIELD_MASK } from '../../redux/sagas/restaurants';
 
-// api.js
-const GOOGLE_API_PATH = "https://places.googleapis.com/v1/";
-const HEADER_CONTENT_TYPE = 'Content-Type';
-const HEADER_API_KEY = 'X-Goog-Api-Key';
-const HEADER_FIELD_MASK = 'X-Goog-FieldMask';
+export const reviewCount = 10;
 
-export const fetchTopReviews = async (count = 5) => {
+export const fetchTopReviews = async (count = reviewCount) => {
     const response = await fetch(`${BACKEND_SERVICE_PATH}/reviews/top?count=${count}`);
     const newData = await response.json();
     return newData.reviews;
