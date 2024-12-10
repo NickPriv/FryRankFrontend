@@ -62,12 +62,8 @@ export function* callGetRestaurantsForIds({ restaurantIds }) {
             restaurantIdToDetailsMap.set(restaurantId, data);
         }
 
-        console.log("hi")
-
         yield put(restaurantsActions.successfulGetRestaurantsForIdsRequest(restaurantIdToDetailsMap));
     } catch (err) {
-        console.log("received error")
-        console.log(err);
         yield put(restaurantsActions.failedGetRestaurantsForIdsRequest(err.response.data.error.message));
     }
 }
