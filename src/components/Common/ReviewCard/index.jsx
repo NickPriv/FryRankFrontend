@@ -2,13 +2,16 @@ import { PropTypes } from 'prop-types';
 import { Card, CardBody, CardSubtitle, CardText, CardTitle } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Score } from '../';
+import { useSelector } from 'react-redux';
 import {
     PATH_ACCOUNT_REVIEWS,
     PATH_RESTAURANT_REVIEWS,
     PATH_VARIABLE_ACCOUNT_ID,
-    PATH_VARIABLE_RESTAURANT_ID
+    PATH_VARIABLE_RESTAURANT_ID,
+    EDIT_REVIEWS_FEATURE 
 } from '../../../constants.js'
 import '../style.css'
+import { FaEdit } from "react-icons/fa";
 
 const propTypes = {
     review: PropTypes.object.isRequired,
@@ -16,6 +19,9 @@ const propTypes = {
 };
 
 const ReviewCard = ({ review, restaurant }) => {
+    const user=useSelector((state)=>state.userReducer.userData?.sub);
+    const isReviewAuthor = user === review.accountId;
+    
     return (
         <Card
             color="warning"
@@ -31,6 +37,7 @@ const ReviewCard = ({ review, restaurant }) => {
                         {review.title}
                     </CardTitle>
                     <Score size="md" score={review.score} />
+                    {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} /> )}
                 </div>
                 { restaurant &&
                     <div>
