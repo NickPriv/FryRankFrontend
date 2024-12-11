@@ -34,7 +34,7 @@ const ReviewCard = ({ review, restaurant }) => {
         setIsModalOpen(false);
     },[])
 
-    const handleSave =useCallback((updatedReview)=>{
+    const handleSave = useCallback((updatedReview)=>{
         //
     },[])
 

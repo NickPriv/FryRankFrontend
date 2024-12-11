@@ -1,4 +1,5 @@
 import style from "./style.module.css"
+import ReviewForm from "../CreateReview/ReviewForm"; //to add later
 
 export default function EditReviewModal({review, restaurant, onSave, onClose}){
 
@@ -15,6 +16,5 @@ export default function EditReviewModal({review, restaurant, onSave, onClose}){
             <button onClick={onClose}>Close</button>
         </form>
         </dialog>
-   </>
-)
+    </>)
 }
