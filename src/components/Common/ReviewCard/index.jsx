@@ -15,7 +15,6 @@ import { FaEdit } from "react-icons/fa";
 import EditReviewModal from '../../EditReview/EditReviewModal.jsx';
 import { useState, useCallback } from 'react';
 
-
 const propTypes = {
     review: PropTypes.object.isRequired,
     restaurant: PropTypes.object,
@@ -25,13 +24,9 @@ const ReviewCard = ({ review, restaurant }) => {
     const user=useSelector((state)=>state.userReducer.userData?.sub);
     const isReviewAuthor = user === review.accountId;
     const [isModalOpen, setIsModalOpen] = useState(false);
-   
-    const handleOpenModal = useCallback(()=>{
-        setIsModalOpen(true);
-    },[]);
-
-    const handleCloseModal = useCallback(()=> {
-        setIsModalOpen(false);
+    
+    const toggle= useCallback(()=>{
+        setIsModalOpen((prev)=>!prev);
     },[])
 
     const handleSave = useCallback((updatedReview)=>{
@@ -54,7 +49,7 @@ const ReviewCard = ({ review, restaurant }) => {
                             {review.title}
                         </CardTitle>
                         <Score size="md" score={review.score} />
-                        {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={handleOpenModal} /> )}
+                        {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}
                     </div>
                     { restaurant &&
                         <div>
@@ -89,12 +84,13 @@ const ReviewCard = ({ review, restaurant }) => {
                     }
                 </CardBody>
             </Card>
-            {isModalOpen && ( <EditReviewModal 
+            <EditReviewModal 
                 review={review} 
                 restaurant={restaurant} 
-                onClose={handleCloseModal} 
-                onSave={handleSave} /> 
-            )}
+                toggle={toggle} 
+                modal={isModalOpen}
+                onSave={handleSave} 
+            /> 
         </>
     )
 }
