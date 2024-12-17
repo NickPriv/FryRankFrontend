@@ -1,6 +1,6 @@
 import { PropTypes } from 'prop-types';
 
-import { Breadcrumb, Button, ErrorBanner, FrySpinner, LinkButton, RestaurantHeader, ReviewCardList } from '../Common';
+import { Breadcrumb, Button, Banner, FrySpinner, LinkButton, RestaurantHeader, ReviewCardList } from '../Common';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -31,8 +31,8 @@ const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsE
 
     return (
         <div>
-            <ErrorBanner error = {reviewsError} />
-            <ErrorBanner error = {restaurantsError} />
+            <Banner type="error" message={reviewsError} />
+            <Banner type="error" message={restaurantsError} />
             { requestingRestaurantDetails && <FrySpinner /> }
             { currentRestaurant &&
                 <div>

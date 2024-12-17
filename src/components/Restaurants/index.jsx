@@ -1,5 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { Breadcrumb, ErrorBanner } from '../Common';
+import { Breadcrumb, Banner } from '../Common';
 import SearchInput from './SearchInput';
 import RestaurantsViewSelect from './RestaurantsViewSelect';
 import Map from './Map';
@@ -28,7 +28,7 @@ const Restaurants = ({ restaurantIdsForQuery, error, getRestaurants, currentSear
 }) => {
     return (
         <div>
-            <ErrorBanner error = {error} />
+            <Banner type="error" message={error} />
             <Breadcrumb />
             <SearchInput
                 getRestaurants = {getRestaurants}

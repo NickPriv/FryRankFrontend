@@ -4,6 +4,7 @@ import CreateReview from '../../components/CreateReview';
 import { reviewsActions } from '../../redux/reducers/reviews';
 import { restaurantsActions } from '../../redux/reducers/restaurants';
 import withRouter from '../Common/withRouter';
+import {getUsernameFromState} from "../Common/utils";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,7 +13,7 @@ const mapStateToProps = (state) => {
         currentReview: state.reviewsReducer.currentReview,
         successfulCreate: state.reviewsReducer.successfulCreate,
         loggedIn: state.userReducer.loggedIn,
-        givenName: state.userReducer.userData ? state.userReducer.userData.given_name : null,
+        username: getUsernameFromState(state),
         accountId: state.userReducer.userData ? state.userReducer.userData.sub : null,
     }
 }

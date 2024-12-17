@@ -11,18 +11,18 @@ const propTypes = {
     updateCurrentReview: PropTypes.func.isRequired,
     createReview: PropTypes.func.isRequired,
     loggedIn: PropTypes.bool.isRequired,
-    givenName: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
     accountId: PropTypes.string.isRequired,
 };
 
-const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview, loggedIn, givenName, accountId }) => {
+const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurrentReview, loggedIn, username, accountId }) => {
 
     return (
         <div>
         <Form
             onChange={(event) => {
-                if (!currentReview.authorId && givenName) {
-                    updateCurrentReview('authorId', givenName);
+                if (!currentReview.authorId && username) {
+                    updateCurrentReview('authorId', username);
                 }
                 if (!currentReview.accountId && accountId) {
                     updateCurrentReview('accountId', accountId);
@@ -38,7 +38,7 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                     <Input
                         id="nameInput"
                         name="authorId"
-                        value={givenName}
+                        value={username}
                         type="textarea"
                         disabled="true"
                     />
