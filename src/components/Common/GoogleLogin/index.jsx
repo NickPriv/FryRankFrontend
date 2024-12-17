@@ -50,7 +50,7 @@ const GoogleLogin = ({ setUserData, loggedIn, username, accountId }) => {
         <div>
             { loggedIn && username &&
                 <div>
-                    <p className="inline me-1 text-white">Hello,</p>
+                    <p className="inline me-1 text-black">Hello,</p>
                     <Link
                         to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, accountId)}
                         style={{"color":"blue", "text-decoration": "underline"}}
