@@ -21,9 +21,6 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
         <div>
         <Form
             onChange={(event) => {
-                if (!currentReview.authorId && username) {
-                    updateCurrentReview('authorId', username);
-                }
                 if (!currentReview.accountId && accountId) {
                     updateCurrentReview('accountId', accountId);
                 }
