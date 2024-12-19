@@ -57,7 +57,7 @@ const GoogleLogin = ({ setUserData, loggedIn, username, accountId }) => {
                     >
                         {username}
                     </Link>
-                    <p className="inline text-white">!</p>
+                    <p className="inline text-black">!</p>
                 </div> }
             { !loggedIn &&
                 <>
