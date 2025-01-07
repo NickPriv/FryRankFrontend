@@ -1,5 +1,8 @@
 import { PropTypes } from 'prop-types';
 import { ReviewCard } from '../';
+import {reviewsActions} from '../../../redux/reducers/reviews';
+import { useDispatch} from 'react-redux';
+import {useEffect} from 'react';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -7,6 +10,12 @@ const propTypes = {
 };
 
 const ReviewCardList = ({ reviews, currentRestaurants }) => {
+    const dispatch = useDispatch();
+    
+    useEffect(() => { 
+        dispatch(reviewsActions.setReviews(reviews)); 
+    }, [dispatch, reviews]);
+    
     return (
         reviews.map(review => (
             <ReviewCard

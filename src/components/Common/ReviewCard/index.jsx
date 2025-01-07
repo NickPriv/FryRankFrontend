@@ -22,6 +22,9 @@ const propTypes = {
 
 const ReviewCard = ({ review, restaurant }) => {
     const user=useSelector((state)=>state.userReducer.userData?.sub);
+    const loggedIn= useSelector((state)=> state.userReducer.loggedIn);
+    const updatedReview = useSelector((state) => state.reviewsReducer.reviews?.find(r => r.reviewId === review.reviewId && r.accountId === review.accountId));
+
     const isReviewAuthor = user === review.accountId;
     const [isModalOpen, setIsModalOpen] = useState(false);
     
@@ -46,7 +49,7 @@ const ReviewCard = ({ review, restaurant }) => {
                 <CardBody>
                     <div>
                         <CardTitle tag="h3" style={{ display: "inline-block" }}>
-                            {review.title}
+                        {updatedReview?.title || review.title}
                         </CardTitle>
                         <Score size="md" score={review.score} />
                         {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}
@@ -89,7 +92,8 @@ const ReviewCard = ({ review, restaurant }) => {
                 restaurant={restaurant} 
                 toggle={toggle} 
                 modal={isModalOpen}
-                onSave={handleSave} 
+                onSave={handleSave}
+                loggedIn={loggedIn}
             /> 
         </>
     )
