@@ -11,7 +11,6 @@ export const types = {
     UPDATE_CURRENT_REVIEW: "UPDATE_CURRENT_REVIEW",
     RESET_CREATE_REQUEST: "RESET_CREATE_REQUEST",
     RESET_REVIEWS: "RESET_REVIEWS",
-    EDIT_REVIEW: "EDIT_REVIEW",
     SET_REVIEWS: "SET_REVIEWS"
 }
 
@@ -83,7 +82,7 @@ export default (state = initialState, action) => {
             }
         }
 
-        case types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST: {
+        case types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST: {           
             return {
                 ...state,
                 currentReview: {
@@ -134,20 +133,7 @@ export default (state = initialState, action) => {
             }
         }
 
-        case types.EDIT_REVIEW: {
-            const updatedReview=action.payload;
-
-            return {
-                ...state,
-                reviews: state.reviews ? state.reviews.map(review => 
-                    review.reviewId === updatedReview.reviewId && review.accountId === updatedReview.accountId?
-                    updatedReview : review
-                ) : []
-            };
-        }
-
         case types.SET_REVIEWS: {
-            console.log("the action payload", action.payload)
             return {
                 ...state,
                 reviews: action.payload
@@ -172,6 +158,5 @@ export const reviewsActions = {
     updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value }),
     resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST }),
     resetReviews: () => ({ type: types.RESET_REVIEWS }),
-    editReview: (editedReview) => ({type: types.EDIT_REVIEW, payload: editedReview}),
     setReviews:(reviews) => ({type: types.SET_REVIEWS, payload: reviews})
 }

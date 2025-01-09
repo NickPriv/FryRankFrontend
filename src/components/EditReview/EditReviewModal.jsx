@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import ReviewForm from "../CreateReview/ReviewForm"; //to add later
 import {reviewsActions } from '../../redux/reducers/reviews';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-export default function EditReviewModal({modal, loggedIn, toggle, review, restaurant, onSave}){
+export default function EditReviewModal({modal, loggedIn, toggle, review, restaurant, onRefresh}){
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview]=useState(review);
+
     
     const handleSaveClick= ()=>{
-        dispatch(reviewsActions.editReview(updatedReview));
-        toggle();
+       dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
+       
+       setTimeout(()=>{
+            onRefresh();
+       },500)
+       
+       toggle();
     };
 
     const handleInputChange = (e) => { 
         const { name, value } = e.target; 
         setUpdatedReview(prevReview => ({ ...prevReview, [name]: value, }));
-
     };
 
     return (

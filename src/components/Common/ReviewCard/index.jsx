@@ -18,9 +18,10 @@ import { useState, useCallback } from 'react';
 const propTypes = {
     review: PropTypes.object.isRequired,
     restaurant: PropTypes.object,
+    onRefresh: PropTypes.func
 };
 
-const ReviewCard = ({ review, restaurant }) => {
+const ReviewCard = ({ review, restaurant, onRefresh }) => {
     const user=useSelector((state)=>state.userReducer.userData?.sub);
     const loggedIn= useSelector((state)=> state.userReducer.loggedIn);
     const updatedReview = useSelector((state) => state.reviewsReducer.reviews?.find(r => r.reviewId === review.reviewId && r.accountId === review.accountId));
@@ -52,7 +53,7 @@ const ReviewCard = ({ review, restaurant }) => {
                         {updatedReview?.title || review.title}
                         </CardTitle>
                         <Score size="md" score={review.score} />
-                        {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}
+                        {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}                      
                     </div>
                     { restaurant &&
                         <div>
@@ -94,6 +95,7 @@ const ReviewCard = ({ review, restaurant }) => {
                 modal={isModalOpen}
                 onSave={handleSave}
                 loggedIn={loggedIn}
+                onRefresh={onRefresh}
             /> 
         </>
     )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fetchTopReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
 import { FrySpinner, ReviewCardList, ErrorBanner } from '../Common';
 
@@ -8,18 +8,21 @@ const RecentReviews = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const reviews = await fetchTopReviews();
-                setRecentReviews(reviews);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
+    const fetchReviews = useCallback(async () => {
+        setLoading(true);
+        setError('');
 
+        try {
+            const reviews = await fetchTopReviews();
+            setRecentReviews(reviews);
+        } catch (error) {
+            setError(error.message);
+        }
+    },[]);
+
+    useEffect(()=>{
         fetchReviews();
-    }, []);
+    }, [fetchReviews]);
 
     useEffect(() => {
         if (recentReviews) {
@@ -51,6 +54,7 @@ const RecentReviews = () => {
             <ReviewCardList
                 reviews={recentReviews}
                 currentRestaurants={restaurantData} // Pass the restaurantMap to the ReviewCardList
+                onRefresh={fetchReviews}
             />
         </div>
     );

@@ -7,9 +7,10 @@ import {useEffect} from 'react';
 const propTypes = {
     reviews: PropTypes.array.isRequired,
     currentRestaurants: PropTypes.object,
+    onRefresh: PropTypes.func
 };
 
-const ReviewCardList = ({ reviews, currentRestaurants }) => {
+const ReviewCardList = ({ reviews, currentRestaurants, onRefresh }) => {
     const dispatch = useDispatch();
     
     useEffect(() => { 
@@ -21,6 +22,7 @@ const ReviewCardList = ({ reviews, currentRestaurants }) => {
             <ReviewCard
                 review={review}
                 restaurant={currentRestaurants ? currentRestaurants.get(review.restaurantId) : null}
+                onRefresh={onRefresh}
             />
         )).sort((a,b) => {
             // We declare the past for undefined values so that they sort to the end of the array.
