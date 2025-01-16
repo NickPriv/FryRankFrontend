@@ -7,8 +7,7 @@ import {
     PATH_ACCOUNT_REVIEWS,
     PATH_RESTAURANT_REVIEWS,
     PATH_VARIABLE_ACCOUNT_ID,
-    PATH_VARIABLE_RESTAURANT_ID,
-    EDIT_REVIEWS_FEATURE 
+    PATH_VARIABLE_RESTAURANT_ID
 } from '../../../constants.js'
 import '../style.css'
 import { FaEdit } from "react-icons/fa";
@@ -22,19 +21,14 @@ const propTypes = {
 };
 
 const ReviewCard = ({ review, restaurant, onRefresh }) => {
-    const user=useSelector((state)=>state.userReducer.userData?.sub);
-    const loggedIn= useSelector((state)=> state.userReducer.loggedIn);
+    const userAccountId=useSelector((state)=>state.userReducer.userData?.sub);
     const updatedReview = useSelector((state) => state.reviewsReducer.reviews?.find(r => r.reviewId === review.reviewId && r.accountId === review.accountId));
 
-    const isReviewAuthor = user === review.accountId;
+    const isReviewAuthor = userAccountId === review.accountId;
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     const toggle= useCallback(()=>{
         setIsModalOpen((prev)=>!prev);
-    },[])
-
-    const handleSave = useCallback((updatedReview)=>{
-        //
     },[])
 
     return (
@@ -53,7 +47,7 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
                         {updatedReview?.title || review.title}
                         </CardTitle>
                         <Score size="md" score={review.score} />
-                        {EDIT_REVIEWS_FEATURE && isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}                      
+                        {isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}                      
                     </div>
                     { restaurant &&
                         <div>
@@ -90,11 +84,9 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
             </Card>
             <EditReviewModal 
                 review={review} 
-                restaurant={restaurant} 
                 toggle={toggle} 
                 modal={isModalOpen}
-                onSave={handleSave}
-                loggedIn={loggedIn}
+                signIn={userAccountId}
                 onRefresh={onRefresh}
             /> 
         </>
