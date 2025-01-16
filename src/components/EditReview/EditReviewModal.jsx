@@ -7,9 +7,9 @@ import FryposalLoginImage from "../../Fryposal.png";
 
 export default function EditReviewModal({modal, signIn, toggle, review, onRefresh}){
     const dispatch = useDispatch();
-    const [updatedReview, setUpdatedReview]=useState(review);
+    const [updatedReview, setUpdatedReview] = useState(review);
 
-    const handleSaveClick= ()=>{
+    const handleSaveClick = ()=>{
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
         setTimeout(()=>{
             onRefresh();   
@@ -31,9 +31,7 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
                     {signIn? (
                     <>
                         <FormGroup>
-                            <Label for="nameInput">
-                                Title
-                            </Label>
+                            <Label for="nameInput">Title</Label>
                             <Input
                                 type="text"
                                 name="title"
@@ -45,7 +43,8 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
 
                         <FormGroup> 
                             <Label for="scoreInput">Score</Label> 
-                            <Input type="select" 
+                            <Input 
+                                type="select" 
                                 name="score" 
                                 id="scoreInput" 
                                 value={updatedReview.score} 
@@ -67,9 +66,7 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="bodyInput">
-                                Body
-                            </Label>
+                            <Label for="bodyInput">Body</Label>
                             <Input
                                 name="body"
                                 placeholder="Your review text here"

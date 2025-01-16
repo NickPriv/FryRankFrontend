@@ -1,8 +1,8 @@
 import { PropTypes } from 'prop-types';
 import { ReviewCard } from '../';
-import {reviewsActions} from '../../../redux/reducers/reviews';
-import { useDispatch} from 'react-redux';
-import {useEffect} from 'react';
+import { reviewsActions } from '../../../redux/reducers/reviews';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,

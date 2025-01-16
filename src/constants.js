@@ -10,8 +10,6 @@ export const PATH_RECENT_REVIEW = "/recent-reviews"
 
 export const BACKEND_SERVICE_PATH = process.env.REACT_APP_BACKEND_SERVICE_PATH;
 export const AGGREGATE_INFORMATION_API_PATH = `${BACKEND_SERVICE_PATH}/reviews/aggregateInformation`;
-
-export const EDIT_REVIEWS_FEATURE = process.env.REACT_APP_FEATURE_EDIT;
                                                
 export const FRENCH_FRIES_TEXT_QUERY = "french fries";
 
