@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {reviewsActions } from '../../redux/reducers/reviews';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import {Input, Label, FormGroup } from 'reactstrap';
+import { reviewsActions } from '../../redux/reducers/reviews';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Input, Label, FormGroup } from 'reactstrap';
 import FryposalLoginImage from "../../Fryposal.png";
 
 export default function EditReviewModal({modal, signIn, toggle, review, onRefresh}){
@@ -13,9 +13,8 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
         setTimeout(()=>{
             onRefresh();   
-        },200)
-       
-       toggle();
+        },200)  
+        toggle();
     };
 
     const handleInputChange = (e) => { 
@@ -26,7 +25,7 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
     return (
         <>
             <Modal isOpen={modal} toggle={toggle} > 
-                <ModalHeader toggle={toggle}> Let's edit your review </ModalHeader>
+                <ModalHeader toggle={toggle}>Let's edit your review</ModalHeader>
                 <ModalBody>
                     {signIn? (
                     <>

@@ -21,13 +21,13 @@ const propTypes = {
 };
 
 const ReviewCard = ({ review, restaurant, onRefresh }) => {
-    const userAccountId=useSelector((state)=>state.userReducer.userData?.sub);
+    const userAccountId = useSelector((state)=>state.userReducer.userData?.sub);
     const updatedReview = useSelector((state) => state.reviewsReducer.reviews?.find(r => r.reviewId === review.reviewId && r.accountId === review.accountId));
 
     const isReviewAuthor = userAccountId === review.accountId;
     const [isModalOpen, setIsModalOpen] = useState(false);
     
-    const toggle= useCallback(()=>{
+    const toggle = useCallback(()=>{
         setIsModalOpen((prev)=>!prev);
     },[])
 

@@ -158,5 +158,5 @@ export const reviewsActions = {
     updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value }),
     resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST }),
     resetReviews: () => ({ type: types.RESET_REVIEWS }),
-    setReviews:(reviews) => ({type: types.SET_REVIEWS, payload: reviews})
+    setReviews: (reviews) => ({ type: types.SET_REVIEWS, payload: reviews })
 }
