@@ -4,15 +4,30 @@ import { reviewsActions } from '../../redux/reducers/reviews';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Input, Label, FormGroup } from 'reactstrap';
 import FryposalLoginImage from "../../Fryposal.png";
+import { PropTypes } from 'prop-types';
 
-export default function EditReviewModal({modal, signIn, toggle, review, onRefresh}){
+const propTypes = {
+    modal: PropTypes.bool.isRequired,
+    signIn: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
+    review: PropTypes.object.isRequired,
+    onRefresh: PropTypes.func
+};
+
+export default function EditReviewModal({ modal, signIn, toggle, review, onRefresh }){
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview] = useState(review);
 
-    const handleSaveClick = ()=>{
+    const handleSaveClick = async ()=>{
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
-        setTimeout(()=>{
-            onRefresh();   
+        setTimeout(async ()=>{
+            
+            try {
+                await onRefresh();
+            } catch (error) {
+                console.log( 'Error refreshing reviews:', error);
+            }
+            
         },200)  
         toggle();
     };
@@ -96,3 +111,5 @@ export default function EditReviewModal({modal, signIn, toggle, review, onRefres
         </>
     )
 }
+
+EditReviewModal.propTypes = propTypes;
