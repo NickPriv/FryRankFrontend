@@ -8,7 +8,7 @@ import {
 } from '../../../constants.js'
 import '../style.css'
 
-const GoogleLogin = ({ setUserData, loggedIn, givenName, accountId }) => {
+const GoogleLogin = ({ setUserData, loggedIn, username, accountId }) => {
 
     window.Google_signIn = async (response) => {
         setUserData(decodeJwtResponse(response.credential));
@@ -48,16 +48,16 @@ const GoogleLogin = ({ setUserData, loggedIn, givenName, accountId }) => {
 
     return (
         <div>
-            { loggedIn &&
+            { loggedIn && username &&
                 <div>
-                    <p className="inline me-1">Hello,</p>
+                    <p className="inline me-1 text-black">Hello,</p>
                     <Link
                         to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, accountId)}
                         style={{"color":"blue", "text-decoration": "underline"}}
                     >
-                        {givenName}
+                        {username}
                     </Link>
-                    <p className="inline">!</p>
+                    <p className="inline text-black">!</p>
                 </div> }
             { !loggedIn &&
                 <>

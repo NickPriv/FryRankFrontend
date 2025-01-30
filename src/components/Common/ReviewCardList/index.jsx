@@ -18,7 +18,7 @@ const ReviewCardList = ({ reviews, currentRestaurants, onRefresh }) => {
     }, [dispatch, reviews]);
     
     return (
-        reviews.map(review => (
+        reviews?.map(review => (
             <ReviewCard
                 review={review}
                 restaurant={currentRestaurants ? currentRestaurants.get(review.restaurantId) : null}
