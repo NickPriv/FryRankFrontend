@@ -12,7 +12,7 @@ import {
 import '../style.css'
 import { FaEdit } from "react-icons/fa";
 import EditReviewModal from '../../EditReview/EditReviewModal.jsx';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 const propTypes = {
     review: PropTypes.object.isRequired,
@@ -23,8 +23,7 @@ const propTypes = {
 const ReviewCard = ({ review, restaurant, onRefresh }) => {
     const userAccountId = useSelector((state)=>state.userReducer.userData?.sub);
     const updatedReview = useSelector((state) => state.reviewsReducer.reviews?.find(r => r.reviewId === review.reviewId && r.accountId === review.accountId));
-
-    const isReviewAuthor = userAccountId === review.accountId;
+    const isReviewAuthor = useMemo(() => userAccountId === review.accountId, [userAccountId, review.accountId]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     const toggle = useCallback(()=>{
@@ -68,7 +67,7 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
                     >
                         By: { review.accountId
                             ? <Link to={`${PATH_ACCOUNT_REVIEWS}`.replace(PATH_VARIABLE_ACCOUNT_ID, review.accountId)}>
-                                {review.authorId ? review.authorId : review.accountId}
+                                {review?.userMetadata?.username ? review?.userMetadata?.username  : review.accountId}
                             </Link>
                             : <div className="inline">{review.authorId}</div> }
                     </CardSubtitle>

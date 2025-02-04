@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { reviewsActions } from '../../redux/reducers/reviews';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -18,16 +18,19 @@ export default function EditReviewModal({ modal, signIn, toggle, review, onRefre
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview] = useState(review);
 
+    useEffect(() => {
+        setUpdatedReview(review); //makes sure the review contents prepopulates with the correct values
+    }, [review]);
+
     const handleSaveClick = async ()=>{
+        
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
-        setTimeout(async ()=>{
-            
+        setTimeout(async ()=>{     
             try {
                 await onRefresh();
             } catch (error) {
                 console.log( 'Error refreshing reviews:', error);
-            }
-            
+            }    
         },200)  
         toggle();
     };

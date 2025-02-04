@@ -15,7 +15,7 @@ const propTypes = {
 
 const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
     const [editedReviews, setRecentReviews] = useState(undefined);
-    const editedRestaurantCount = reviews?.length || 0 ; //updating a review  
+    const editedRestaurantCount = reviews? 1 : 0; //updating a review  
     
     const reviewsBody = () => {
         const fetchReviews = async () => {
