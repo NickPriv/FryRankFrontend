@@ -9,12 +9,12 @@ import { PropTypes } from 'prop-types';
 const propTypes = {
     modal: PropTypes.bool.isRequired,
     signIn: PropTypes.bool.isRequired,
-    toggle: PropTypes.func.isRequired,
+    save: PropTypes.func.isRequired,
     review: PropTypes.object.isRequired,
     onRefresh: PropTypes.func
 };
 
-export default function EditReviewModal({ modal, signIn, toggle, review, onRefresh }){
+export default function EditReviewModal({ modal, signIn, save, review, onRefresh }){
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview] = useState(review);
 
@@ -32,7 +32,7 @@ export default function EditReviewModal({ modal, signIn, toggle, review, onRefre
                 console.log( 'Error refreshing reviews:', error);
             }    
         },200)  
-        toggle();
+        save();
     };
 
     const handleInputChange = (e) => { 
@@ -42,8 +42,8 @@ export default function EditReviewModal({ modal, signIn, toggle, review, onRefre
 
     return (
         <>
-            <Modal isOpen={modal} toggle={toggle} > 
-                <ModalHeader toggle={toggle}>Let's edit your review</ModalHeader>
+            <Modal isOpen={modal} toggle={save} > 
+                <ModalHeader toggle={save}>Let's edit your review</ModalHeader>
                 <ModalBody>
                     {signIn? (
                     <>
@@ -105,7 +105,7 @@ export default function EditReviewModal({ modal, signIn, toggle, review, onRefre
                         <Button color="primary" onClick={handleSaveClick}>
                             Save Edit
                         </Button> {'  '}
-                        <Button color="secondary" onClick={toggle}>
+                        <Button color="secondary" onClick={save}>
                             Cancel Edit
                         </Button>
                     </ModalFooter>

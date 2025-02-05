@@ -26,7 +26,7 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
     const isReviewAuthor = useMemo(() => userAccountId === review.accountId, [userAccountId, review.accountId]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     
-    const toggle = useCallback(()=>{
+    const save = useCallback(()=>{
         setIsModalOpen((prev)=>!prev);
     },[])
 
@@ -46,7 +46,7 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
                         {updatedReview?.title || review.title}
                         </CardTitle>
                         <Score size="md" score={review.score} />
-                        {isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={toggle} /> )}                      
+                        {isReviewAuthor && ( <FaEdit style={{ fontSize: '24px', position: 'absolute', top: '19px', right: '15px', cursor: 'pointer' }} onClick={save} /> )}                      
                     </div>
                     { restaurant &&
                         <div>
@@ -83,7 +83,7 @@ const ReviewCard = ({ review, restaurant, onRefresh }) => {
             </Card>
             <EditReviewModal 
                 review={review} 
-                toggle={toggle} 
+                save={save} 
                 modal={isModalOpen}
                 signIn={userAccountId}
                 onRefresh={onRefresh}
