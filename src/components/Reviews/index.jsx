@@ -1,7 +1,5 @@
 import { PropTypes } from 'prop-types';
-import { fetchTopReviews } from '../../containers/RecentReviews';
 import { Breadcrumb, Button, Banner, FrySpinner, LinkButton, RestaurantHeader, ReviewCardList } from '../Common';
-import { useState } from 'react';
 
 const propTypes = {
     reviews: PropTypes.array.isRequired,
@@ -14,22 +12,15 @@ const propTypes = {
 };
 
 const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
-    const [editedReviews, setRecentReviews] = useState(undefined);
-    const editedRestaurantCount = reviews? 1 : 0; //updating a review  
     
     const reviewsBody = () => {
-        const fetchReviews = async () => {
-            const updatedReview = await fetchTopReviews(editedRestaurantCount);
-            setRecentReviews(updatedReview);
-        };
-
-        if (!reviews) {
+       if (!reviews) {
             return <FrySpinner />;
         } else if (reviews.length === 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return (
-                <ReviewCardList reviews={editedReviews ?? reviews } onRefresh={fetchReviews}/>
+                <ReviewCardList reviews={reviews } onRefresh={undefined}/>
             )
         }
     }

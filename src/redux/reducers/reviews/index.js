@@ -94,8 +94,13 @@ export default (state = initialState, action) => {
         }
 
         case types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS: {
+            const updatedReviews = state?.reviews?.map(review =>
+                review.reviewId === action.data.reviewId ? action.data : review
+            );
+
             return {
                 ...state,
+                reviews: updatedReviews,
                 successfulCreate: true,
                 error: ''
             };
@@ -106,6 +111,7 @@ export default (state = initialState, action) => {
                 ...state,
                 successfulCreate: false,
                 error: action.error,
+                
             }
         }
 
@@ -153,7 +159,7 @@ export const reviewsActions = {
     successfulGetAllReviewsForAccountRequest: (reviewsData) => ({ type: types.GET_ACCOUNT_REVIEWS_SUCCESS, reviewsData }),
     failedGetAllReviewsForAccountRequest: error => ({ type: types.GET_ACCOUNT_REVIEWS_FAILURE, error }),
     startCreateReviewForRestaurantRequest: review => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_REQUEST, review }),
-    successfulCreateReviewForRestaurantRequest: () => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS }),
+    successfulCreateReviewForRestaurantRequest: (data) => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_SUCCESS, data }),
     failedCreateReviewForRestaurantRequest: error => ({ type: types.CREATE_REVIEW_FOR_RESTAURANT_FAILURE, error }),
     updateCurrentReview: (name, value) => ({ type: types.UPDATE_CURRENT_REVIEW, name, value }),
     resetCreateRequest: () => ({ type: types.RESET_CREATE_REQUEST }),

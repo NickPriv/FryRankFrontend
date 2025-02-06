@@ -33,7 +33,7 @@ export function* callCreateReviewForRestaurant({ review }) {
             [REVIEW_PROPERTY_ISO_DATE_TIME]: new Date().toISOString()
         };
         yield axios.post(REVIEWS_API_PATH, review);
-        yield put(reviewsActions.successfulCreateReviewForRestaurantRequest());
+        yield put(reviewsActions.successfulCreateReviewForRestaurantRequest(review));
     } catch (err) {
         yield put(reviewsActions.failedCreateReviewForRestaurantRequest(err.response.data.message));
     }

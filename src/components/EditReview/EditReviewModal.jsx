@@ -17,21 +17,17 @@ const propTypes = {
 export default function EditReviewModal({ modal, signIn, save, review, onRefresh }){
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview] = useState(review);
-
+    
     useEffect(() => {
         setUpdatedReview(review); //makes sure the review contents prepopulates with the correct values
     }, [review]);
 
     const handleSaveClick = async ()=>{
-        
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
-        setTimeout(async ()=>{     
-            try {
-                await onRefresh();
-            } catch (error) {
-                console.log( 'Error refreshing reviews:', error);
-            }    
-        },200)  
+
+        if (onRefresh){
+            onRefresh()
+        }
         save();
     };
 
