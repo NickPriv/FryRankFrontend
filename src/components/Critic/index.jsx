@@ -11,13 +11,12 @@ const propTypes = {
 };
 
 const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestaurants, requestingReviews, restaurantsError, otherUserSettings }) => {
-    
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
         } else if (reviews.length === 0) {
             return <p>Sorry, this critic has not yet published a review.</p>
-        } else  {
+        } else {
             return (
                 <ReviewCardList
                     reviews={reviews}

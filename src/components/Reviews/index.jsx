@@ -12,15 +12,14 @@ const propTypes = {
 };
 
 const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsError, currentRestaurants, requestingRestaurantDetails, averageScore, loggedIn }) => {
-    
     const reviewsBody = () => {
-       if (!reviews) {
+        if (!reviews) {
             return <FrySpinner />;
         } else if (reviews.length === 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return (
-                <ReviewCardList reviews={reviews } onRefresh={undefined}/>
+                <ReviewCardList reviews={reviews }/>
             )
         }
     }
