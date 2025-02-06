@@ -110,8 +110,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 successfulCreate: false,
-                error: action.error,
-                
+                error: action.error,    
             }
         }
 
