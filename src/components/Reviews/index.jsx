@@ -19,7 +19,7 @@ const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsE
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return (
-                <ReviewCardList reviews={reviews }/>
+                <ReviewCardList reviews={reviews}/>
             )
         }
     }
