@@ -58,7 +58,6 @@ const RecentReviews = () => {
             <ReviewCardList
                 reviews={recentReviews}
                 currentRestaurants={restaurantData} // Pass the restaurantMap to the ReviewCardList
-                onRefresh={fetchReviews}
             />
         </div>
     );

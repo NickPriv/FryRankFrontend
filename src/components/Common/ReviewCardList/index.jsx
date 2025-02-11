@@ -4,16 +4,14 @@ import { ReviewCard } from '../';
 const propTypes = {
     reviews: PropTypes.array.isRequired,
     currentRestaurants: PropTypes.object,
-    onRefresh: PropTypes.func
 };
 
-const ReviewCardList = ({ reviews, currentRestaurants, onRefresh }) => {
+const ReviewCardList = ({ reviews, currentRestaurants }) => {
     return (
         reviews?.map(review => (
             <ReviewCard
                 review={review}
                 restaurant={currentRestaurants ? currentRestaurants.get(review.restaurantId) : null}
-                onRefresh={onRefresh}
             />
         )).sort((a,b) => {
             // We declare the past for undefined values so that they sort to the end of the array.

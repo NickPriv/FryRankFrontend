@@ -10,11 +10,10 @@ const propTypes = {
     modal: PropTypes.bool.isRequired,
     signIn: PropTypes.bool.isRequired,
     save: PropTypes.func.isRequired,
-    review: PropTypes.object.isRequired,
-    onRefresh: PropTypes.func
+    review: PropTypes.object.isRequired
 };
 
-export default function EditReviewModal({ modal, signIn, save, review, onRefresh }){
+export default function EditReviewModal({ modal, signIn, save, review }){
     const dispatch = useDispatch();
     const [updatedReview, setUpdatedReview] = useState(review);
     
