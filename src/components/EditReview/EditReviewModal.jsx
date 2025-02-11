@@ -24,9 +24,6 @@ export default function EditReviewModal({ modal, signIn, save, review, onRefresh
 
     const handleSaveClick = async ()=>{
         dispatch(reviewsActions.startCreateReviewForRestaurantRequest(updatedReview));
-        if (onRefresh){
-            onRefresh()
-        }
         save();
     };
 
