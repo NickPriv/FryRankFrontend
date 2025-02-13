@@ -1,4 +1,4 @@
-import React, { memo }from 'react';
+import React, { memo } from 'react';
 import { FormGroup, Label, Input } from 'reactstrap';
 
 const ScoreDropdown = memo(({name, id, labelName, value='', onChange = () => {} }) => {
