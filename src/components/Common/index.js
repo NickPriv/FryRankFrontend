@@ -8,4 +8,5 @@ export { default as LinkButton } from './LinkButton';
 export { default as RestaurantHeader } from './RestaurantHeader';
 export { default as ReviewCard } from './ReviewCard';
 export { default as ReviewCardList } from './ReviewCardList';
-export { default as Score } from "./Score"
+export { default as Score } from "./Score";
+export { default as ScoreDropdown } from "./ScoreDropdown";

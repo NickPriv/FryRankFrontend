@@ -5,6 +5,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Input, Label, FormGroup } from 'reactstrap';
 import FryposalLoginImage from "../../Fryposal.png";
 import { PropTypes } from 'prop-types';
+import { ScoreDropdown } from "../Common";
 
 const propTypes = {
     modal: PropTypes.bool.isRequired,
@@ -48,31 +49,7 @@ export default function EditReviewModal({ modal, signIn, save, review }){
                                 placeholder="Enter new title"
                             />
                         </FormGroup>
-
-                        <FormGroup> 
-                            <Label for="scoreInput">Score</Label> 
-                            <Input 
-                                type="select" 
-                                name="score" 
-                                id="scoreInput" 
-                                value={updatedReview.score} 
-                                onChange={handleInputChange} 
-                                className="form-select" 
-                            > 
-                                <option value="">Select a score</option> 
-                                <option value="10">10</option> 
-                                <option value="9">9</option> 
-                                <option value="8">8</option> 
-                                <option value="7">7</option> 
-                                <option value="6">6</option> 
-                                <option value="5">5</option> 
-                                <option value="4">4</option> 
-                                <option value="3">3</option> 
-                                <option value="2">2</option> 
-                                <option value="1">1</option> 
-                            </Input> 
-                        </FormGroup>
-
+                        <ScoreDropdown labelname="Score" name="score" id="scoreInput" value={updatedReview.score} onChange={handleInputChange}/>
                         <FormGroup>
                             <Label for="bodyInput">Body</Label>
                             <Input

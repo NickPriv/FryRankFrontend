@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types';
 import { Form, FormGroup, Input, Label } from 'reactstrap';
 
-import { Button, LinkButton } from '../../Common';
+import { Button, LinkButton, ScoreDropdown } from '../../Common';
 import FryposalLoginImage from "../../../Fryposal.png";
 import './style.css';
 
@@ -40,24 +40,7 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                         disabled="true"
                     />
                 </FormGroup>
-                    <FormGroup>
-                        <Label for="scoreInput">
-                            Score
-                        </Label>
-                        <Input type="select" name="score" id="scoreInput" className="form-select">
-                            <option></option>
-                            <option>10</option>
-                            <option>9</option>
-                            <option>8</option>
-                            <option>7</option>
-                            <option>6</option>
-                            <option>5</option>
-                            <option>4</option>
-                            <option>3</option>
-                            <option>2</option>
-                            <option>1</option>
-                        </Input>
-                    </FormGroup>
+                    <ScoreDropdown labelname="Score" name="score" id="scoreInput"/>
                     <FormGroup>
                         <Label for="titleInput">
                             Title
