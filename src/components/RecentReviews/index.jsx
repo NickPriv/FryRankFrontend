@@ -1,25 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { fetchTopReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
+import { useSelector, useDispatch } from 'react-redux';
 import { FrySpinner, ReviewCardList, Banner } from '../Common';
+import { reviewsActions } from '../../redux/reducers/reviews';
 
 const RecentReviews = () => {
-    const [recentReviews, setRecentReviews] = useState();
+    const dispatch = useDispatch();
+    const recentReviews = useSelector((state) => state.reviewsReducer.reviews);
     const [restaurantData, setRestaurantData] = useState(new Map());
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const reviews = await fetchTopReviews();
-                setRecentReviews(reviews);
-            } catch (error) {
-                setError(error.message);
-            }
-        };
+    const fetchReviews = useCallback(async () => {
+        setLoading(true);
+        setError('');
 
+        try {
+            const reviews = await fetchTopReviews();
+            dispatch(reviewsActions.setReviews(reviews));
+            setLoading(false);
+        } catch (error) {
+            setError(error.message);
+        }
+    },[]);
+
+    useEffect(()=>{
         fetchReviews();
-    }, []);
+    }, [fetchReviews]);
 
     useEffect(() => {
         if (recentReviews) {

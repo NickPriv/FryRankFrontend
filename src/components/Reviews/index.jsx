@@ -1,5 +1,4 @@
 import { PropTypes } from 'prop-types';
-
 import { Breadcrumb, Button, Banner, FrySpinner, LinkButton, RestaurantHeader, ReviewCardList } from '../Common';
 
 const propTypes = {
@@ -16,11 +15,11 @@ const Reviews = ({ params: { restaurantId }, reviews, reviewsError, restaurantsE
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
-        } else if (reviews.length == 0) {
+        } else if (reviews.length === 0) {
             return <p>No reviews exist for this restaurant yet. Why don't you write the first one?</p>
         } else {
             return (
-                <ReviewCardList reviews={reviews} />
+                <ReviewCardList reviews={reviews}/>
             )
         }
     }

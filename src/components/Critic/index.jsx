@@ -1,5 +1,4 @@
 import { PropTypes } from 'prop-types';
-
 import { Banner, FrySpinner, ReviewCardList } from '../Common';
 
 const propTypes = {
@@ -15,7 +14,7 @@ const Critic = ({ params: { accountId }, reviews, reviewsError, currentRestauran
     const reviewsBody = () => {
         if (!reviews) {
             return <FrySpinner />;
-        } else if (reviews.length == 0) {
+        } else if (reviews.length === 0) {
             return <p>Sorry, this critic has not yet published a review.</p>
         } else {
             return (
