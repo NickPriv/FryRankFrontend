@@ -2,8 +2,10 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 import {BACKEND_SERVICE_PATH} from "../../../constants";
 import {types, userSettingsActions} from "../../reducers/userSettings";
+import jwt from 'jsonwebtoken';
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
+const secretKey = process.env.REACT_TOKEN_SECRET_KEY;
 
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {

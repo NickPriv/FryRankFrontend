@@ -11,6 +11,7 @@
     "@vis.gl/react-google-maps": "^1.2.0",
     "axios": "^1.7.4",
     "bootstrap": "5.1",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-cookie": "^7.2.1",
@@ -23,15 +24,16 @@
     "reactstrap": "^8.10.1",
     "redux-saga": "^1.2.3",
     "serve": "^14.2.4",
+    "vm-browserify": "^1.1.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "serve -s build",
-    "dev": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "react-scripts build"
+    "start": "react-app-reqired start",
+    "dev": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "heroku-postbuild": "react-app-rewired build"
   },
   "eslintConfig": {
     "extends": [
@@ -50,5 +52,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "^2.1.0",
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.1",
+    "https-browserify": "^1.0.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.4"
   }
 }
