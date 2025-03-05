@@ -9,7 +9,7 @@ const ScoreDropdown = memo(({name, id, labelName, value='', onChange = () => {}}
                 type="select" 
                 name={name}
                 id={id}
-                value = {value}
+                defaultValue = {value}
                 onChange={onChange} 
                 className="form-select" 
             > 
