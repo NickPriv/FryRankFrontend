@@ -40,7 +40,7 @@ const ReviewForm = ({ createReview, currentRestaurant, currentReview, updateCurr
                         disabled="true"
                     />
                 </FormGroup>
-                    <ScoreDropdown labelname="Score" name="score" id="scoreInput"/>
+                    <ScoreDropdown labelName="Score" name="score" id="scoreInput"/>
                     <FormGroup>
                         <Label for="titleInput">
                             Title
