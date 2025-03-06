@@ -49,7 +49,7 @@ export default function EditReviewModal({ modal, signIn, save, review }){
                                 placeholder="Enter new title"
                             />
                         </FormGroup>
-                        <ScoreDropdown labelname="Score" name="score" id="scoreInput" value={updatedReview.score} onChange={handleInputChange}/>
+                        <ScoreDropdown labelName="Score" name="score" id="scoreInput" value={updatedReview.score} onChange={handleInputChange}/>
                         <FormGroup>
                             <Label for="bodyInput">Body</Label>
                             <Input
