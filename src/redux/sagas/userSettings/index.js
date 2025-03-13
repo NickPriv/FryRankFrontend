@@ -2,7 +2,7 @@ import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
 import {BACKEND_SERVICE_PATH} from "../../../constants";
 import {types, userSettingsActions} from "../../reducers/userSettings";
-import { SignJWT} from 'jose';
+import { SignJWT } from 'jose';
 
 const secretKey = "3c2353bc79ff762690f24ea376b4eb940f1db01427b39a65fb9153d59f011e46"
 //process.env.REACT_TOKEN_SECRET_KEY;
