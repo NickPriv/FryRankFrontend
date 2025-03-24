@@ -1,26 +1,24 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import axios from 'axios';
-import {BACKEND_SERVICE_PATH} from "../../../constants";
+import {BACKEND_SERVICE_PATH, SECRET_KEY} from "../../../constants";
 import {types, userSettingsActions} from "../../reducers/userSettings";
 import { SignJWT } from 'jose';
 
-const secretKey = "3c2353bc79ff762690f24ea376b4eb940f1db01427b39a65fb9153d59f011e46"
-//process.env.REACT_TOKEN_SECRET_KEY;
 const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
 
 async function generateToken(accountId) {
-    const token = await new SignJWT({ userId: accountId }) // Replace with your payload
-        .setProtectedHeader({ alg: 'HS256' }) // Specify signing algorithm
+    const token = await new SignJWT({ userId: accountId })
+        .setProtectedHeader({ alg: 'HS256' })
         .setIssuedAt()
         .setExpirationTime('30m') // Token expiry time
-        .sign(new TextEncoder().encode(secretKey));
+        .sign(new TextEncoder().encode(SECRET_KEY));
     return token;
 }
 
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {
         const token = yield generateToken(accountId);
-        console.log("the token", token);
+        console.log("token generation", token);
         const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: accountId, defaultUsername: defaultUsername } });
         yield put(userSettingsActions.successfulPutUserSettingsRequest(data));
     } catch (err) {
