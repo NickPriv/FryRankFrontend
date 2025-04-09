@@ -18,8 +18,8 @@ async function generateToken(accountId) {
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {
         const token = yield generateToken(accountId);
-        console.log("token generation", token);
-        const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: accountId, defaultUsername: defaultUsername } });
+        const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: token, defaultUsername: defaultUsername } });
+        console.log("the data", data);
         yield put(userSettingsActions.successfulPutUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedPutUserSettingsRequest(err.response.data.message));
