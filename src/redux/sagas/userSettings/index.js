@@ -1,25 +1,16 @@
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery, call } from 'redux-saga/effects'
 import axios from 'axios';
-import {BACKEND_SERVICE_PATH, SECRET_KEY} from "../../../constants";
+import {BACKEND_SERVICE_PATH} from "../../../constants";
 import {types, userSettingsActions} from "../../reducers/userSettings";
-import { SignJWT } from 'jose';
+import {generateToken} from "../../../utils/";
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
-
-async function generateToken(accountId) {
-    const token = await new SignJWT({ userId: accountId })
-        .setProtectedHeader({ alg: 'HS256' })
-        .setIssuedAt()
-        .setExpirationTime('30m') // Token expiry time
-        .sign(new TextEncoder().encode(SECRET_KEY));
-    return token;
-}
+let token ="";
 
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {
-        const token = yield generateToken(accountId);
+        token = yield call(generateToken, accountId);
         const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: token, defaultUsername: defaultUsername } });
-        console.log("the data", data);
         yield put(userSettingsActions.successfulPutUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedPutUserSettingsRequest(err.response.data.message));
@@ -28,7 +19,7 @@ export function* callPutUserSettings({ accountId, defaultUsername }){
 
 export function* callGetUserSettings({ accountId }){
     try {
-        const { data } = yield axios.get(API_PATH, { params: { accountId: accountId } });
+        const { data } = yield axios.get(API_PATH, { params: { accountId: token } });
         yield put(userSettingsActions.successfulGetOtherUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedGetOtherUserSettingsRequest(err.response.data.message));
