@@ -27,8 +27,13 @@ export function* callGetUserSettings({ accountId }){
 }
 
 export function* callSetUserSettings({ userSettings }){
+    const updatedUserSettings = {
+        ...userSettings,
+        accountId: token
+    };
+
     try {
-        const { data } = yield axios.post(API_PATH, userSettings);
+        const { data } = yield axios.post(API_PATH, updatedUserSettings);
         yield put(userSettingsActions.successfulSetUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedSetUserSettingsRequest(err.response.data.message));
