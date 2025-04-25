@@ -5,11 +5,10 @@ import {types, userSettingsActions} from "../../reducers/userSettings";
 import {generateToken} from "../../../utils/";
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
-let token ="";
 
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {
-        token = yield call(generateToken, accountId);
+        const token = yield call(generateToken, accountId);
         const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: token, defaultUsername: defaultUsername } });
         yield put(userSettingsActions.successfulPutUserSettingsRequest(data));
     } catch (err) {
@@ -19,6 +18,7 @@ export function* callPutUserSettings({ accountId, defaultUsername }){
 
 export function* callGetUserSettings({ accountId }){
     try {
+        const token = yield call(generateToken, accountId);
         const { data } = yield axios.get(API_PATH, { params: { accountId: token } });
         yield put(userSettingsActions.successfulGetOtherUserSettingsRequest(data));
     } catch (err) {
@@ -27,6 +27,7 @@ export function* callGetUserSettings({ accountId }){
 }
 
 export function* callSetUserSettings({ userSettings }){
+    const token = yield call(generateToken, userSettings.accountId);
     const updatedUserSettings = {
         ...userSettings,
         accountId: token
