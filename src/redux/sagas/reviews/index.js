@@ -21,7 +21,6 @@ export function* callGetAllReviewsForRestaurant({ restaurantId }) {
 export function* callGetAllReviewsForAccount({ accountId }) {
     try {
         const token = yield call(generateToken, accountId);
-        console.log("all reviews for accountid", token);
         const { data } = yield axios.get(REVIEWS_API_PATH, { params: { accountId: token } });
         yield put(reviewsActions.successfulGetAllReviewsForAccountRequest(data));
     } catch (err) {
@@ -35,10 +34,11 @@ export function* callCreateReviewForRestaurant({ review }) {
         review = {
             ...review,
             [REVIEW_PROPERTY_ISO_DATE_TIME]: new Date().toISOString(),
-            accountId: token
         };
-        console.log("the review for create", review)
-        yield axios.post(REVIEWS_API_PATH, review);
+        yield axios.post(REVIEWS_API_PATH, review,  {
+            headers: {
+                'Authorization': `Bearer ${token}`,  // Send JWT separately for authentication
+            }});
         yield put(reviewsActions.successfulCreateReviewForRestaurantRequest(review));
     } catch (err) {
         yield put(reviewsActions.failedCreateReviewForRestaurantRequest(err.response.data.message));
