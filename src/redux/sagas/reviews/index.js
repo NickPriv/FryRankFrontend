@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 import { types, reviewsActions } from '../../reducers/reviews';
 import { BACKEND_SERVICE_PATH, AGGREGATE_INFORMATION_API_PATH, REVIEW_PROPERTY_ISO_DATE_TIME } from '../../../constants';
-import {generateToken} from "../../../utils/";
+import { generateToken } from "../../../utils/";
 
 const REVIEWS_API_PATH = `${BACKEND_SERVICE_PATH}/reviews`;
 

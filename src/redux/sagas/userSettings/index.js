@@ -2,14 +2,14 @@ import { put, takeEvery, call } from 'redux-saga/effects'
 import axios from 'axios';
 import {BACKEND_SERVICE_PATH} from "../../../constants";
 import {types, userSettingsActions} from "../../reducers/userSettings";
-import {generateToken} from "../../../utils/";
+import { generateToken } from "../../../utils/";
 
 const API_PATH = `${BACKEND_SERVICE_PATH}/userMetadata`
 
 export function* callPutUserSettings({ accountId, defaultUsername }){
     try {
         const token = yield call(generateToken, accountId);
-        const { data } = yield axios.put(API_PATH, {  }, { params: { accountId: token, defaultUsername: defaultUsername } });
+        const { data } = yield axios.put(API_PATH, { }, { params: { accountId: token, defaultUsername: defaultUsername } });
         yield put(userSettingsActions.successfulPutUserSettingsRequest(data));
     } catch (err) {
         yield put(userSettingsActions.failedPutUserSettingsRequest(err.response.data.message));
