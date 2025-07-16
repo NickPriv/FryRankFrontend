@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { fetchTopReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
+import { fetchRecentReviews, fetchRestaurantDetails } from '../../containers/RecentReviews';
 import { useSelector, useDispatch } from 'react-redux';
 import { FrySpinner, ReviewCardList, Banner } from '../Common';
 import { reviewsActions } from '../../redux/reducers/reviews';
@@ -16,7 +16,7 @@ const RecentReviews = () => {
         setError('');
 
         try {
-            const reviews = await fetchTopReviews();
+            const reviews = await fetchRecentReviews();
             dispatch(reviewsActions.setReviews(reviews));
             setLoading(false);
         } catch (error) {
