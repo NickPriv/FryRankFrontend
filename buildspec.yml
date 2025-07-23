@@ -10,11 +10,6 @@ phases:
     commands:
       - npm run build
 
-artifacts:
-  files:
-    - '**/*'
-  base-directory: build
-
 post_build:
   commands:
     - aws s3 sync build/ s3://fryrank-app-spa-bucket/ --delete
